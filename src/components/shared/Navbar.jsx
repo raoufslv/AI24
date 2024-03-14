@@ -11,7 +11,7 @@ export default function Navbar() {
   const { theme } = useTheme();
 
   return (
-    <nav className=" flex justify-between items-center py-4 px-12">
+    <nav className=" flex justify-between items-center w-full py-4 px-8 flex-wrap">
       <div className=" flex items-center space-x-24">
         <div className=" flex items-center space-x-2">
           {theme === "dark" ? (
@@ -19,7 +19,7 @@ export default function Navbar() {
           ) : (
             <img src={logo} alt="logo" className="w-10 h-10" />
           )}
-          <h1 className="text-2xl font-Bruno">CG Vortex</h1>
+          <h1 className="text-2xl font-bruno">CG Vortex</h1>
         </div>
         <ul className=" flex space-x-8">
           <li>
@@ -43,8 +43,12 @@ export default function Navbar() {
       <div className=" flex items-center space-x-10">
         <ModeToggle />
         <div className=" flex space-x-4">
-          <Button>Log In</Button>
-          <Button>Sign Up</Button>
+          <Button className="bg-transparent text-black border border-black hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black">
+            Log In
+          </Button>
+          <Button className="hover:bg-neutral-100 hover:text-black dark:hover:bg-darky dark:hover:text-white">
+            Sign Up
+          </Button>
         </div>
       </div>
     </nav>

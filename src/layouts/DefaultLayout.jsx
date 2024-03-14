@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "@/components/shared/Navbar";
 export default function DefaultLayout({ children }) {
   return (
-    <div>
+    <div className="">
       <header>
         <Navbar />
       </header>
@@ -10,4 +10,4 @@ export default function DefaultLayout({ children }) {
       <footer>Footer</footer>
     </div>
   );
-};
+}

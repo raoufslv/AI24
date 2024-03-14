@@ -18,6 +18,7 @@ export const theme = {
   },
   extend: {
     colors: {
+      darky: "#1C1C1C",
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",
@@ -54,7 +55,7 @@ export const theme = {
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
-      Bruno: ["Bruno Ace SC", "cursive"],
+      bruno: ["Bruno Ace SC", "cursive"],
     },
     borderRadius: {
       lg: "var(--radius)",
