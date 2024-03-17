@@ -17,6 +17,9 @@ export const theme = {
     },
   },
   extend: {
+    screens: {
+      md: "860px",
+    },
     colors: {
       darky: "#1C1C1C",
       border: "hsl(var(--border))",
