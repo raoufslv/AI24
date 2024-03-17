@@ -7,6 +7,7 @@ export default function AuthButtons() {
         className="bg-transparent text-black border border-black 
                   hover:bg-black hover:text-white 
                   dark:border-white dark:text-white 
+                  dark:bg-transparent
                   dark:hover:bg-white dark:hover:text-black
                   "
       >

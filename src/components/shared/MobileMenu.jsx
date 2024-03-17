@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/components/theme-provider";
+import { useTheme } from "@/context/theme-provider";
 import NavLinks from "@/components/shared/NavLinks";
 import AuthButtons from "@/components/shared/AuthButtons";
 
