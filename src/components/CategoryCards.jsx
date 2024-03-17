@@ -16,9 +16,6 @@ console.log(TempCategory);
 export default function CategoryCards() {
   return (
     <>
-      <h1 className="xl:text-xl md:text-lg text-base font-bruno text-left">
-        Explore By Category
-      </h1>
       <Carousel
         opts={{
           align: "start",
