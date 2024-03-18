@@ -1,16 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/context/theme-provider";
 import NavLinks from "@/components/shared/NavLinks";
 import AuthButtons from "@/components/shared/AuthButtons";
 
-import hamburgerIcon from "@/assets/icons/hamburger-icon.svg";
-import hamburgerWhiteIcon from "@/assets/icons/hamburgerWhite-icon.svg";
-import exitIcon from "@/assets/icons/exit-icon.svg";
-import exitWhiteIcon from "@/assets/icons/exitWhite-icon.svg";
+import Icon from "@/components/ui/icon";
 
 export default function MobileMenu() {
-  const { theme } = useTheme();
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -20,12 +15,9 @@ export default function MobileMenu() {
   return (
     <>
       {/* Hamburger Menu Icon */}
-      <img
-        onClick={toggleMenu}
-        src={theme === "light" ? hamburgerIcon : hamburgerWhiteIcon}
-        alt="menu"
-        className="md:hidden w-8 cursor-pointer"
-      />
+      <div onClick={toggleMenu} className="md:hidden w-8 cursor-pointer">
+        <Icon name="Menu" size={28} />
+      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -39,12 +31,12 @@ export default function MobileMenu() {
               flex flex-col items-center justify-center space-y-8 z-10"
           >
             {/* Exit icon */}
-            <img
+            <div
               onClick={toggleMenu}
-              src={theme === "light" ? exitIcon : exitWhiteIcon}
-              alt="exit"
               className="w-8 cursor-pointer absolute top-4 left-4"
-            />
+            >
+              <Icon name="X" />
+            </div>
 
             <NavLinks />
             <div className="flex flex-col space-y-8 sm:hidden">
