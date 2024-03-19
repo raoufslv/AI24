@@ -1,14 +1,12 @@
 {
-    "compilerOptions": {
-      "jsx": "react",
-      // ...
-      "baseUrl": ".",
-      "paths": {
-        "@/*": [
-          "./src/*"
-        ]
-      }
-      // ...
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "jsx": "react",
+    // ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
     }
+    // ...
   }
-  
+}

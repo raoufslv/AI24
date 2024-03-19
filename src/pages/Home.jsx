@@ -5,6 +5,8 @@ import SearchBar from "@/components/SearchBar";
 import ThreeDCard from "@/components/ui/ThreeDCard";
 import ViewAllButton from "@/components/shared/ViewAllButton";
 
+import AboutSection from "@/components/AboutSection";
+
 export default function Home() {
   return (
     <>
@@ -16,7 +18,7 @@ export default function Home() {
       <Hometitle text="Personalize your search" />
       <SearchBar />
 
-      <div className="flex justify-between items-end w-full pr-16">
+      <div className="flex justify-between items-end w-full 2xl:pr-16 xl:pr-12 lg:8 md:6">
         <Hometitle text="Top rated Items" />
         <ViewAllButton />
       </div>
@@ -29,6 +31,8 @@ export default function Home() {
           <ThreeDCard key={index} />
         ))}
       </div>
+
+      <AboutSection />
     </>
   );
 }
