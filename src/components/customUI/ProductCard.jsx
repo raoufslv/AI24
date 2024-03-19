@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 
 export default function ProductCard({ product }) {
-  console.log(product);
   return (
     <CardContainer className="inter-var">
       <CardBody

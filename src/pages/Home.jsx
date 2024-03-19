@@ -2,11 +2,11 @@ import CategoryCards from "@/components/home/CategoryCards";
 import BigBanner from "@/components/shared/BigBanner";
 import Hometitle from "@/components/ui/hometitle";
 import SearchBar from "@/components/shared/SearchBar";
-import ProductCard from "@/components/customUI/ProductCard";
 import ViewAllButton from "@/components/customUI/ViewAllButton";
 
 import AboutSection from "@/components/home/AboutSection";
 import TopProducts from "@/components/home/TopProducts";
+import LatestArticles from "@/components/home/LatestArticles";
 
 export default function Home() {
   return (
@@ -23,10 +23,15 @@ export default function Home() {
         <Hometitle text="Top rated Items" />
         <ViewAllButton />
       </div>
-
       <TopProducts />
 
       <AboutSection />
+
+      <div className="flex justify-between items-end w-full 2xl:pr-16 xl:pr-12 lg:8 md:6">
+        <Hometitle text="Latest Articles" />
+        <ViewAllButton />
+      </div>
+      <LatestArticles />
     </>
   );
 }
