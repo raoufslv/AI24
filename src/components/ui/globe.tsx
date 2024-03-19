@@ -11,7 +11,7 @@ declare module "@react-three/fiber" {
   }
 }
 
-import countries from "@/data/globe.json";
+import countries from "@/assets/globe.json";
 import React from "react";
 
 extend({ ThreeGlobe });

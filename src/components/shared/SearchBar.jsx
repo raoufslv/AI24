@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import Selector from "./shared/Selector";
+import Selector from "../customUI/Selector";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { categories } from "@/constants/Categories";
 import Softwares from "@/constants/softwares";
 import license from "@/constants/license";
-import PriceDropDown from "@/components/shared/PriceDropDown";
+import PriceDropDown from "@/components/customUI/PriceDropDown";
 
 export default function SearchBar() {
   const [minPrice, setMinPrice] = useState(0);

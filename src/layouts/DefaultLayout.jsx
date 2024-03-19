@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/shared/Navbar";
 export default function DefaultLayout({ children }) {
   return (
     <div className="xl:px-8 lg:px-6 px-4">

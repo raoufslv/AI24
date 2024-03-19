@@ -393,7 +393,7 @@ export default function AboutSection() {
       className="flex bg-darky rounded-xl text-white justify-center items-center mx-auto 
     xl:w-4/5 p-6 mb-56"
     >
-      <div className="flex flex-col w-full md:space-y-12 space-y-6">
+      <div className="flex flex-col w-full md:space-y-16 space-y-6">
         <h1
           className="2xl:text-3xl xl:text-2xl text-xl 
          font-bruno"
@@ -418,7 +418,7 @@ export default function AboutSection() {
           Discover our Articles
         </Button>
       </div>
-      <div className="sm:w-full 2xl:h-96 xl:h-72 sm:h-64 h-40 w-40">
+      <div className="sm:w-full 2xl:h-[30rem] xl:h-72 sm:h-64 h-40 w-40">
         <World data={sampleArcs} globeConfig={globeConfig} />
       </div>
     </div>

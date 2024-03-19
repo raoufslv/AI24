@@ -1,11 +1,12 @@
-import CategoryCards from "@/components/CategoryCards";
-import BigBanner from "@/components/BigBanner";
+import CategoryCards from "@/components/home/CategoryCards";
+import BigBanner from "@/components/shared/BigBanner";
 import Hometitle from "@/components/ui/hometitle";
-import SearchBar from "@/components/SearchBar";
-import ThreeDCard from "@/components/ui/ThreeDCard";
-import ViewAllButton from "@/components/shared/ViewAllButton";
+import SearchBar from "@/components/shared/SearchBar";
+import ProductCard from "@/components/customUI/ProductCard";
+import ViewAllButton from "@/components/customUI/ViewAllButton";
 
-import AboutSection from "@/components/AboutSection";
+import AboutSection from "@/components/home/AboutSection";
+import TopProducts from "@/components/home/TopProducts";
 
 export default function Home() {
   return (
@@ -23,14 +24,7 @@ export default function Home() {
         <ViewAllButton />
       </div>
 
-      <div
-        className="flex flex-wrap justify-start gap-10 w-full"
-        style={{ overflow: "hidden" }}
-      >
-        {[...Array(6)].map((_, index) => (
-          <ThreeDCard key={index} />
-        ))}
-      </div>
+      <TopProducts />
 
       <AboutSection />
     </>

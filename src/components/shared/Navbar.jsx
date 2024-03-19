@@ -1,8 +1,8 @@
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import MobileMenu from "@/components/shared/MobileMenu";
-import NavLinks from "@/components/shared/NavLinks";
-import AuthButtons from "@/components/shared/AuthButtons";
-import Logo from "@/components/shared/Logo";
+import MobileMenu from "@/components/customUI/MobileMenu";
+import NavLinks from "@/components/customUI/NavLinks";
+import AuthButtons from "@/components/customUI/AuthButtons";
+import Logo from "@/components/customUI/Logo";
 
 export default function Navbar() {
   return (
