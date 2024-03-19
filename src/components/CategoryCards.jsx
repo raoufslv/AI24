@@ -10,16 +10,12 @@ import {
 
 import { categories } from "@/constants/Categories";
 
-import TempCategory from "@/assets/images/TempCategory.png";
-console.log(TempCategory);
-
 export default function CategoryCards() {
   return (
     <>
       <Carousel
         opts={{
           align: "start",
-          loop: true,
           dragFree: true,
         }}
         className="mx-10 my-3"

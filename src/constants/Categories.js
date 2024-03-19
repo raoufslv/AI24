@@ -44,27 +44,27 @@ export const categories = [
   },
   {
     id: 8,
-    name: "3D Printing",
+    name: "3D Print",
     image: Printing,
   },
   {
     id: 9,
-    name: "Animation",
+    name: "Textures",
     image: Animation,
   },
   {
     id: 10,
-    name: "Art",
+    name: "Artstation",
     image: Art,
   },
   {
     id: 11,
-    name: "Materials",
+    name: "Riggeed Models",
     image: Materials,
   },
   {
     id: 12,
-    name: "Robots",
+    name: "Medical",
     image: Robots,
   },
 ];

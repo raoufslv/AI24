@@ -22,6 +22,7 @@ export const theme = {
     },
     colors: {
       darky: "#1C1C1C",
+      greeny: "#99B898",
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",

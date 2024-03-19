@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import NavLinks from "@/components/shared/NavLinks";
 import AuthButtons from "@/components/shared/AuthButtons";
 
-import Icon from "@/components/ui/icon";
+import { Menu, X } from "lucide-react";
 
 export default function MobileMenu() {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,7 +16,7 @@ export default function MobileMenu() {
     <>
       {/* Hamburger Menu Icon */}
       <div onClick={toggleMenu} className="md:hidden w-8 cursor-pointer">
-        <Icon name="Menu" size={28} />
+        <Menu size={28} />
       </div>
 
       {/* Mobile Menu */}
@@ -35,7 +35,7 @@ export default function MobileMenu() {
               onClick={toggleMenu}
               className="w-8 cursor-pointer absolute top-4 left-4"
             >
-              <Icon name="X" />
+              <X />
             </div>
 
             <NavLinks />
