@@ -18,7 +18,7 @@ extend({ ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
 const aspect = 1.2;
-const cameraZ = 300;
+const cameraZ = 280;
 
 type Position = {
   order: number;
@@ -89,8 +89,8 @@ export function Globe({ globeConfig, data }: WorldProps) {
     shininess: 0.9,
     arcTime: 2000,
     arcLength: 0.9,
-    rings: 1,
-    maxRings: 3,
+    rings: 10,
+    maxRings: 10,
     ...globeConfig,
   };
 
@@ -250,9 +250,9 @@ export function World(props: WorldProps) {
   const scene = new Scene();
   scene.fog = new Fog(0xffffff, 400, 2000);
   return (
-    <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
+    <Canvas scene={scene} camera={new PerspectiveCamera(43, aspect, 180, 400)}>
       <WebGLRendererConfig />
-      <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
+      <ambientLight color={globeConfig.ambientLight} intensity={0.7} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-400, 100, 400)}
