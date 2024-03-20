@@ -3,6 +3,8 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card.tsx";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 
+import LazyLoad from "react-lazy-load";
+
 export default function ProductCard({ product }) {
   return (
     <CardContainer className="inter-var">
@@ -13,11 +15,13 @@ export default function ProductCard({ product }) {
       rounded-xl border"
       >
         <CardItem translateZ="100" className="w-full">
-          <img
-            src={product.image}
-            className="h-44 object-cover object-center hover:object-scale-down w-full rounded-t-xl group-hover/card:shadow-xl"
-            alt="thumbnail"
-          />
+          <LazyLoad height={175}>
+            <img
+              src={product.image}
+              className="h-44 object-cover object-center hover:object-scale-down w-full rounded-t-xl group-hover/card:shadow-xl"
+              alt="thumbnail"
+            />
+          </LazyLoad>
         </CardItem>
         <div className="flex justify-between items-center mt-1 px-4">
           <CardItem
@@ -35,11 +39,7 @@ export default function ProductCard({ product }) {
           </CardItem>
         </div>
         <div className="flex justify-between items-center my-4 px-4">
-          <CardItem
-            translateZ={20}
-            as="button"
-            className="px-2 py-2 text-xs "
-          >
+          <CardItem translateZ={20} as="button" className="px-2 py-2 text-xs ">
             $ {product.price}
           </CardItem>
           <Link to={"/details"}>

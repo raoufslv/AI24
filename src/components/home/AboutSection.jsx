@@ -391,7 +391,7 @@ export default function AboutSection() {
   return (
     <div
       className="flex bg-darky rounded-xl text-white justify-center items-center mx-auto 
-    xl:w-4/5 p-6 mb-56"
+    xl:w-4/5 p-6"
     >
       <div className="flex flex-col w-full md:space-y-16 space-y-6">
         <h1
@@ -400,7 +400,7 @@ export default function AboutSection() {
         >
           About CG Vortex
         </h1>
-        <p className="xl:text-lg sm:text-base text-sm">
+        <div className="xl:text-lg sm:text-base text-sm">
           <p>
             We are a market place where you find everything related to 3D, 2D,
             modeling, animations and much more.
@@ -410,7 +410,7 @@ export default function AboutSection() {
             We also write articles about related topics, checkout our latest
             articles.
           </p>
-        </p>
+        </div>
         <Button
           className="w-fit bg-greeny dark:bg-greeny sm:text-lg sm:p-6 p-2"
           to="/articles"

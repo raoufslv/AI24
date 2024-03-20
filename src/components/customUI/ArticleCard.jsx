@@ -2,8 +2,9 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card.tsx";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
+
+import LazyLoad from "react-lazy-load";
 
 export default function ArticleCard({ article }) {
   return (
@@ -15,11 +16,13 @@ export default function ArticleCard({ article }) {
       rounded-xl border"
       >
         <CardItem translateZ="100" className="w-full relative">
+          <LazyLoad height={230}>
           <img
             src={article.image}
             className="h-56 object-cover object-center w-full rounded-t-xl group-hover/card:shadow-xl"
             alt="thumbnail"
           />
+          </LazyLoad>
           <div className="absolute top-2 right-2 flex gap-2">
             {article.tags.map((tag, index) => (
               <Badge

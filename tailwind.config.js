@@ -19,6 +19,8 @@ export const theme = {
   extend: {
     screens: {
       md: "860px",
+      "3xl": "1735px",
+      "4xl": "1970px",
     },
     colors: {
       darky: "#1C1C1C",

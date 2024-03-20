@@ -17,7 +17,7 @@ export default function SearchBar() {
       action=""
       className="bg-darky flex md:flex-nowrap flex-wrap md:justify-start justify-center items-center rounded-lg 
     xl:space-x-12 md:space-x-4 space-x-2
-     w-fit mt-5 mb-10 p-6"
+     w-fit p-6"
     >
       <input
         type="text"
