@@ -33,7 +33,7 @@ export default function CategoryCards() {
             >
               <div className="absolute inset-0 bg-black opacity-30 rounded-lg" />
               <span
-                className="xl:text-3xl lg:text-2xl md:text-xl text-lg
+                className="xl:text-2xl md:text-xl text-lg
              text-white z-10 text-center"
               >
                 {category.name}

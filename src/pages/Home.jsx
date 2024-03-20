@@ -7,6 +7,7 @@ import ViewAllButton from "@/components/customUI/ViewAllButton";
 import AboutSection from "@/components/home/AboutSection";
 import TopProducts from "@/components/home/TopProducts";
 import LatestArticles from "@/components/home/LatestArticles";
+import { FeaturedShops } from "@/components/home/FeaturedShops";
 
 export default function Home() {
   return (
@@ -32,6 +33,11 @@ export default function Home() {
         <ViewAllButton />
       </div>
       <LatestArticles />
+
+      <div className="my-20">
+        <Hometitle text="Featured shops" />
+        <FeaturedShops />
+      </div>
     </>
   );
 }

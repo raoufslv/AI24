@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
     <CardContainer className="inter-var">
       <CardBody
         className=" bg-gray-50 relative group/card  
-      dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] 
+      dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black   
       w-auto sm:w-[16rem] h-auto 
       rounded-xl border"
       >
@@ -22,30 +22,30 @@ export default function ProductCard({ product }) {
         <div className="flex justify-between items-center mt-1 px-4">
           <CardItem
             translateZ="50"
-            className=" py-2 xl:text-xl lg:text-lg md:text-base sm:text-sm font-bold text-neutral-600 dark:text-white"
+            className=" py-2 xl:text-xl lg:text-lg md:text-base sm:text-sm  text-neutral-600 dark:text-white"
           >
             {product.title}
           </CardItem>
           <CardItem
             translateZ={20}
-            className="px-2 py-2 rounded-xl text-xs font-normal dark:text-white flex items-center justify-center gap-1"
+            className="px-2 py-2 rounded-xl text-xs  dark:text-white flex items-center justify-center gap-1"
           >
             {product.rating}
-            <Star size={20} fill="#fff" />
+            <Star size={20} />
           </CardItem>
         </div>
         <div className="flex justify-between items-center my-4 px-4">
           <CardItem
             translateZ={20}
             as="button"
-            className="px-2 py-2 text-xs font-bold"
+            className="px-2 py-2 text-xs "
           >
             $ {product.price}
           </CardItem>
           <Link to={"/details"}>
             <CardItem
               translateZ={20}
-              className="px-2 py-2 rounded-xl text-xs font-normal dark:text-white"
+              className="px-2 py-2 rounded-xl text-xs  dark:text-white"
             >
               See details →
             </CardItem>

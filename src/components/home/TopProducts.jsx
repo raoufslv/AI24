@@ -3,7 +3,7 @@ import { products } from "@/constants/products";
 
 export default function TopProducts() {
   return (
-    <div className="flex flex-wrap justify-start gap-10 w-full">
+    <div className="flex flex-wrap justify-start space-x-6 w-full">
       {products.map((product, index) => (
         <ProductCard key={index} product={product} />
       ))}
