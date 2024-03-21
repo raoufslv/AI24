@@ -3,7 +3,7 @@ import Printing from "@/assets/images/categories/3DPrinting.png";
 import Addons from "@/assets/images/categories/Addons.png";
 import Animation from "@/assets/images/categories/Animation.png";
 
-export const articles = [
+export const news = [
   {
     id: 1,
     title: "3D Assets for FPS Games",

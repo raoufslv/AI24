@@ -1,7 +1,10 @@
 import { World } from "@/components/ui/globe";
 import { Button } from "@/components/ui/button";
 
+import { useNavigate } from "react-router-dom";
+
 export default function AboutSection() {
+  const navigate = useNavigate();
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
@@ -407,15 +410,15 @@ export default function AboutSection() {
           </p>
 
           <p className="mt-1">
-            We also write articles about related topics, checkout our latest
-            articles.
+            We also write about latest news about related topics, checkout the
+            news.
           </p>
         </div>
         <Button
           className="w-fit bg-greeny dark:bg-greeny sm:text-lg sm:p-6 p-2"
-          to="/articles"
+          onClick={() => navigate("/news")}
         >
-          Discover our Articles
+          Discover latest News
         </Button>
       </div>
       <div className="sm:w-full 2xl:h-[30rem] xl:h-72 sm:h-64 h-40 w-40">

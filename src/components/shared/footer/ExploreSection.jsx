@@ -15,13 +15,10 @@ export default function ExploreSection() {
           <Link to="/#">Home</Link>
         </li>
         <li className={classes.linkHover}>
-          <Link to="/#About">About us</Link>
-        </li>
-        <li className={classes.linkHover}>
           <Link to="/Products">Products</Link>
         </li>
         <li className={classes.linkHover}>
-          <Link to="/Articles">Articles</Link>
+          <Link to="/News">News</Link>
         </li>
         <li className={classes.linkHover}>
           <Link to="/Contact">Contact us</Link>

@@ -42,7 +42,7 @@ export default function ProductCard({ product }) {
           <CardItem translateZ={20} as="button" className="px-2 py-2 text-xs ">
             $ {product.price}
           </CardItem>
-          <Link to={"/details"}>
+          <Link to={"/products/" + product.id}>
             <CardItem
               translateZ={20}
               className="px-2 py-2 rounded-xl text-xs  dark:text-white"

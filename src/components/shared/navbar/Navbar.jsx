@@ -46,7 +46,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <nav aria-label="Main navigation">
+          <nav aria-label="Main navigation" className="xl:flex-grow xl:pl-32">
             <ul className="hidden md:flex xl:space-x-8 lg:space-x-6 md:space-x-4 space-x-2">
               <NavLinks />
             </ul>

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
-// import About from "../pages/about";
+import Contact from "../pages/Contact";
+import Products from "../pages/Products";
+import Product from "../pages/Product";
+import News from "../pages/News";
+import OneNews from "../pages/OneNews";
 // import NotFound from "../pages/not-found";
 // import Profile from "../pages/profile";
 // import Dashboard from "../pages/dashboard";
@@ -29,15 +33,47 @@ const Router = () => {
           </DefaultLayout>
         }
       />
-      {/* <Route
-        path="/about"
+      <Route
+        path="/contact"
         element={
           <DefaultLayout>
-            <About />
+            <Contact />
           </DefaultLayout>
         }
       />
       <Route
+        path="/products"
+        element={
+          <DefaultLayout>
+            <Products />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/products/:id"
+        element={
+          <DefaultLayout>
+            <Product />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/news"
+        element={
+          <DefaultLayout>
+            <News />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/news/:id"
+        element={
+          <DefaultLayout>
+            <OneNews />
+          </DefaultLayout>
+        }
+      />
+      {/*<Route
         path="/profile"
         element={
           <DefaultLayout>

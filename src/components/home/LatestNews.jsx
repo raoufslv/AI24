@@ -1,14 +1,14 @@
-import { articles } from "@/constants/articles";
-import ArticleCard from "@/components/customUI/ArticleCard";
+import { news } from "@/constants/news";
+import NewsCard from "@/components/customUI/NewsCard";
 import { useEffect, useState } from "react";
 
-export default function LatestArticles() {
+export default function LatestNews() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  let maxArticles;
+  let maxNews;
   if (screenWidth >= 768) {
-    maxArticles = 4;
+    maxNews = 4;
   } else {
-    maxArticles = 3;
+    maxNews = 3;
   }
 
   useEffect(() => {
@@ -25,8 +25,8 @@ export default function LatestArticles() {
     >
       {/* //"flex flex-wrap justify-start space-x-24 w-full"> */}
 
-      {articles.slice(0, maxArticles).map((article, index) => (
-        <ArticleCard key={index} article={article} />
+      {news.slice(0, maxNews).map((onenews, index) => (
+        <NewsCard key={index} news={onenews} />
       ))}
     </div>
   );

@@ -12,13 +12,25 @@ export default function FollowUsSection() {
     <div className={classes.footerDiv}>
       <h2 className={classes.footerH2}>Follow us</h2>
       <div className={classes.flexGap}>
-        <Link to="https://www.facebook.com/" className={classes.linkHover}>
+        <Link
+          to="https://www.facebook.com/"
+          target="_blank"
+          className={classes.linkHover}
+        >
           <Facebook size={32} />
         </Link>
-        <Link to="https://www.twitter.com/" className={classes.linkHover}>
+        <Link
+          to="https://www.twitter.com/"
+          target="_blank"
+          className={classes.linkHover}
+        >
           <Twitter size={32} />
         </Link>
-        <Link to="https://www.youtube.com/" className={classes.linkHover}>
+        <Link
+          to="https://www.youtube.com/"
+          target="_blank"
+          className={classes.linkHover}
+        >
           <Youtube size={32} />
         </Link>
       </div>

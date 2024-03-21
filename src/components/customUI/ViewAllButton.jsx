@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { LayoutGrid } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function ViewAllButton() {
+export default function ViewAllButton({path}) {
   const navigate = useNavigate();
   return (
     <Button
       className="gap-2"
       variant="outline"
       onClick={() => {
-        navigate("/top-rated");
+        navigate(path);
       }}
     >
       View All

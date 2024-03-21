@@ -19,17 +19,21 @@ const shops = [
   {
     name: "Artstation",
     image: artstation,
+    link: "https://www.artstation.com/",
   },
   {
     name: "CG Trade",
     image: cgtrade,
+    link: "https://www.cgtrader.com/",
   },
   {
-    name: "Blendarmarket",
+    name: "Blender market",
     image: blendarmarket,
+    link: "https://blendermarket.com/",
   },
   {
     name: "Flipped Normals",
     image: flippednormals,
+    link: "https://flippednormals.com/",
   },
 ];

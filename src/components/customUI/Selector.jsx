@@ -8,12 +8,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function Selector({ topic, items }) {
+export default function Selector({ topic, items, value, onChange }) {
+  const handleSelectChange = (selectedValue) => {
+    // Pass the selected value back to the parent component
+    onChange(selectedValue);
+  };
+
   return (
-    <Select>
+    <Select onValueChange={(value) => handleSelectChange(value)}>
       <span className="text-sm">{topic}:</span>
       <SelectTrigger className="w-full bg-transparent dark:bg-transparent text-greeny border-0 p-0 ">
-        <SelectValue className="w-full" placeholder="All" />
+        <SelectValue className="w-full" placeholder="All" value={value} />
       </SelectTrigger>
       <SelectContent>
         {items.map((item) => (

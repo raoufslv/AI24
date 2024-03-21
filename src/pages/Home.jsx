@@ -6,7 +6,7 @@ import ViewAllButton from "@/components/customUI/ViewAllButton";
 
 import AboutSection from "@/components/home/AboutSection";
 import TopProducts from "@/components/home/TopProducts";
-import LatestArticles from "@/components/home/LatestArticles";
+import LatestArticles from "@/components/home/LatestNews";
 import { FeaturedShops } from "@/components/home/FeaturedShops";
 import Testimonials from "@/components/home/Testimonials";
 
@@ -21,33 +21,37 @@ export default function Home() {
       {/* Category cards */}
       <div>
         <Hometitle text="Explore By Category" />
-        <CategoryCards />
+        <div className="mt-4">
+          <CategoryCards />
+        </div>
       </div>
 
       {/* Search bar */}
       <div>
         <Hometitle text="Personalize your search" />
-        <SearchBar />
+        <div className="mt-4">
+          <SearchBar />
+        </div>
       </div>
 
       {/* Top rated items */}
       <div>
         <div className="flex justify-between items-end w-full 2xl:pr-16 xl:pr-12 lg:8 md:6">
           <Hometitle text="Top rated Items" />
-          <ViewAllButton />
+          <ViewAllButton path={"/products?filter=toprated"} />
         </div>
         <TopProducts />
       </div>
 
       {/* About section */}
-      <div className="my-12">
+      <div id="about" className="my-12">
         <AboutSection />
       </div>
 
       {/* Latest articles */}
       <div className="my-12">
         <div className="flex justify-between items-end w-full 2xl:pr-16 xl:pr-12 lg:8 md:6">
-          <Hometitle text="Latest Articles" />
+          <Hometitle text="News" />
           <ViewAllButton />
         </div>
         <LatestArticles />
@@ -62,7 +66,7 @@ export default function Home() {
       {/* Testimonials */}
       <div className="">
         <Hometitle text="Testimonials" />
-        <div className="md:px-20 sm:mx-16 mx-6">
+        <div className="xl:px-20 2xl:px-28 3xl:px-32">
           <Testimonials />
         </div>
       </div>
