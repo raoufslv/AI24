@@ -1,8 +1,17 @@
-# React + Vite
+# CG Vortex Client
+[![Netlify Status](https://api.netlify.com/api/v1/badges/010e92b3-30ab-4253-bd4d-ce19b3881216/deploy-status)](https://app.netlify.com/sites/cg-vortex/deploys)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project setup
+```
+npm install
+```
 
-Currently, two official plugins are available:
+### Compiles and hot-reloads for development
+```
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Compiles and minifies for production
+```
+npm run build
+```
