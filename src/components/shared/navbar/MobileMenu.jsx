@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import NavLinks from "@/components/customUI/NavLinks";
-import AuthButtons from "@/components/customUI/AuthButtons";
+import NavLinks from "@/components/shared/navbar/NavLinks";
+import AuthButtons from "@/components/shared/navbar/AuthButtons";
 
 import { Menu, X } from "lucide-react";
 

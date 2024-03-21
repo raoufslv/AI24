@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import MobileMenu from "@/components/customUI/MobileMenu";
-import NavLinks from "@/components/customUI/NavLinks";
-import AuthButtons from "@/components/customUI/AuthButtons";
+import MobileMenu from "@/components/shared/navbar/MobileMenu";
+import NavLinks from "@/components/shared/navbar/NavLinks";
+import AuthButtons from "@/components/shared/navbar/AuthButtons";
 import Logo from "@/components/customUI/Logo";
 
 export default function Navbar() {
