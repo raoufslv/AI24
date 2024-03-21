@@ -23,7 +23,7 @@ export default function Testimonials() {
       <CarouselContent className="-ml-1">
         {testimonials.map((testimonial, index) => (
           <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
-            <div className="p-1 pt-12">
+            <div className="p-1 pt-12 flex flex-col items-center justify-center">
               <Card className="relative w-11/12 dark:bg-darky dark:border-0 rounded-2xl flex flex-col justify-end min-h-[17rem] md:min-h-full pt-12">
                 <LazyLoad>
                   <img

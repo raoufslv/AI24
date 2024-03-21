@@ -62,7 +62,7 @@ export default function Home() {
       {/* Testimonials */}
       <div className="">
         <Hometitle text="Testimonials" />
-        <div className="px-20">
+        <div className="md:px-20 sm:mx-16 mx-6">
           <Testimonials />
         </div>
       </div>

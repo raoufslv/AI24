@@ -20,7 +20,7 @@ export default function NewsletterSection() {
           <Input
             type="email"
             placeholder="Email"
-            className="w-full pl-8 text-black"
+            className="w-full pl-8 text-black dark:text-white"
           />
           <Button
             type="submit"
