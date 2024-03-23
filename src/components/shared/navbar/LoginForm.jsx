@@ -7,24 +7,42 @@ import { Eye, EyeOff } from "lucide-react";
 import google from "@/assets/icons/google.svg";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "@/hooks/react-query/useAuth";
+
+const LoginFormSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8).max(20),
+});
 
 export function LoginForm() {
+  const navigate = useNavigate();
+  const [loginMutation] = useLoginMutation();
+
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: zodResolver(LoginFormSchema),
+  });
 
   const onSubmit = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error();
-      console.log(data);
+      await loginMutation(data);
+      navigate("/dashboard");
     } catch (error) {
       setError("root", {
         type: "manual",
-        message: "Invalid email or password",
+        message: error.message,
       });
     }
   };
@@ -55,9 +73,7 @@ export function LoginForm() {
         <LabelInputContainer className="mb-4 w-80">
           <Label htmlFor="email">Email or username</Label>
           <Input
-            {...register("email", {
-              required: "Email or username is required",
-            })}
+            {...register("email")}
             id="email"
             placeholder="taylor02@gmail.com"
             type="text"
@@ -69,22 +85,7 @@ export function LoginForm() {
         <LabelInputContainer className="mb-1 relative">
           <Label htmlFor="password">Password</Label>
           <Input
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password must have at least 8 characters",
-              },
-              maxLength: {
-                value: 20,
-                message: "Password must have at most 20 characters",
-              },
-              pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                message:
-                  "Password must contain at least one letter and one number",
-              },
-            })}
+            {...register("password")}
             id="password"
             placeholder="••••••••"
             type={showPassword ? "text" : "password"}
