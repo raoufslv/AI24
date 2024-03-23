@@ -95,10 +95,7 @@ export const InfiniteMovingCards = ({
           >
             <li
               className="w-[150px] flex space-x-2 items-center justify-center max-w-full relative rounded-2xl flex-shrink-0 border-slate-700 px-8 py-6 md:w-[250px]"
-              style={{
-                background:
-                  "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
-              }}
+              
             >
               <img
                 src={item.image}

@@ -15,7 +15,7 @@ export default function NewsletterSection() {
         </p>
       </div>
       <div className="w-fit">
-        <div className="flex items-center relative">
+        <div className="flex items-center relative w-full">
           <Mail color="#555555" size={20} className="z-10 absolute left-2" />
           <Input
             type="email"
