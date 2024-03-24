@@ -19,7 +19,7 @@ const SignupFormSchema = z.object({
   password: z.string().min(8).max(20),
 });
 
-export function SignupForm() {
+export function SignupForm({ toggle }) {
   const navigate = useNavigate();
   const signupMutation = useSignupMutation();
 
@@ -92,16 +92,14 @@ export function SignupForm() {
         />
         <PasswordInput register={register} errors={errors} className="mb-8" />
 
-        <SubmitButton isSubmitting={isSubmitting} />
+        <SubmitButton isSubmitting={isSubmitting} text="Sign up" loading="signing up..." />
         {errors.root && <ErrorMessage message={errors.root.message} />}
 
         <p className="text-center text-neutral-600 dark:text-neutral-300 mt-4 text-sm">
           Already have an account?{" "}
-          <span>
-            <a href="#" className="font-bold">
-              Login
-            </a>
-          </span>
+          <button className="font-bold" onClick={toggle} type="button">
+            Login
+          </button>
         </p>
       </form>
     </div>

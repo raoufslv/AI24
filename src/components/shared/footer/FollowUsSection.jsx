@@ -1,7 +1,7 @@
 import { Facebook, Twitter, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function FollowUsSection() {
+export default function FollowUsSection({ flag }) {
   const classes = {
     footerH2: "text-xl",
     footerDiv: "flex flex-col items-start justify-start gap-4 my-8",
@@ -10,7 +10,7 @@ export default function FollowUsSection() {
   };
   return (
     <div className={classes.footerDiv}>
-      <h2 className={classes.footerH2}>Follow us</h2>
+      {!flag && <h2 className={classes.footerH2}>Follow us</h2>}
       <div className={classes.flexGap}>
         <Link
           to="https://www.facebook.com/"

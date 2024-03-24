@@ -15,11 +15,11 @@ import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/hooks/react-query/useAuth";
 
 const LoginFormSchema = z.object({
-  email: z.string(),
+  email: z.string().nonempty(),
   password: z.string().min(8).max(20),
 });
 
-export function LoginForm() {
+export function LoginForm({ toggle }) {
   const navigate = useNavigate();
   const loginMutation = useLoginMutation();
 
@@ -76,9 +76,20 @@ export function LoginForm() {
         <PasswordInput register={register} errors={errors} className="mb-1" />
 
         <ForgotPasswordLink />
-        <SubmitButton isSubmitting={isSubmitting} />
+        <SubmitButton
+          isSubmitting={isSubmitting}
+          text="Log in"
+          loading="Logging in..."
+        />
 
         {errors.root && <ErrorMessage message={errors.root.message} />}
+
+        <p className="text-center text-neutral-600 dark:text-neutral-300 mt-4 text-sm">
+          Don't have an account?{" "}
+          <button className="font-bold" onClick={toggle} type="button">
+            Register
+          </button>
+        </p>
       </form>
     </div>
   );

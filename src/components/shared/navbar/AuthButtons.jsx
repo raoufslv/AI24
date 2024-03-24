@@ -7,7 +7,12 @@ import FormModal from "@/components/customUI/FormModal";
 export default function AuthButtons() {
   const [openSignup, setOpenSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
-  
+
+  const toggleBetweenForms = () => {
+    setOpenLogin(!openLogin);
+    setOpenSignup(!openSignup);
+  };
+
   return (
     <>
       <Button
@@ -19,8 +24,7 @@ export default function AuthButtons() {
                   "
         onClick={() => {
           setOpenLogin(true);
-        }
-      }
+        }}
       >
         Log In
       </Button>
@@ -36,11 +40,11 @@ export default function AuthButtons() {
       </Button>
 
       <FormModal open={openSignup} setOpen={setOpenSignup}>
-        <SignupForm />
+        <SignupForm toggle={toggleBetweenForms} />
       </FormModal>
-      
+
       <FormModal open={openLogin} setOpen={setOpenLogin}>
-        <LoginForm />
+        <LoginForm toggle={toggleBetweenForms} />
       </FormModal>
     </>
   );
