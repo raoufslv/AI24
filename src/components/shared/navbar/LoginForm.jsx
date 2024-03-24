@@ -1,26 +1,27 @@
-"use client";
-import React, { useState } from "react";
-import { Label } from "../../ui/label";
-import { Input } from "../../ui/input";
-import { cn } from "@/lib/utils";
-import { Eye, EyeOff } from "lucide-react";
-import google from "@/assets/icons/google.svg";
-import { Link } from "react-router-dom";
+import SubmitButton from "@/components/customUI/forms/SubmitButton";
+import DividerLine from "@/components/customUI/forms/DividerLine";
+import FormInput from "@/components/customUI/forms/FormInput";
+import PasswordInput from "@/components/customUI/forms/PasswordInput";
+import SocialLoginButton from "@/components/customUI/forms/SocialLoginButton";
+import ForgotPasswordLink from "@/components/customUI/forms/ForgotPasswordLink";
+import ErrorMessage from "@/components/customUI/forms/ErrorMessage";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useNavigate } from "react-router-dom";
+
 import { useLoginMutation } from "@/hooks/react-query/useAuth";
 
 const LoginFormSchema = z.object({
-  email: z.string().email(),
+  email: z.string(),
   password: z.string().min(8).max(20),
 });
 
 export function LoginForm() {
   const navigate = useNavigate();
-  const [loginMutation] = useLoginMutation();
+  const loginMutation = useLoginMutation();
 
   const {
     register,
@@ -37,8 +38,10 @@ export function LoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      await loginMutation(data);
-      navigate("/dashboard");
+      console.log("data : ", data);
+      const response = await loginMutation.mutateAsync(data);
+      console.log("response : ", response);
+      // navigate("/dashboard");
     } catch (error) {
       setError("root", {
         type: "manual",
@@ -46,7 +49,6 @@ export function LoginForm() {
       });
     }
   };
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
@@ -55,97 +57,29 @@ export function LoginForm() {
       </h2>
 
       <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
-        <button
-          className=" relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-          type="submit"
-        >
-          <img src={google} alt="Google" className="h-6 w-6" />
-          <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-            Sign in with Google
-          </span>
-          <BottomGradient />
-        </button>
+        <SocialLoginButton />
+
         <div className="flex items-center gap-2">
-          <div className="bg-neutral-700 my-8 h-[1px] w-full" />
+          <DividerLine />
           or
-          <div className="bg-neutral-700 my-8 h-[1px] w-full" />
-        </div>
-        <LabelInputContainer className="mb-4 w-80">
-          <Label htmlFor="email">Email or username</Label>
-          <Input
-            {...register("email")}
-            id="email"
-            placeholder="taylor02@gmail.com"
-            type="text"
-          />
-          {errors.email && (
-            <span className="text-red-500 text-xs">{errors.email.message}</span>
-          )}
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-1 relative">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            {...register("password")}
-            id="password"
-            placeholder="••••••••"
-            type={showPassword ? "text" : "password"}
-          />
-          {errors.password && (
-            <span className="text-red-500 text-xs">
-              {errors.password.message}
-            </span>
-          )}
-
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-2 top-6 h-6 w-6 text-neutral-400 dark:text-neutral-300"
-          >
-            <EyeOff className={`h-6 w-6 ${showPassword ? "hidden" : ""}`} />
-            <Eye className={`h-6 w-6 ${showPassword ? "" : "hidden"}`} />
-          </button>
-        </LabelInputContainer>
-        <div className="flex items-center justify-end mb-8">
-          <Link
-            to="/forgot-password"
-            className="text-xs text-neutral-400 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
-          >
-            Forgot password?
-          </Link>
+          <DividerLine />
         </div>
 
-        <button
-          disabled={isSubmitting}
-          className="bg-black dark:bg-white relative group/btn w-full text-white dark:text-black rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          type="submit"
-        >
-          {isSubmitting ? "Logging in..." : "Log in"}
-          <BottomGradient />
-        </button>
+        <FormInput
+          register={register}
+          errors={errors}
+          id="email"
+          name="Email or username"
+          placeholder="Enter your email or username"
+          className="w-80"
+        />
+        <PasswordInput register={register} errors={errors} className="mb-1" />
 
-        {errors.root && (
-          <span className="text-red-500 text-xs mt-2 text-center mx-auto">
-            {errors.root.message}
-          </span>
-        )}
+        <ForgotPasswordLink />
+        <SubmitButton isSubmitting={isSubmitting} />
+
+        {errors.root && <ErrorMessage message={errors.root.message} />}
       </form>
     </div>
   );
 }
-
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-    </>
-  );
-};
-
-const LabelInputContainer = ({ children, className }) => {
-  return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
-      {children}
-    </div>
-  );
-};

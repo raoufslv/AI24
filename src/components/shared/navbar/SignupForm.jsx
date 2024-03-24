@@ -1,17 +1,56 @@
-"use client";
-import React, { useState } from "react";
-import { Label } from "../../ui/label";
-import { Input } from "../../ui/input";
-import { cn } from "@/lib/utils";
-import { Eye, EyeOff } from "lucide-react";
+import SubmitButton from "@/components/customUI/forms/SubmitButton";
+import FormInput from "@/components/customUI/forms/FormInput";
+import PasswordInput from "@/components/customUI/forms/PasswordInput";
+import ErrorMessage from "@/components/customUI/forms/ErrorMessage";
+
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useNavigate } from "react-router-dom";
+
+import { useSignupMutation } from "@/hooks/react-query/useAuth";
+
+const SignupFormSchema = z.object({
+  firstname: z.string().min(2).max(50),
+  lastname: z.string().min(2).max(50),
+  username: z.string().min(2).max(50),
+  email: z.string().email(),
+  password: z.string().min(8).max(20),
+});
 
 export function SignupForm() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted");
-  };
+  const navigate = useNavigate();
+  const signupMutation = useSignupMutation();
 
-  const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      firstname: "",
+      lastname: "",
+      username: "",
+      email: "",
+      password: "",
+    },
+    resolver: zodResolver(SignupFormSchema),
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await signupMutation.mutateAsync(data);
+      console.log("response : ", response);
+      // navigate("/dashboard");
+    } catch (error) {
+      setError("root", {
+        type: "manual",
+        message: error.message,
+      });
+    }
+  };
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
@@ -19,49 +58,42 @@ export function SignupForm() {
         Create your account
       </h2>
 
-      <form className="mt-8" onSubmit={handleSubmit}>
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" />
-          </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Durden" type="text" />
-          </LabelInputContainer>
-        </div>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="username">Username</Label>
-          <Input id="username" placeholder="Tyler02" type="text" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-8 relative">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            placeholder="••••••••"
-            type={showPassword ? "text" : "password"}
+      <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+          <FormInput
+            register={register}
+            errors={errors}
+            id="firstname"
+            name="First name"
+            placeholder="Enter your first name"
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-2 top-6 h-6 w-6 text-neutral-400 dark:text-neutral-300"
-          >
-            <EyeOff className={`h-6 w-6 ${showPassword ? "hidden" : ""}`} />
-            <Eye className={`h-6 w-6 ${showPassword ? "" : "hidden"}`} />
-          </button>
-        </LabelInputContainer>
 
-        <button
-          className="bg-black dark:bg-white relative group/btn w-full text-white dark:text-black rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          type="submit"
-        >
-          Sign up
-          <BottomGradient />
-        </button>
+          <FormInput
+            register={register}
+            errors={errors}
+            id="lastname"
+            name="Last name"
+            placeholder="Enter your last name"
+          />
+        </div>
+        <FormInput
+          register={register}
+          errors={errors}
+          id="username"
+          name="Username"
+          placeholder="Enter your username"
+        />
+        <FormInput
+          register={register}
+          errors={errors}
+          id="email"
+          name="Email"
+          placeholder="Enter your email"
+        />
+        <PasswordInput register={register} errors={errors} className="mb-8" />
+
+        <SubmitButton isSubmitting={isSubmitting} />
+        {errors.root && <ErrorMessage message={errors.root.message} />}
 
         <p className="text-center text-neutral-600 dark:text-neutral-300 mt-4 text-sm">
           Already have an account?{" "}
@@ -75,20 +107,3 @@ export function SignupForm() {
     </div>
   );
 }
-
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-    </>
-  );
-};
-
-const LabelInputContainer = ({ children, className }) => {
-  return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
-      {children}
-    </div>
-  );
-};
