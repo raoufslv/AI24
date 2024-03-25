@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 
 export default function RatingGroup({ filled }) {
   return (
-    <div className=" flex justify-between">
+    <div className=" flex justify-between items-center">
       <div className="flex gap-1">
         {
           // create an array of 5 elements
