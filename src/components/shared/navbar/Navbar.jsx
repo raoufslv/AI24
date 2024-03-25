@@ -4,9 +4,15 @@ import MobileMenu from "@/components/shared/navbar/MobileMenu";
 import NavLinks from "@/components/shared/navbar/NavLinks";
 import AuthButtons from "@/components/shared/navbar/AuthButtons";
 import Logo from "@/components/customUI/Logo";
+import { setAccessToken } from "@/context/accessToken";
+import { axiosInstance } from "@/services/authService";
+
+import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { connected, setConnected, setRole } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +34,18 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const logout = async () => {
+    try {
+      // clear the access token
+      setAccessToken(null);
+      setConnected(false);
+      setRole(null);
+      await axiosInstance.post("auth/logout", {});
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
   return (
     <div
@@ -56,7 +74,14 @@ export default function Navbar() {
           <div className="flex items-center xl:space-x-10 lg:space-x-8 md:space-x-4 space-x-2">
             <ModeToggle />
             <div className="space-x-4 hidden sm:flex">
-              <AuthButtons />
+              {connected ? (
+                <div>
+                  connected
+                  <Button onClick={logout}>logout</Button>
+                </div>
+              ) : (
+                <AuthButtons />
+              )}
             </div>
           </div>
         </div>

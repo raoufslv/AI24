@@ -10,17 +10,17 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useNavigate } from "react-router-dom";
-
 import { useLoginMutation } from "@/hooks/react-query/useAuth";
+import { setAccessToken } from "@/context/accessToken";
+import { useAuth } from "@/context/AuthContext";
 
 const LoginFormSchema = z.object({
   email: z.string().nonempty(),
   password: z.string().min(8).max(20),
 });
 
-export function LoginForm({ toggle }) {
-  const navigate = useNavigate();
+export function LoginForm({ toggle, selfOpenModal }) {
+  const { setConnected, setRole } = useAuth();
   const loginMutation = useLoginMutation();
 
   const {
@@ -38,10 +38,12 @@ export function LoginForm({ toggle }) {
 
   const onSubmit = async (data) => {
     try {
-      console.log("data : ", data);
       const response = await loginMutation.mutateAsync(data);
-      console.log("response : ", response);
-      // navigate("/dashboard");
+      setAccessToken(response.accessToken);
+      setConnected(true);
+      setRole(response.role);
+      // close the modal
+      selfOpenModal(false);
     } catch (error) {
       setError("root", {
         type: "manual",

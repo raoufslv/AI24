@@ -40,11 +40,11 @@ export default function AuthButtons() {
       </Button>
 
       <FormModal open={openSignup} setOpen={setOpenSignup}>
-        <SignupForm toggle={toggleBetweenForms} />
+        <SignupForm toggle={toggleBetweenForms} selfOpenModal={setOpenSignup} />
       </FormModal>
 
       <FormModal open={openLogin} setOpen={setOpenLogin}>
-        <LoginForm toggle={toggleBetweenForms} />
+        <LoginForm toggle={toggleBetweenForms} selfOpenModal={setOpenLogin} />
       </FormModal>
     </>
   );

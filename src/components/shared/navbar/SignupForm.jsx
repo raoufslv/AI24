@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useNavigate } from "react-router-dom";
-
 import { useSignupMutation } from "@/hooks/react-query/useAuth";
+import { setAccessToken } from "@/context/accessToken";
+import { useAuth } from "@/context/AuthContext";
 
 const SignupFormSchema = z.object({
   firstname: z.string().min(2).max(50),
@@ -19,8 +19,8 @@ const SignupFormSchema = z.object({
   password: z.string().min(8).max(20),
 });
 
-export function SignupForm({ toggle }) {
-  const navigate = useNavigate();
+export function SignupForm({ toggle, selfOpenModal }) {
+  const { setConnected, setRole } = useAuth();
   const signupMutation = useSignupMutation();
 
   const {
@@ -42,8 +42,11 @@ export function SignupForm({ toggle }) {
   const onSubmit = async (data) => {
     try {
       const response = await signupMutation.mutateAsync(data);
-      console.log("response : ", response);
-      // navigate("/dashboard");
+      setAccessToken(response.accessToken);
+      setConnected(true);
+      setRole(response.role);
+      // close the modal
+      selfOpenModal(false);
     } catch (error) {
       setError("root", {
         type: "manual",
@@ -92,7 +95,11 @@ export function SignupForm({ toggle }) {
         />
         <PasswordInput register={register} errors={errors} className="mb-8" />
 
-        <SubmitButton isSubmitting={isSubmitting} text="Sign up" loading="signing up..." />
+        <SubmitButton
+          isSubmitting={isSubmitting}
+          text="Sign up"
+          loading="signing up..."
+        />
         {errors.root && <ErrorMessage message={errors.root.message} />}
 
         <p className="text-center text-neutral-600 dark:text-neutral-300 mt-4 text-sm">
