@@ -7,7 +7,7 @@ export default function Contact() {
   return (
     <div
       className="text-white dark:text-white bg-darky rounded-xl p-24 
-    flex justify-between items-start"
+    flex justify-between items-start md:flex-row flex-col"
     >
       <div className="flex flex-col justify-start items-start gap-16">
         <h2 className="font-bruno text-2xl ">Contact Us</h2>
