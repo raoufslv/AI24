@@ -31,7 +31,7 @@ export default function TopProducts() {
     <div
       className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
     xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 4xl:grid-cols-7
-    w-full"
+    w-full gap-4 pt-4"
     >
       {products.slice(0, maxProducts).map((product, index) => (
         <ProductCard key={index} product={product} />

@@ -2,12 +2,12 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card.tsx";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
-
+import { cn } from "@/lib/utils";
 import LazyLoad from "react-lazy-load";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, className }) {
   return (
-    <CardContainer className="inter-var">
+    <CardContainer className={cn("inter-var", className)}>
       <CardBody
         className=" bg-gray-50 relative group/card  
       dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black   

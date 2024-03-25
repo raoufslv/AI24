@@ -1,3 +1,7 @@
-export default function DividerLine() {
-  return <div className="bg-neutral-700 my-8 h-[1px] w-full" />;
+import { cn } from "@/lib/utils";
+
+export default function DividerLine({ className }) {
+  return (
+    <div className={cn("bg-neutral-700 my-8 h-[1px] w-full", className)} />
+  );
 }

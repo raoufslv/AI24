@@ -36,7 +36,7 @@ export default function Home() {
 
       {/* Top rated items */}
       <div>
-        <div className="flex justify-between items-end w-full 2xl:pr-16 xl:pr-12 lg:8 md:6">
+        <div className="flex justify-between items-end w-full 2xl:pr-4 xl:pr-12 lg:8 md:6">
           <Hometitle text="Top rated Items" />
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>

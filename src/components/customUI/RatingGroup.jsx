@@ -1,0 +1,22 @@
+import React from "react";
+import { Star } from "lucide-react";
+
+export default function RatingGroup({ filled }) {
+  return (
+    <div className=" flex justify-between">
+      <div className="flex gap-1">
+        {
+          // create an array of 5 elements
+          Array.from({ length: 5 }, (_, index) => (
+            <Star
+              key={index}
+              size={20}
+              fill={index < filled ? "currentColor" : "none"}
+            />
+          ))
+        }
+      </div>{" "}
+      & up
+    </div>
+  );
+}
