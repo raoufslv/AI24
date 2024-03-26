@@ -12,7 +12,6 @@
   src: url("./assets/fonts/Poppins-Regular.ttf");
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -59,7 +58,6 @@
     --ring: 0 0% 83.1%;
   }
 }
-
 
 @layer base {
   * {

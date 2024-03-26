@@ -37,7 +37,7 @@ export default function Navbar() {
         isScrolled ? "bg-white shadow-lg dark:bg-darky" : ""
       }`}
     >
-      <div className="mx-auto 2xl:px-16 xl:px-10 lg:px-8 px-6">
+      <div className="mx-auto 2xl:px-56 xl:px-10 lg:px-8 px-6">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-4">
             {/* Mobile Menu */}
@@ -49,7 +49,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <nav aria-label="Main navigation" className="xl:flex-grow xl:pl-32">
-            <ul className="hidden md:flex xl:space-x-8 lg:space-x-6 md:space-x-4 space-x-2">
+            <ul className="hidden md:flex xl:space-x-8 lg:space-x-6 md:space-x-4 space-x-2 xl:text-xl">
               <NavLinks />
             </ul>
           </nav>

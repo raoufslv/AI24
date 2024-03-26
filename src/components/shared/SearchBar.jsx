@@ -10,7 +10,7 @@ import Softwares from "@/constants/softwares";
 import license from "@/constants/license";
 import PriceDropDown from "@/components/customUI/PriceDropDown";
 
-export default function SearchBar() {
+export default function SearchBar({ flag }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSoftware, setSelectedSoftware] = useState("");
@@ -53,33 +53,38 @@ export default function SearchBar() {
           onChange={(value) => setSelectedCategory(value)}
         />
       </div>
+      {flag == "news" ? (
+        ""
+      ) : (
+        <>
+          <div className="flex items-center text-white justify-center">
+            <Selector
+              topic="Softwares"
+              items={Softwares}
+              value={selectedSoftware}
+              onChange={(value) => setSelectedSoftware(value)}
+            />
+          </div>
 
-      <div className="flex items-center text-white justify-center">
-        <Selector
-          topic="Softwares"
-          items={Softwares}
-          value={selectedSoftware}
-          onChange={(value) => setSelectedSoftware(value)}
-        />
-      </div>
+          <div className="flex items-center text-white justify-center">
+            <Selector
+              topic="license"
+              items={license}
+              value={selectedLicense}
+              onChange={(value) => setSelectedLicense(value)}
+            />
+          </div>
 
-      <div className="flex items-center text-white justify-center">
-        <Selector
-          topic="license"
-          items={license}
-          value={selectedLicense}
-          onChange={(value) => setSelectedLicense(value)}
-        />
-      </div>
-
-      <div className="flex items-center text-white justify-center">
-        <PriceDropDown
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          setMaxPrice={setMaxPrice}
-          setMinPrice={setMinPrice}
-        />
-      </div>
+          <div className="flex items-center text-white justify-center">
+            <PriceDropDown
+              minPrice={minPrice}
+              maxPrice={maxPrice}
+              setMaxPrice={setMaxPrice}
+              setMinPrice={setMinPrice}
+            />
+          </div>
+        </>
+      )}
 
       <Button
         variant="outline"

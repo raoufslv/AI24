@@ -1,7 +1,7 @@
 import React from "react";
 import { Star } from "lucide-react";
 
-export default function RatingGroup({ filled }) {
+export default function RatingGroup({ filled, flag }) {
   return (
     <div className=" flex justify-between items-center">
       <div className="flex gap-1">
@@ -15,8 +15,8 @@ export default function RatingGroup({ filled }) {
             />
           ))
         }
-      </div>{" "}
-      & up
+      </div>
+      {flag ? "" : "& up"}
     </div>
   );
 }

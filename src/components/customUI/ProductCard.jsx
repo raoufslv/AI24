@@ -11,7 +11,7 @@ export default function ProductCard({ product, className }) {
       <CardBody
         className=" bg-gray-50 relative group/card  
       dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black   
-      w-auto sm:w-[16rem] h-auto 
+      w-auto sm:w-[17rem] h-auto 
       rounded-xl border"
       >
         <CardItem translateZ="100" className="w-full">

@@ -1,8 +1,8 @@
 import { news } from "@/constants/news";
-import NewsCard from "@/components/customUI/NewsCard";
+import NewsHorizontalCard from "@/components/customUI/NewsHorizontalCard";
 import { useEffect, useState } from "react";
 
-export default function LatestNews() {
+export default function NewsList() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   let maxNews;
   if (screenWidth >= 768) {
@@ -18,15 +18,13 @@ export default function LatestNews() {
   }, []);
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-2
-    xl:grid-cols-3 3xl:grid-cols-4
-    gap-4 w-full my-4
+      className="grid  gap-4 xl:w-1/2
     "
     >
       {/* //"flex flex-wrap justify-start space-x-24 w-full"> */}
 
       {news.slice(0, maxNews).map((onenews, index) => (
-        <NewsCard key={index} news={onenews} />
+        <NewsHorizontalCard key={index} news={onenews} />
       ))}
     </div>
   );

@@ -36,7 +36,7 @@ export default function Home() {
 
       {/* Top rated items */}
       <div>
-        <div className="flex justify-between items-end w-full 2xl:pr-4 xl:pr-12 lg:8 md:6">
+        <div className="flex justify-between items-end w-full lg:8 md:6">
           <Hometitle text="Top rated Items" />
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
@@ -50,7 +50,7 @@ export default function Home() {
 
       {/* Latest articles */}
       <div className="my-12">
-        <div className="flex justify-between items-end w-full 2xl:pr-16 xl:pr-12 lg:8 md:6">
+        <div className="flex justify-between items-end w-full lg:8 md:6">
           <Hometitle text="News" />
           <ViewAllButton />
         </div>
@@ -66,7 +66,7 @@ export default function Home() {
       {/* Testimonials */}
       <div className="">
         <Hometitle text="Testimonials" />
-        <div className="xl:px-20 2xl:px-28 3xl:px-32">
+        <div className="">
           <Testimonials />
         </div>
       </div>

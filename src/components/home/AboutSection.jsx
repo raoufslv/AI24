@@ -394,7 +394,7 @@ export default function AboutSection() {
   return (
     <div
       className="flex bg-darky rounded-xl text-white justify-center items-center mx-auto 
-    xl:w-4/5 p-6"
+     p-6"
     >
       <div className="flex flex-col w-full md:space-y-16 space-y-6">
         <h1
@@ -403,7 +403,7 @@ export default function AboutSection() {
         >
           About CG Vortex
         </h1>
-        <div className="xl:text-lg sm:text-base text-sm">
+        <div className="xl:text-lg sm:text-base text-xs">
           <p>
             We are a market place where you find everything related to 3D, 2D,
             modeling, animations and much more.

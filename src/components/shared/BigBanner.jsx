@@ -1,4 +1,3 @@
-import React from "react";
 import TempBanner from "@/assets/images/TempBanner.png";
 import LazyLoad from "react-lazy-load";
 

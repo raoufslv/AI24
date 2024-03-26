@@ -1,7 +1,7 @@
 import DividerLine from "@/components/customUI/forms/DividerLine";
 import BigBanner from "@/components/shared/BigBanner";
 import SearchBar from "@/components/shared/SearchBar";
-import SidebarFilter from "@/components/customUI/SidebarFilter";
+import SidebarFilter from "@/components/shared/SidebarFilter";
 import ProductsList from "@/components/customUI/ProductsList";
 
 export default function Products() {

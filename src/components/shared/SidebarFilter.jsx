@@ -14,6 +14,7 @@ import { X } from "lucide-react";
 import tags from "@/constants/tags";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 export default function SidebarFilter() {
   const selectedTagsArray = [];
@@ -49,25 +50,45 @@ export default function SidebarFilter() {
         <div className="flex flex-col gap-2">
           <RadioGroup>
             <div className="flex items-center gap-4">
-              <RatingGroup filled={4} />
-              <RadioGroupItem value="default" id="r1" className="bg-white" />
+              <Label htmlFor="r4" className="text-white">
+                <RatingGroup filled={4} />
+              </Label>
+              <RadioGroupItem
+                value="default"
+                id="r4"
+                className="bg-white dark:text-darky"
+              />
             </div>
 
             <div className="flex items-center gap-4">
-              <RatingGroup filled={3} />
+              <Label htmlFor="r3" className="text-white">
+                <RatingGroup filled={3} />
+              </Label>
               <RadioGroupItem
                 value="comfortable"
-                id="r2"
-                className="bg-white"
+                id="r3"
+                className="bg-white dark:text-darky"
               />
             </div>
             <div className="flex items-center gap-4">
-              <RatingGroup filled={2} />
-              <RadioGroupItem value="compact" id="r3" className="bg-white" />
+              <Label htmlFor="r2" className="text-white">
+                <RatingGroup filled={2} />
+              </Label>
+              <RadioGroupItem
+                value="compact"
+                id="r2"
+                className="bg-white dark:text-darky"
+              />
             </div>
             <div className="flex items-center gap-4">
-              <RatingGroup filled={1} />
-              <RadioGroupItem value="compacst2" id="r4" className="bg-white" />
+              <Label htmlFor="r1" className="text-white">
+                <RatingGroup filled={1} />
+              </Label>
+              <RadioGroupItem
+                value="compacst2"
+                id="r1"
+                className="bg-white dark:text-darky"
+              />
             </div>
           </RadioGroup>
         </div>
@@ -115,7 +136,7 @@ export default function SidebarFilter() {
                   );
                 }}
                 variant="outline"
-                className="bg-transparent"
+                className="bg-transparent dark:bg-transparent dark:border-white dark:hover:bg-white dark:hover:text-black"
               >
                 {tag.name}
               </Button>
