@@ -9,39 +9,23 @@ import { axiosInstance } from "@/services/authService";
 
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
+import { useScrollDetector } from "@/hooks/custom/ScrollDetector";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { connected, setConnected, setRole } = useAuth();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-
-      // Check if the user has scrolled down more than 50px
-      if (scrollTop > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    // Add scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Remove scroll event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    useScrollDetector(setIsScrolled);
   }, []);
 
   const logout = async () => {
     try {
       // clear the access token
-      setAccessToken(null);
       setConnected(false);
       setRole(null);
-      await axiosInstance.post("auth/logout", {});
+      await axiosInstance.post("auth/logout");
+      setAccessToken(null);
     } catch (error) {
       throw new Error(error);
     }
