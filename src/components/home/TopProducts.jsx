@@ -1,8 +1,7 @@
 import ProductCard from "@/components/customUI/ProductCard";
-import { products } from "@/constants/products";
 import { useEffect, useState } from "react";
 
-export default function TopProducts() {
+export default function TopProducts({products}) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   let maxProducts;
   if (screenWidth >= 1970) {

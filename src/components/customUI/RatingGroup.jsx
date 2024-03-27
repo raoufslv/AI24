@@ -10,7 +10,7 @@ export default function RatingGroup({ filled, flag }) {
           Array.from({ length: 5 }, (_, index) => (
             <Star
               key={index}
-              size={20}
+              size={16}
               fill={index < filled ? "currentColor" : "none"}
             />
           ))

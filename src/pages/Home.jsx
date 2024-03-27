@@ -3,6 +3,7 @@ import BigBanner from "@/components/shared/BigBanner";
 import Hometitle from "@/components/ui/hometitle";
 import SearchBar from "@/components/shared/SearchBar";
 import ViewAllButton from "@/components/customUI/ViewAllButton";
+import { products } from "@/constants/products";
 
 import AboutSection from "@/components/home/AboutSection";
 import TopProducts from "@/components/home/TopProducts";
@@ -40,7 +41,7 @@ export default function Home() {
           <Hometitle text="Top rated Items" />
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
-        <TopProducts />
+        <TopProducts products={products} />
       </div>
 
       {/* About section */}
