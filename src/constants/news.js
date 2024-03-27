@@ -8,7 +8,7 @@ export const news = [
     id: 1,
     title: "3D Assets for FPS Games",
     image: Assets,
-    rating: 4.3,
+    rating: 4,
     description:
       "how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games.",
     date: "2022-01-01",
@@ -18,7 +18,7 @@ export const news = [
     id: 2,
     title: "Ready to Print 3D Models",
     image: Printing,
-    rating: 4.3,
+    rating: 3,
     description:
       "how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games.",
     date: "2022-01-01",
@@ -28,7 +28,7 @@ export const news = [
     id: 3,
     title: "Addons for 3D Models",
     image: Addons,
-    rating: 4.3,
+    rating: 3,
     description:
       "how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games.",
     date: "2022-01-01",
@@ -38,7 +38,7 @@ export const news = [
     id: 4,
     title: "3D Animation on Demand",
     image: Animation,
-    rating: 4.3,
+    rating: 3,
     description:
       "how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games how to use Blender to create 3D assets for FPS games.",
     date: "2022-01-01",
