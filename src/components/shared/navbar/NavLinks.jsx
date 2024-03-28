@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 
 export default function NavLinks({ toggleMenu }) {
   const location = useLocation();
-  // slice the pathname to get the first word after the slash
   const path = location.pathname.slice(1).split("/")[0];
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");

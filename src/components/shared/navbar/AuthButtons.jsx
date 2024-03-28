@@ -5,40 +5,20 @@ import { useState } from "react";
 import FormModal from "@/components/customUI/FormModal";
 import { useAuth } from "@/context/AuthContext";
 
-import { setAccessToken } from "@/context/accessToken";
-import { axiosInstance } from "@/services/authService";
+import ProfilAvatar from "./ProfilAvatar";
 
 export default function AuthButtons() {
   const [openSignup, setOpenSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
-  const { connected, setConnected, setRole } = useAuth();
+  const { connected } = useAuth();
 
   const toggleBetweenForms = () => {
     setOpenLogin(!openLogin);
     setOpenSignup(!openSignup);
   };
 
-  const logout = async () => {
-    try {
-      // clear the access token
-      setConnected(false);
-      setRole(null);
-      await axiosInstance.post("auth/logout");
-      setAccessToken(null);
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
-
   if (connected) {
-    return (
-      <Button
-        className="hover:bg-neutral-100 hover:text-black dark:hover:bg-darky dark:hover:text-white"
-        onClick={logout}
-      >
-        Logout
-      </Button>
-    );
+    return <ProfilAvatar />;
   }
 
   return (
