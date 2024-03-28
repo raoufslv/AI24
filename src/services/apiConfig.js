@@ -4,7 +4,7 @@ export let axiosInstance = axios.create();
 import axios from "axios";
 const localUrl = "http://localhost:5000/api";
 const deployedUrl = "https://cgvortexserver.onrender.com/api";
-const BASE_URL = localUrl;
+const BASE_URL = deployedUrl;
 
 export const createAxiosInstance = () => {
   axiosInstance = axios.create({
