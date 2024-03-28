@@ -9,6 +9,7 @@ export default function MobileMenu() {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
+    console.log("toggleMenu");
     setShowMenu(!showMenu);
   };
 
@@ -38,7 +39,7 @@ export default function MobileMenu() {
               <X />
             </div>
 
-            <NavLinks />
+            <NavLinks toggleMenu={toggleMenu} />
             <div className="flex flex-col space-y-8 sm:hidden">
               <AuthButtons />
             </div>

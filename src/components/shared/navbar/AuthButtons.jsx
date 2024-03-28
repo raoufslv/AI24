@@ -3,15 +3,44 @@ import { SignupForm } from "@/components/shared/navbar/SignupForm.jsx";
 import { LoginForm } from "@/components/shared/navbar/LoginForm.jsx";
 import { useState } from "react";
 import FormModal from "@/components/customUI/FormModal";
+import { useAuth } from "@/context/AuthContext";
+
+import { setAccessToken } from "@/context/accessToken";
+import { axiosInstance } from "@/services/authService";
 
 export default function AuthButtons() {
   const [openSignup, setOpenSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
+  const { connected, setConnected, setRole } = useAuth();
 
   const toggleBetweenForms = () => {
     setOpenLogin(!openLogin);
     setOpenSignup(!openSignup);
   };
+
+  const logout = async () => {
+    try {
+      // clear the access token
+      setConnected(false);
+      setRole(null);
+      await axiosInstance.post("auth/logout");
+      setAccessToken(null);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  if (connected) {
+    console.log("connected51511551");
+    return (
+      <Button
+        className="hover:bg-neutral-100 hover:text-black dark:hover:bg-darky dark:hover:text-white"
+        onClick={logout}
+      >
+        Logout
+      </Button>
+    );
+  }
 
   return (
     <>

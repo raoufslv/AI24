@@ -4,32 +4,14 @@ import MobileMenu from "@/components/shared/navbar/MobileMenu";
 import NavLinks from "@/components/shared/navbar/NavLinks";
 import AuthButtons from "@/components/shared/navbar/AuthButtons";
 import Logo from "@/components/customUI/Logo";
-import { setAccessToken } from "@/context/accessToken";
-import { axiosInstance } from "@/services/authService";
-
-import { useAuth } from "@/context/AuthContext";
-import { Button } from "@/components/ui/button";
 import { useScrollDetector } from "@/hooks/custom/ScrollDetector";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { connected, setConnected, setRole } = useAuth();
 
   useEffect(() => {
     useScrollDetector(setIsScrolled);
   }, []);
-
-  const logout = async () => {
-    try {
-      // clear the access token
-      setConnected(false);
-      setRole(null);
-      await axiosInstance.post("auth/logout");
-      setAccessToken(null);
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
 
   return (
     <div
@@ -49,7 +31,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <nav aria-label="Main navigation" className="xl:flex-grow xl:pl-32">
-            <ul className="hidden md:flex xl:space-x-8 lg:space-x-6 md:space-x-4 space-x-2 xl:text-xl">
+            <ul className="hidden md:flex xl:space-x-8 lg:space-x-6 md:space-x-4 space-x-2 xl:text-lg">
               <NavLinks />
             </ul>
           </nav>
@@ -58,14 +40,7 @@ export default function Navbar() {
           <div className="flex items-center xl:space-x-10 lg:space-x-8 md:space-x-4 space-x-2">
             <ModeToggle />
             <div className="space-x-4 hidden sm:flex">
-              {connected ? (
-                <div>
-                  connected
-                  <Button onClick={logout}>logout</Button>
-                </div>
-              ) : (
-                <AuthButtons />
-              )}
+              <AuthButtons />
             </div>
           </div>
         </div>
