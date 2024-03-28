@@ -17,7 +17,7 @@ export default function News() {
         <SearchBar flag="news" />
       </div>
 
-      <div className="flex lg:flex-row lg:items-start flex-col gap-16 justify-center items-center">
+      <div className="flex md:flex-row md:items-start flex-col xl:gap-16 lg:gap-6 gap-4 justify-center items-center">
         {/* side bar */}
         <SidebarFilter />
 
@@ -25,7 +25,7 @@ export default function News() {
         <NewsList />
 
         {/* ads banner */}
-        <div className="xl:w-1/6 min-w-36 flex flex-col gap-6">
+        <div className="xl:w-1/6 min-w-36 lg:flex flex-col gap-6 md:hidden flex">
           <SmallBanner />
           <SmallBanner />
           <SmallBanner />

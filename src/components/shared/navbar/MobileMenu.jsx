@@ -9,7 +9,6 @@ export default function MobileMenu() {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
-    console.log("toggleMenu");
     setShowMenu(!showMenu);
   };
 

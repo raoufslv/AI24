@@ -12,19 +12,22 @@ export default function NewsContent({ newsItem }) {
         className="w-[73rem] h-72 object-cover object-center rounded-t-lg"
       />
       <div className="flex justify-between mt-3">
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap">
           <p>{newsItem.date}</p>
           <RatingGroup flag="none" filled={newsItem.rating} />
         </div>
         <div className="flex gap-2">
-          {newsItem.tags.map((tag) => (
-            <span
-              key={tag}
-              className="mr-2 text-xs bg-gray-200 dark:bg-gray-600 px-2 py-1 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
+          <div className="flex gap-2 flex-wrap justify-end">
+            {newsItem.tags.map((tag) => (
+              <p
+                key={tag}
+                className="mr-2 text-xs bg-gray-200 dark:bg-gray-600 px-2 py-1 rounded-full"
+              >
+                {tag}
+              </p>
+            ))}
+          </div>
+
           <Link2 className="" size={24} />
           <Bookmark className="" size={24} />
         </div>

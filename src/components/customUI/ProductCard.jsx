@@ -11,7 +11,7 @@ export default function ProductCard({ product, className }) {
       <CardBody
         className=" bg-gray-50 relative group/card  
       dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black   
-      w-auto sm:w-[17rem] h-auto 
+      w-[17rem] h-auto 
       rounded-xl border"
       >
         <CardItem translateZ="100" className="w-full">
@@ -27,6 +27,12 @@ export default function ProductCard({ product, className }) {
           <CardItem
             translateZ="50"
             className=" py-2 xl:text-xl lg:text-lg md:text-base sm:text-sm  text-neutral-600 dark:text-white"
+            style={{
+              width: "200px",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
             {product.title}
           </CardItem>

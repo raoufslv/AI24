@@ -20,7 +20,7 @@ export default function CategoryCards() {
         align: "start",
         dragFree: true,
       }}
-      className="mx-10"
+      className=""
     >
       <CarouselContent>
         {categories.map((category) => (

@@ -31,7 +31,6 @@ export default function AuthButtons() {
   };
 
   if (connected) {
-    console.log("connected51511551");
     return (
       <Button
         className="hover:bg-neutral-100 hover:text-black dark:hover:bg-darky dark:hover:text-white"

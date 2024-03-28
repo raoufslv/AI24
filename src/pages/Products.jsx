@@ -19,7 +19,7 @@ export default function Products() {
 
       <DividerLine className={"opacity-40"} />
 
-      <div className="flex flex-row gap-4">
+      <div className="flex sm:flex-row flex-col gap-4 sm:items-start items-center">
         {/* side bar */}
         <SidebarFilter />
         {/* product list */}

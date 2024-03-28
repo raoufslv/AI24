@@ -10,7 +10,7 @@ export default function DefaultLayout({ children }) {
       <main className="3xl:px-56 2xl:px-16 xl:px-10 lg:px-8 px-6">
         {children}
       </main>
-      <footer className="mt-56">
+      <footer className="mt-36">
         <Footer />
       </footer>
     </div>

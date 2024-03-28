@@ -4,8 +4,8 @@ import { products } from "@/constants/products";
 export default function ProductsList() {
   return (
     <div
-      className="flex flex-row flex-wrap justify-start
-  w-full gap-6"
+      className="flex flex-wrap sm:justify-start justify-center
+     gap-4"
     >
       {products.map((product, index) => (
         <ProductCard key={index} product={product} />
