@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getAccessToken, setAccessToken } from "@/context/accessToken";
-import { axiosInstance, createAxiosInstance } from "@/services/authService";
+import { axiosInstance, createAxiosInstance } from "@/services/apiConfig";
 
 function App() {
   const [loading, setLoading] = useState(true);
