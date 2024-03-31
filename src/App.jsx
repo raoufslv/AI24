@@ -10,7 +10,7 @@ import { axiosInstance, createAxiosInstance } from "@/services/apiConfig";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const { setConnected, setRole } = useAuth();
+  const { setConnected, setRole, setImage, setFirstName } = useAuth();
 
   useEffect(() => {
     fetch("http://localhost:5000/api/auth/refresh", {
@@ -21,10 +21,11 @@ function App() {
         if (response.ok) {
           const data = await response.json();
           if (data.accessToken) {
-            console.log("Access token refreshed with browser");
             setAccessToken(data.accessToken);
             setConnected(true);
             setRole(data.role);
+            setImage(data.image);
+            setFirstName(data.firstname);
           }
         }
         setLoading(false);
@@ -58,13 +59,7 @@ function App() {
             );
             const newAccessToken = response.data.accessToken;
             if (newAccessToken) {
-              console.log(
-                "Access token refreshed with interceptors:",
-                newAccessToken
-              );
               setAccessToken(newAccessToken);
-              setConnected(true);
-              setRole(response.data.role);
               config.headers.Authorization = `Bearer ${newAccessToken}`;
             } else {
               setConnected(false);

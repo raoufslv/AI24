@@ -13,16 +13,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { useNavigate } from "react-router-dom";
+import { User } from "lucide-react";
 
 export default function ProfilAvatar() {
   const navigate = useNavigate();
-  const { setConnected, setRole } = useAuth();
+  const { setConnected, firstName, image } = useAuth();
 
   const logout = async () => {
     try {
       // clear the access token
       setConnected(false);
-      setRole(null);
       await axiosInstance.post("auth/logout");
       setAccessToken(null);
     } catch (error) {
@@ -34,8 +34,14 @@ export default function ProfilAvatar() {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>A</AvatarFallback>
+            <AvatarImage
+              src={image}
+              className=" object-cover object-center"
+              alt="profil pic"
+            />
+            <AvatarFallback>
+              {firstName ? firstName.charAt(0).toUpperCase() : <User />}
+            </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent>

@@ -20,7 +20,7 @@ const LoginFormSchema = z.object({
 });
 
 export function LoginForm({ toggle, selfOpenModal }) {
-  const { setConnected, setRole } = useAuth();
+  const { setConnected, setRole, setImage, setFirstName } = useAuth();
   const loginMutation = useLoginMutation();
 
   const {
@@ -42,6 +42,8 @@ export function LoginForm({ toggle, selfOpenModal }) {
       setAccessToken(response.accessToken);
       setConnected(true);
       setRole(response.role);
+      setImage(response.image);
+      setFirstName(response.firstName);
       // close the modal
       selfOpenModal(false);
     } catch (error) {
