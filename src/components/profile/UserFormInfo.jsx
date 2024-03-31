@@ -70,9 +70,6 @@ export default function UserFormInfo({ userInfo }) {
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-2xl w-full mx-auto"
     >
-      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200 text-center">
-        Update Profile
-      </h2>
 
       {/* Image Upload */}
       <ProfilPicUpload
