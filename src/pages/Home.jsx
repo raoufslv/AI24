@@ -1,7 +1,4 @@
-import CategoryCards from "@/components/home/CategoryCards";
-import BigBanner from "@/components/shared/BigBanner";
 import Hometitle from "@/components/ui/hometitle";
-import SearchBar from "@/components/shared/SearchBar";
 import ViewAllButton from "@/components/customUI/ViewAllButton";
 import { products } from "@/constants/products";
 
@@ -11,42 +8,28 @@ import LatestArticles from "@/components/home/LatestNews";
 import { FeaturedShops } from "@/components/home/FeaturedShops";
 import Testimonials from "@/components/home/Testimonials";
 
+import HeroSection from "@/components/home/HeroSection";
+
 export default function Home() {
   return (
     <>
-      {/* ads banner */}
-      <div>
-        <BigBanner />
-      </div>
-
-      {/* Category cards */}
-      <div>
-        <Hometitle text="Explore By Category" />
-        <div className="mt-4">
-          <CategoryCards />
-        </div>
-      </div>
-
-      {/* Search bar */}
-      <div>
-        <Hometitle text="Personalize your search" />
-        <div className="mt-4">
-          <SearchBar />
-        </div>
-      </div>
-
+      <HeroSection />
       {/* Top rated items */}
       <div>
         <div className="flex justify-between items-end w-full lg:8 md:6 mt-4 xl:mt-0">
-          <Hometitle text="Top rated Items" />
+          <Hometitle text="Popular Items" />
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
         <TopProducts products={products} />
       </div>
 
-      {/* About section */}
-      <div id="about" className="my-12">
-        <AboutSection />
+      {/* Top rated items */}
+      <div>
+        <div className="flex justify-between items-end w-full lg:8 md:6 mt-4 xl:mt-0">
+          <Hometitle text="New items" />
+          <ViewAllButton path={"/products?filter=toprated"} />
+        </div>
+        <TopProducts products={products} />
       </div>
 
       {/* Latest articles */}
@@ -56,6 +39,11 @@ export default function Home() {
           <ViewAllButton />
         </div>
         <LatestArticles />
+      </div>
+
+      {/* About section */}
+      <div id="about" className="my-12">
+        <AboutSection />
       </div>
 
       {/* Featured shops */}
