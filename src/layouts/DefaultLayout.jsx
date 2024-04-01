@@ -7,7 +7,7 @@ export default function DefaultLayout({ children }) {
       <header className="mb-24">
         <Navbar />
       </header>
-      <main className="3xl:px-56 2xl:px-16 xl:px-10 lg:px-8 px-6">
+      <main className="3xl:px-44 2xl:px-16 xl:px-10 lg:px-8 px-6">
         {children}
       </main>
       <footer className="mt-36">
