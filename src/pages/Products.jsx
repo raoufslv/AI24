@@ -1,20 +1,22 @@
 import DividerLine from "@/components/customUI/forms/DividerLine";
-import BigBanner from "@/components/shared/BigBanner";
-import SearchBar from "@/components/shared/SearchBar";
 import SidebarFilter from "@/components/shared/SidebarFilter";
 import ProductsList from "@/components/customUI/ProductsList";
+import CategoriesBar from "@/components/shared/CategoriesBar";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Products() {
   return (
     <>
-      {/* ads banner */}
-      <div>
-        <BigBanner />
-      </div>
-
-      {/* Search bar */}
-      <div className="mt-4">
-        <SearchBar />
+      <div className="flex flex-col items-center justify-center gap-6">
+        <CategoriesBar flag="products" />
+        <div className="w-96 relative">
+          <Input placeholder="Search for products" className="" />
+          <Button className="absolute right-0 top-0">
+            <Search />
+          </Button>
+        </div>
       </div>
 
       <DividerLine className={"opacity-40"} />

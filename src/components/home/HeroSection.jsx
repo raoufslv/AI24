@@ -1,6 +1,6 @@
 import { Boxes } from "@/components/ui/background-boxes";
 import { Input } from "../ui/input";
-import CategoriesBar from "./CategoriesBar";
+import CategoriesBar from "@/components/shared/CategoriesBar";
 
 export default function HeroSection() {
   return (
