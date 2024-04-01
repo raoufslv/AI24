@@ -13,19 +13,27 @@ import HeroSection from "@/components/home/HeroSection";
 export default function Home() {
   return (
     <>
+      {/* Hero section */}
       <HeroSection />
+
       {/* Top rated items */}
-      <div>
-        <div className="flex justify-between items-end w-full lg:8 md:6 mt-4 xl:mt-0">
-          <Hometitle text="Popular Items" />
+      <div className=" mt-4 xl:mt-0">
+        <Hometitle text="Popular Items" />
+        <div className="flex justify-between items-end w-full mt-4 xl:mt-0">
+          <h2 className="text-lg">Addons</h2>
+          <ViewAllButton path={"/products?filter=toprated"} />
+        </div>
+        <TopProducts products={products} />
+        <div className="flex justify-between items-end w-full mt-4">
+          <h2 className="text-lg">Courses</h2>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
         <TopProducts products={products} />
       </div>
 
       {/* Top rated items */}
-      <div>
-        <div className="flex justify-between items-end w-full lg:8 md:6 mt-4 xl:mt-0">
+      <div className="mt-12">
+        <div className="flex justify-between items-end w-full mt-4 xl:mt-0">
           <Hometitle text="New items" />
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
@@ -34,16 +42,11 @@ export default function Home() {
 
       {/* Latest articles */}
       <div className="my-12">
-        <div className="flex justify-between items-end w-full lg:8 md:6">
+        <div className="flex justify-between items-end w-full">
           <Hometitle text="News" />
           <ViewAllButton />
         </div>
         <LatestArticles />
-      </div>
-
-      {/* About section */}
-      <div id="about" className="my-12">
-        <AboutSection />
       </div>
 
       {/* Featured shops */}

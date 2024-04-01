@@ -1,39 +1,88 @@
 import React from "react";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "../ui/button";
+import { ChevronDown } from "lucide-react";
+import {
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 
-export default function SelectCategory({ topic, items, value, onChange }) {
-  const handleSelectChange = (selectedValue) => {
-    // Pass the selected value back to the parent component
-    onChange(selectedValue);
-  };
+import { useNavigate } from "react-router-dom";
+
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+export default function SelectCategory({ category, subcategories }) {
+  const navigate = useNavigate();
 
   return (
-    <Select onValueChange={(value) => handleSelectChange(value)}>
+    <MenubarMenu>
       <Button
-        className=" text-white dark:text-white hover:bg-transparent dark:hover:bg-transparent 
-      bg-transparent dark:bg-transparent border-0 p-0"
+        className="text-white dark:text-white 
+          hover:bg-transparent dark:hover:bg-transparent bg-transparent 
+          dark:bg-transparent border-0 p-0"
+        onClick={() =>
+          navigate({
+            pathname: "/categories",
+            search: `categories=${category}`,
+          })
+        }
       >
-        {topic}
+        {category}
       </Button>
-
-      <SelectTrigger className="text-white w-full bg-transparent dark:bg-transparent border-0 p-0 ">
-        <SelectValue className="" value={value} />
-      </SelectTrigger>
-      <SelectContent>
-        {items.map((item) => (
-          <SelectItem key={item.id} value={item.name}>
-            {item.name}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+      <MenubarTrigger>
+        <ChevronDown color="#fff" />
+      </MenubarTrigger>
+      <MenubarContent>
+        <ScrollArea className="h-96 w-48">
+          {subcategories.map((subcategory, idx) =>
+            subcategory.subjects ? (
+              <MenubarSub key={idx}>
+                <MenubarSubTrigger
+                  onClick={() =>
+                    navigate({
+                      pathname: "/products",
+                      search: `categories=${category}&subcategories=${subcategory.name}`,
+                    })
+                  }
+                >
+                  {subcategory.name}
+                </MenubarSubTrigger>
+                <MenubarSubContent>
+                  {subcategory.subjects.map((subject, idx) => (
+                    <MenubarItem
+                      key={idx}
+                      onClick={() =>
+                        navigate({
+                          pathname: "/products",
+                          search: `categories=${category}&subcategories=${subcategory.name}&subjects=${subject}`,
+                        })
+                      }
+                    >
+                      {subject}
+                    </MenubarItem>
+                  ))}
+                </MenubarSubContent>
+              </MenubarSub>
+            ) : (
+              <MenubarItem
+                key={idx}
+                onClick={() =>
+                  navigate({
+                    pathname: "/products",
+                    search: `categories=${category}&subcategories=${subcategory.name}`,
+                  })
+                }
+              >
+                {subcategory.name}
+              </MenubarItem>
+            )
+          )}
+        </ScrollArea>
+      </MenubarContent>
+    </MenubarMenu>
   );
 }

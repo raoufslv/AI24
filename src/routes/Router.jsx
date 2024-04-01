@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "@/pages/Home";
 import Contact from "@/pages/Contact";
 import Products from "@/pages/Products";
+import Categories from "@/pages/Categories";
 import Product from "@/pages/Product";
 import News from "@/pages/News";
 import OneNews from "@/pages/OneNews";
@@ -40,6 +41,14 @@ const Router = () => {
         element={
           <DefaultLayout>
             <Products />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/categories"
+        element={
+          <DefaultLayout>
+            <Categories />
           </DefaultLayout>
         }
       />

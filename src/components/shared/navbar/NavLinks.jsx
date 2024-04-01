@@ -63,6 +63,23 @@ export default function NavLinks({ toggleMenu }) {
       </li>
       <li>
         <motion.div
+          variants={path === "categories" ? activeVariants : itemVariants}
+          whileHover="hover"
+          initial="initial"
+          animate="animate"
+        >
+          <Link
+            to="/categories"
+            tabIndex="1"
+            aria-label="Go to the categories page"
+            {...(toggleMenu && { onClick: toggleMenu })}
+          >
+            categories
+          </Link>
+        </motion.div>
+      </li>
+      <li>
+        <motion.div
           variants={path === "news" ? activeVariants : itemVariants}
           whileHover="hover"
           initial="initial"
@@ -78,28 +95,7 @@ export default function NavLinks({ toggleMenu }) {
           </Link>
         </motion.div>
       </li>
-      {/*only if the user is in the home page*/}
-      {location.pathname === "/" && (
-        <li>
-          <motion.div
-            variants={itemVariants}
-            whileHover="hover"
-            initial="initial"
-            animate="animate"
-          >
-            <button
-              onClick={() => {
-                scrollToAbout();
-                toggleMenu && toggleMenu();
-              }}
-              tabIndex="3"
-              aria-label="Learn more about us"
-            >
-              About
-            </button>
-          </motion.div>
-        </li>
-      )}
+
       <li>
         <motion.div
           variants={path === "contact" ? activeVariants : itemVariants}

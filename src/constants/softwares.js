@@ -4,6 +4,18 @@ export default [
     name: "All",
   },
   {
+    id: 7,
+    name: "Blender",
+  },
+  {
+    id: 8,
+    name: "Zbrush",
+  },
+  {
+    id: 9,
+    name: "Maya",
+  },
+  {
     id: 1,
     name: "3D Coat",
   },
@@ -26,5 +38,10 @@ export default [
   {
     id: 6,
     name: "Akeytsu",
+  },
+
+  {
+    id: 10,
+    name: "Houdini",
   },
 ];

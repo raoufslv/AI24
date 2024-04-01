@@ -1,62 +1,22 @@
 import SelectCategory from "@/components/customUI/SelectCategory";
-import { categories } from "@/constants/Categories";
-import { useState } from "react";
+import { categories } from "@/constants/categoriesTemp";
+import { Menubar } from "@/components/ui/menubar";
 
 export default function CategoriesBar() {
-  const [selectedCategory, setSelectedCategory] = useState("");
   return (
-    <div
-      className="bg-white bg-opacity-30 rounded-lg
-       flex gap-8 absolute z-20 top-20 px-3 py-[0.35rem]"
+    <Menubar
+      className="absolute z-20 top-20 
+      bg-white bg-opacity-30 px-3 py-6 border-0 
+      gap-2 sm:flex hidden"
     >
-      <div className="flex">
-        <SelectCategory
-          topic="Addons"
-          items={categories}
-          value={selectedCategory}
-          onChange={(value) => setSelectedCategory(value)}
-        />{" "}
-      </div>
-      <div className="flex">
-        <SelectCategory
-          topic="Courses"
-          items={categories}
-          value={selectedCategory}
-          onChange={(value) => setSelectedCategory(value)}
-        />
-      </div>
-      <div className="flex">
-        <SelectCategory
-          topic="Materials"
-          items={categories}
-          value={selectedCategory}
-          onChange={(value) => setSelectedCategory(value)}
-        />
-      </div>
-      <div className="flex">
-        <SelectCategory
-          topic="Shaders"
-          items={categories}
-          value={selectedCategory}
-          onChange={(value) => setSelectedCategory(value)}
-        />
-      </div>
-      <div className="flex">
-        <SelectCategory
-          topic="Brushes"
-          items={categories}
-          value={selectedCategory}
-          onChange={(value) => setSelectedCategory(value)}
-        />
-      </div>
-      <div className="flex">
-        <SelectCategory
-          topic="Models"
-          items={categories}
-          value={selectedCategory}
-          onChange={(value) => setSelectedCategory(value)}
-        />
-      </div>
-    </div>
+      {categories.map((category, idx) => (
+        <div key={idx} className="flex">
+          <SelectCategory
+            category={category.name}
+            subcategories={category.subcategories}
+          />
+        </div>
+      ))}
+    </Menubar>
   );
 }
