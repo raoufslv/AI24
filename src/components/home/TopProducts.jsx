@@ -4,12 +4,10 @@ import { useEffect, useState } from "react";
 export default function TopProducts({products}) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   let maxProducts;
-  if (screenWidth >= 1970) {
-    maxProducts = 6;
-  } else if (screenWidth >= 1536) {
-    maxProducts = 5;
+   if (screenWidth >= 1536) {
+    maxProducts = 10;
   } else if (screenWidth >= 1280) {
-    maxProducts = 4;
+    maxProducts = 8;
   } else if (screenWidth >= 768) {
     maxProducts = 6;
   } else if (screenWidth >= 640) {

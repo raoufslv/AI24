@@ -2,12 +2,10 @@ import Hometitle from "@/components/ui/hometitle";
 import ViewAllButton from "@/components/customUI/ViewAllButton";
 import { products } from "@/constants/products";
 
-import AboutSection from "@/components/home/AboutSection";
 import TopProducts from "@/components/home/TopProducts";
 import LatestArticles from "@/components/home/LatestNews";
 import { FeaturedShops } from "@/components/home/FeaturedShops";
 import Testimonials from "@/components/home/Testimonials";
-
 import HeroSection from "@/components/home/HeroSection";
 
 export default function Home() {
@@ -25,7 +23,7 @@ export default function Home() {
         </div>
         <TopProducts products={products} />
         <div className="flex justify-between items-end w-full mt-4">
-          <h2 className="text-lg">Courses</h2>
+          <h2 className="text-lg mt-6">Courses</h2>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
         <TopProducts products={products} />
