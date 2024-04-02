@@ -18,7 +18,7 @@ export default function PriceDropDown({
 }) {
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="text-black dark:text-white">
         Prix
         <span className="p-1 text-greeny">
           {

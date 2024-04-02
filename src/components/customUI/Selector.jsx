@@ -16,7 +16,7 @@ export default function Selector({ topic, items, value, onChange }) {
 
   return (
     <Select onValueChange={(value) => handleSelectChange(value)}>
-      <span className="text-sm">{topic}:</span>
+      <span className="text-sm text-black dark:text-white">{topic}:</span>
       <SelectTrigger className="w-full bg-transparent dark:bg-transparent text-greeny border-0 p-0 ">
         <SelectValue className="w-full" placeholder="All" value={value} />
       </SelectTrigger>
