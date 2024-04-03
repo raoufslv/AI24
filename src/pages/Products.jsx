@@ -1,83 +1,114 @@
+// Products.js
+import React, { useState, useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
+import CategoriesBar from "@/components/shared/CategoriesBar";
 import DividerLine from "@/components/customUI/forms/DividerLine";
 import SidebarFilter from "@/components/shared/SidebarFilter";
+import FilterOptions from "@/components/shared/FilterOptions";
+import SearchBarV2 from "@/components/shared/SearchBarV2";
 import ProductsList from "@/components/customUI/ProductsList";
-import CategoriesBar from "@/components/shared/CategoriesBar";
-import { Input } from "@/components/ui/input";
-import { ChevronDown, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
-
-import Selector from "@/components/customUI/Selector";
-
-import Softwares from "@/constants/softwares";
-import license from "@/constants/license";
-import PriceDropDown from "@/components/customUI/PriceDropDown";
+import { useProductsQuery } from "@/hooks/react-query/useProduct";
+import { getProducts } from "@/services/productsService";
 
 export default function Products() {
-  const navigate = useNavigate();
-  const { category } = useParams();
-  const [search, setSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const queryClient = useQueryClient();
+  const [page, setPage] = useState(1);
+  const [queryParameters] = useSearchParams();
+  const categories = queryParameters.get("categories");
+  const subcategories = queryParameters.get("subcategories");
+  const subjects = queryParameters.get("subjects");
   const [selectedSoftware, setSelectedSoftware] = useState("");
   const [selectedLicense, setSelectedLicense] = useState("");
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
+  const [maxPrice, setMaxPrice] = useState(200);
+  const { error, data, isLoading, isPlaceholderData } = useProductsQuery(
+    page,
+    searchQuery,
+    categories,
+    subcategories,
+    subjects,
+    selectedSoftware,
+    selectedLicense,
+    minPrice,
+    maxPrice
+  );
+
+  useEffect(() => {
+    searchQuery !== "" && setPage(1);
+    if (!isPlaceholderData && data?.hasMore) {
+      queryClient.prefetchQuery({
+        queryKey: [
+          "products",
+          page + 1,
+          searchQuery,
+          categories,
+          subcategories,
+          subjects,
+          selectedSoftware,
+          selectedLicense,
+          minPrice,
+          maxPrice,
+        ],
+        queryFn: () =>
+          getProducts(
+            page + 1,
+            searchQuery,
+            categories,
+            subcategories,
+            subjects,
+            selectedSoftware,
+            selectedLicense,
+            minPrice,
+            maxPrice
+          ),
+      });
+    }
+  }, [
+    data,
+    isPlaceholderData,
+    page,
+    queryClient,
+    searchQuery,
+    categories,
+    subcategories,
+    subjects,
+    selectedSoftware,
+    selectedLicense,
+    minPrice,
+    maxPrice,
+  ]);
+
   return (
     <>
       <div className="flex flex-col items-center justify-center">
         <CategoriesBar flag="products" />
-        <div className="w-96 relative mt-4">
-          <Input
-            placeholder="Search for products"
-            className=""
-            onChange={() => setSearch(event.target.value)}
-          />
-          <Button
-            variant="icon"
-            className="absolute right-3 top-0 p-0"
-            onClick={() => navigate(`/products?search=${search}`)}
-          >
-            <Search />
-          </Button>
-        </div>
-        <div className="self-end flex gap-6">
-          <div className="flex items-center text-white justify-center">
-            <Selector
-              topic="Softwares"
-              items={Softwares}
-              value={selectedSoftware}
-              onChange={(value) => setSelectedSoftware(value)}
-            />
-          </div>
-          
-
-          <div className="flex items-center text-white justify-center">
-            <Selector
-              topic="license"
-              items={license}
-              value={selectedLicense}
-              onChange={(value) => setSelectedLicense(value)}
-            />
-          </div>
-
-          <div className="flex items-center text-white justify-center">
-            <PriceDropDown
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-              setMaxPrice={setMaxPrice}
-              setMinPrice={setMinPrice}
-            />
-          </div>
-        </div>
+        <SearchBarV2
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        <FilterOptions
+          selectedSoftware={selectedSoftware}
+          setSelectedSoftware={setSelectedSoftware}
+          selectedLicense={selectedLicense}
+          setSelectedLicense={setSelectedLicense}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+          setMinPrice={setMinPrice}
+        />
       </div>
-
       <DividerLine className={"opacity-40 mt-1"} />
-
       <div className="flex sm:flex-row flex-col gap-4 sm:items-start items-center">
-        {/* side bar */}
         <SidebarFilter />
-        {/* product list */}
-        <ProductsList />
+        <ProductsList
+          data={data}
+          isLoading={isLoading}
+          error={error}
+          page={page}
+          setPage={setPage}
+        />
       </div>
     </>
   );

@@ -9,7 +9,6 @@ import {
 
 import { Slider } from "@/components/ui/slider";
 
-
 export default function PriceDropDown({
   minPrice,
   maxPrice,
@@ -23,7 +22,7 @@ export default function PriceDropDown({
         <span className="p-1 text-greeny">
           {
             // if the minPrice and maxPrice are not the default values, display the range else display 'all'
-            minPrice !== 0 || maxPrice !== 1000 ? (
+            minPrice !== 0 || maxPrice !== 200 ? (
               <>
                 ${minPrice} - ${maxPrice}
               </>
@@ -45,7 +44,7 @@ export default function PriceDropDown({
           <p>${minPrice}</p>
           <Slider
             defaultValue={[minPrice, maxPrice]}
-            max={1000}
+            max={200}
             step={10}
             minStepsBetweenThumbs={1}
             onValueChange={(values) => {

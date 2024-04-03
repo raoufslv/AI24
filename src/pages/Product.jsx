@@ -59,7 +59,7 @@ export default function Product() {
           <Hometitle text="Similar to this items" />
           <ViewAllButton path={"/products"} />
         </div>
-        <TopProducts products={products} />
+        <TopProducts />
       </div>
     </>
   );

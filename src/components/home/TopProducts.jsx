@@ -1,10 +1,11 @@
 import ProductCard from "@/components/customUI/ProductCard";
 import { useEffect, useState } from "react";
+import { usePopularProductsQuery } from "@/hooks/react-query/useProduct";
 
-export default function TopProducts({products}) {
+export default function TopProducts() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   let maxProducts;
-   if (screenWidth >= 1536) {
+  if (screenWidth >= 1536) {
     maxProducts = 10;
   } else if (screenWidth >= 1280) {
     maxProducts = 8;
@@ -21,6 +22,12 @@ export default function TopProducts({products}) {
       setScreenWidth(window.innerWidth);
     });
   }, []);
+
+  const { data: products, isLoading } = usePopularProductsQuery();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div

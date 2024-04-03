@@ -21,12 +21,12 @@ export default function Home() {
           <h2 className="text-lg">Addons</h2>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
-        <TopProducts products={products} />
+        <TopProducts />
         <div className="flex justify-between items-end w-full mt-4">
           <h2 className="text-lg mt-6">Courses</h2>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
-        <TopProducts products={products} />
+        <TopProducts />
       </div>
 
       {/* Top rated items */}
@@ -35,7 +35,7 @@ export default function Home() {
           <Hometitle text="New items" />
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
-        <TopProducts products={products} />
+        <TopProducts />
       </div>
 
       {/* Latest articles */}
