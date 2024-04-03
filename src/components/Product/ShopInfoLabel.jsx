@@ -1,25 +1,32 @@
-import { shops } from "@/constants/shops";
 import { RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import RatingGroup from "@/components/customUI/RatingGroup";
-export default function ShopInfoLabel({productshopinfo}) {
+import { useShopQuery } from "@/hooks/react-query/useShop";
+
+export default function ShopInfoLabel({ productshopinfo }) {
+  const { data: shop, isLoading } = useShopQuery(productshopinfo.shopid);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Label
       className="border rounded p-2 flex flex-col gap-4"
-      htmlFor={productshopinfo.shopid}
+      htmlFor={shop._id}
     >
       <div className="flex justify-between items-center gap-16">
         <div className="flex items-center gap-2">
           <img
-            src={shops.find((shop) => shop.id == productshopinfo.shopid).image}
-            alt={shops.find((shop) => shop.id == productshopinfo.shopid).name}
+            src={shop.logoimageurl}
+            alt={shop.name}
             className="w-8 h-8 object-cover rounded"
           />
-          <p>{shops.find((shop) => shop.id == productshopinfo.shopid).name}</p>
+          <p>{shop.name}</p>
         </div>
         <RadioGroupItem
-          value={productshopinfo.shopid}
-          id={productshopinfo.shopid}
+          value={shop._id}
+          id={shop._id}
           className="bg-white dark:text-darky"
         />
       </div>

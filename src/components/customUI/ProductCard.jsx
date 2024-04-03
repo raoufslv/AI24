@@ -10,9 +10,8 @@ export default function ProductCard({ product, className }) {
     <CardContainer className={cn("inter-var", className)}>
       <CardBody
         className=" bg-gray-50 relative group/card  
-      dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black   
-      w-[17rem] h-auto 
-      rounded-lg border"
+      dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] 
+      dark:bg-black w-[17rem] h-auto rounded-lg border"
       >
         <CardItem translateZ="100" className="w-full">
           <LazyLoad height={175}>

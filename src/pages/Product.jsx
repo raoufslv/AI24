@@ -11,12 +11,15 @@ import ViewAllButton from "@/components/customUI/ViewAllButton";
 import TopProducts from "@/components/home/TopProducts";
 import ProductContent from "@/components/Product/ProductContent";
 
+import { useProductQuery } from "@/hooks/react-query/useProduct";
+
 export default function Product() {
   const { id } = useParams();
-  const product = products.find((product) => {
-    return product.id == id;
-  });
-  if (!product) return <div>Product not found</div>;
+  const { data: product, isLoading } = useProductQuery(id);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>

@@ -1,14 +1,12 @@
 import { Bookmark, Link2 } from "lucide-react";
 import EmblaCarousel from "@/components/customUI/EmblaCarousel";
 import "@/assets/styles/embla.css";
-import { images } from "@/constants/images";
 import ShopInfoCard from "./ShopInfoCard";
 import ProductSpecificationList from "./ProductSpecificationList";
 
-const OPTIONS = {};
-const SLIDES = images;
-
 export default function ProductContent({ product }) {
+  const OPTIONS = {};
+  const SLIDES = product.imagesurls;
   return (
     <>
       <div className="flex flex-col gap-14">
@@ -19,7 +17,7 @@ export default function ProductContent({ product }) {
             <EmblaCarousel slides={SLIDES} options={OPTIONS} />
           </div>
           {/* Product shops info */}
-          <ShopInfoCard productshopsinfo={product.productshopsinfo} />
+          <ShopInfoCard productshopsinfo={product.productshopsinfolist} />
         </div>
 
         {/* second section */}
@@ -33,16 +31,17 @@ export default function ProductContent({ product }) {
                 <Bookmark />
               </div>
             </div>
-            <p className="mt-6 2xl:w-[37rem] xl:w-[33rem] lg:w-[22rem] md:w-[28rem] w-[22rem]">
-              {product.description}
-            </p>
+            <p
+              className="mt-6 2xl:w-[37rem] xl:w-[33rem] lg:w-[22rem] md:w-[28rem] w-[22rem]"
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            ></p>
           </div>
 
           {/* product specification */}
           <ProductSpecificationList
             license={product.license}
             software={product.software}
-            category={product.category}
+            category={product.categories}
             price={product.price}
             rating={product.rating}
             tags={product.tags}

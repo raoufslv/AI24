@@ -1,7 +1,14 @@
 import ProductCard from "@/components/customUI/ProductCard";
-import { products } from "@/constants/products";
+import { useProductsQuery } from "@/hooks/react-query/useProduct";
 
 export default function ProductsList() {
+  const { data: products, isLoading } = useProductsQuery();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  console.log(products);
+
   return (
     <div
       className="flex flex-wrap sm:justify-start justify-center
