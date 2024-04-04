@@ -25,7 +25,7 @@ export default function ShopInfoLabel({ productshopinfo }) {
           <p>{shop.name}</p>
         </div>
         <RadioGroupItem
-          value={shop._id}
+          value={productshopinfo.productlink}
           id={shop._id}
           className="bg-white dark:text-darky"
         />

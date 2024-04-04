@@ -7,6 +7,7 @@ export default function ProductSpecificationList({
   price,
   rating,
   tags,
+  author,
 }) {
   return (
     <div className="rounded-lg 2xl:w-[30rem] xl:w-[25rem]">
@@ -38,6 +39,11 @@ export default function ProductSpecificationList({
           <p className="flex gap-1 items-center">
             {rating} <Star />{" "}
           </p>
+        </li>
+        <DividerLine className="opacity-30" />
+        <li className="flex justify-between">
+          <h4 className="font-bold">Author :</h4>
+          <p className="flex gap-1 items-center">{author}</p>
         </li>
         <DividerLine className="opacity-30" />
         <li className="flex justify-between">

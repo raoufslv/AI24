@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-export default function SelectCategory({ category, subcategories }) {
+export default function SelectCategory({ category, subcategories, flag }) {
   const navigate = useNavigate();
 
   return (
@@ -26,7 +26,7 @@ export default function SelectCategory({ category, subcategories }) {
           dark:bg-transparent border-0 p-0"
         onClick={() =>
           navigate({
-            pathname: "/categories",
+            pathname: flag ? "/products" : "/categories",
             search: `categories=${category}`,
           })
         }

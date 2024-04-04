@@ -45,7 +45,7 @@ export default function PriceDropDown({
           <Slider
             defaultValue={[minPrice, maxPrice]}
             max={200}
-            step={10}
+            step={5}
             minStepsBetweenThumbs={1}
             onValueChange={(values) => {
               setMinPrice(values[0]);

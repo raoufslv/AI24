@@ -1,17 +1,17 @@
 // TopProducts.js
 import ProductCard from "@/components/customUI/ProductCard";
 import { useProductsWithMaxCount } from "@/hooks/custom/useProductsWithMaxCount";
-import { usePopularProductsQuery } from "@/hooks/react-query/useProduct";
+import { useLatestProductsQuery } from "@/hooks/react-query/useProduct";
 
-export default function TopProducts({ category }) {
+export default function LatestProducts() {
   const { products, isLoading } = useProductsWithMaxCount(
-    usePopularProductsQuery,
-    category
+    useLatestProductsQuery
   );
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   if (products.length === 0) {
     return <div>No products found</div>;
   }

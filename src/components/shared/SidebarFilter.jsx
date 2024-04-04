@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { categories } from "@/constants/Categories";
+import { useState, useEffect } from "react";
+import sortList from "@/constants/sort";
 import {
   Select,
   SelectContent,
@@ -7,21 +7,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import RatingGroup from "@/components/customUI/RatingGroup";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
 import tags from "@/constants/tags";
 
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+export default function SidebarFilter({ setSort, setTags, category }) {
+  // get the tags that belong to the category
+  let FilteredTags = tags;
+  if (category) {
+    FilteredTags = tags.filter((tag) => tag.categories.includes(category));
+  }
 
-export default function SidebarFilter() {
-  const selectedTagsArray = [];
-  const unselectedTagsArray = tags;
+  const [unselectedTags, setUnselectedTags] = useState(FilteredTags);
+  const [selectedTags, setSelectedTags] = useState([]);
 
-  const [selectedTags, setSelectedTags] = useState(selectedTagsArray);
-  const [unselectedTags, setUnselectedTags] = useState(unselectedTagsArray);
+  useEffect(() => {
+    // put only the tag names in the tags array
+    setTags(selectedTags.map((tag) => tag.name));
+  }, [selectedTags]);
+
+  useEffect(() => {
+    // get the tags that belong to the category
+    if (category) {
+      FilteredTags = tags.filter((tag) => tag.categories.includes(category));
+    }
+    // set the unselected tags to the filtered tags
+    setUnselectedTags(FilteredTags);
+  }, [category]);
 
   return (
     <div
@@ -31,69 +44,23 @@ export default function SidebarFilter() {
       {/* Sort */}
       <div>
         <h3 className="font-bruno text-lg">Sort By</h3>
-        <Select>
+        <Select
+          onValueChange={(value) => {
+            setSort(value);
+          }}
+        >
           <SelectTrigger className="w-48 bg-transparent dark:bg-transparent">
             <SelectValue placeholder="Default" />
           </SelectTrigger>
           <SelectContent>
-            {categories.map((categorie) => (
-              <SelectItem key={categorie.id} value={categorie.name}>
-                {categorie.name}
+            {sortList.map((sort, idx) => (
+              <SelectItem key={idx} value={sort}>
+                {sort}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       </div>
-      {/* Rating  */}
-      <div>
-        <h3 className="font-bruno text-lg">Rating</h3>
-        <div className="flex flex-col gap-2">
-          <RadioGroup>
-            <div className="flex items-center gap-4">
-              <Label htmlFor="r4" className="text-white">
-                <RatingGroup filled={4} />
-              </Label>
-              <RadioGroupItem
-                value="default"
-                id="r4"
-                className="bg-white dark:text-darky"
-              />
-            </div>
-
-            <div className="flex items-center gap-4">
-              <Label htmlFor="r3" className="text-white">
-                <RatingGroup filled={3} />
-              </Label>
-              <RadioGroupItem
-                value="comfortable"
-                id="r3"
-                className="bg-white dark:text-darky"
-              />
-            </div>
-            <div className="flex items-center gap-4">
-              <Label htmlFor="r2" className="text-white">
-                <RatingGroup filled={2} />
-              </Label>
-              <RadioGroupItem
-                value="compact"
-                id="r2"
-                className="bg-white dark:text-darky"
-              />
-            </div>
-            <div className="flex items-center gap-4">
-              <Label htmlFor="r1" className="text-white">
-                <RatingGroup filled={1} />
-              </Label>
-              <RadioGroupItem
-                value="compacst2"
-                id="r1"
-                className="bg-white dark:text-darky"
-              />
-            </div>
-          </RadioGroup>
-        </div>
-      </div>
-
       {/* Tags */}
       <div>
         <h3 className="font-bruno text-lg">Tags</h3>

@@ -9,11 +9,14 @@ export const getProducts = async (
   selectedSoftware = "",
   selectedLicense = "",
   minPrice = 0,
-  maxPrice = 200
+  maxPrice = 200,
+  sort = "",
+  tags = []
 ) => {
   try {
     selectedLicense = selectedLicense === "All" ? "" : selectedLicense;
     selectedSoftware = selectedSoftware === "All" ? "" : selectedSoftware;
+    sort = sort === "Default" ? "" : sort;
     const response = await axiosInstance.get("product/all/" + page, {
       params: {
         searchQuery,
@@ -22,8 +25,10 @@ export const getProducts = async (
         subjects,
         selectedSoftware,
         selectedLicense,
-        minPrice, 
+        minPrice,
         maxPrice,
+        sort,
+        tags,
       },
     });
     return response.data;
@@ -41,9 +46,27 @@ export const getProduct = async (productId) => {
   }
 };
 
-export const getPopularProducts = async () => {
+export const getPopularProducts = async (category) => {
   try {
-    const response = await axiosInstance.get("product/popular");
+    const response = await axiosInstance.get(`product/popular/${category}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const getSimilarProducts = async (productId) => {
+  try {
+    const response = await axiosInstance.get(`product/similar/${productId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const getLatestProducts = async () => {
+  try {
+    const response = await axiosInstance.get("product/latest");
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);

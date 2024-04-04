@@ -2,6 +2,8 @@ import {
   getProducts,
   getProduct,
   getPopularProducts,
+  getSimilarProducts,
+  getLatestProducts,
 } from "@/services/productsService";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
@@ -14,7 +16,9 @@ export const useProductsQuery = (
   selectedSoftware,
   selectedLicense,
   minPrice,
-  maxPrice
+  maxPrice,
+  sort,
+  tags
 ) => {
   return useQuery({
     queryKey: [
@@ -28,6 +32,8 @@ export const useProductsQuery = (
       selectedLicense,
       minPrice,
       maxPrice,
+      sort,
+      tags,
     ],
     queryFn: () =>
       getProducts(
@@ -39,7 +45,9 @@ export const useProductsQuery = (
         selectedSoftware,
         selectedLicense,
         minPrice,
-        maxPrice
+        maxPrice,
+        sort,
+        tags
       ),
     keepPreviousData,
   });
@@ -52,9 +60,26 @@ export const useProductQuery = (productId) => {
   });
 };
 
-export const usePopularProductsQuery = () => {
+export const usePopularProductsQuery = (category) => {
   return useQuery({
-    queryKey: ["popularProducts"],
-    queryFn: getPopularProducts,
+    queryKey: ["popularProducts", category],
+    queryFn: () => getPopularProducts(category),
+    staleTime: 1000 * 60 * 60, // 1 hour
+  });
+};
+
+export const useSimilarProductsQuery = (productId) => {
+  return useQuery({
+    queryKey: ["similarProducts", productId],
+    queryFn: () => getSimilarProducts(productId),
+    staleTime: 1000 * 60 * 60, // 1 hour
+  });
+};
+
+export const useLatestProductsQuery = () => {
+  return useQuery({
+    queryKey: ["latestProducts"],
+    queryFn: () => getLatestProducts(),
+    staleTime: 1000 * 60 * 30, // 30 minutes
   });
 };

@@ -12,10 +12,12 @@ import { useProductsQuery } from "@/hooks/react-query/useProduct";
 import { getProducts } from "@/services/productsService";
 
 export default function Products() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [queryParameters] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(
+    queryParameters.get("search") || ""
+  );
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
-  const [queryParameters] = useSearchParams();
   const categories = queryParameters.get("categories");
   const subcategories = queryParameters.get("subcategories");
   const subjects = queryParameters.get("subjects");
@@ -23,6 +25,8 @@ export default function Products() {
   const [selectedLicense, setSelectedLicense] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(200);
+  const [sort, setSort] = useState("Default");
+  const [tags, setTags] = useState([]);
   const { error, data, isLoading, isPlaceholderData } = useProductsQuery(
     page,
     searchQuery,
@@ -32,7 +36,9 @@ export default function Products() {
     selectedSoftware,
     selectedLicense,
     minPrice,
-    maxPrice
+    maxPrice,
+    sort,
+    tags
   );
 
   useEffect(() => {
@@ -50,6 +56,8 @@ export default function Products() {
           selectedLicense,
           minPrice,
           maxPrice,
+          sort,
+          tags,
         ],
         queryFn: () =>
           getProducts(
@@ -61,7 +69,9 @@ export default function Products() {
             selectedSoftware,
             selectedLicense,
             minPrice,
-            maxPrice
+            maxPrice,
+            sort,
+            tags
           ),
       });
     }
@@ -78,6 +88,8 @@ export default function Products() {
     selectedLicense,
     minPrice,
     maxPrice,
+    sort,
+    tags,
   ]);
 
   return (
@@ -101,7 +113,11 @@ export default function Products() {
       </div>
       <DividerLine className={"opacity-40 mt-1"} />
       <div className="flex sm:flex-row flex-col gap-4 sm:items-start items-center">
-        <SidebarFilter />
+        <SidebarFilter
+          setSort={setSort}
+          setTags={setTags}
+          category={categories}
+        />
         <ProductsList
           data={data}
           isLoading={isLoading}

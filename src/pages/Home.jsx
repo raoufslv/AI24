@@ -1,12 +1,12 @@
 import Hometitle from "@/components/ui/hometitle";
 import ViewAllButton from "@/components/customUI/ViewAllButton";
-import { products } from "@/constants/products";
 
 import TopProducts from "@/components/home/TopProducts";
 import LatestArticles from "@/components/home/LatestNews";
 import { FeaturedShops } from "@/components/home/FeaturedShops";
 import Testimonials from "@/components/home/Testimonials";
 import HeroSection from "@/components/home/HeroSection";
+import LatestProducts from "@/components/shared/LatestProducts";
 
 export default function Home() {
   return (
@@ -21,12 +21,12 @@ export default function Home() {
           <h2 className="text-lg">Addons</h2>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
-        <TopProducts />
+        <TopProducts category={"Addons"} />
         <div className="flex justify-between items-end w-full mt-4">
           <h2 className="text-lg mt-6">Courses</h2>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
-        <TopProducts />
+        <TopProducts category={"Courses"} />
       </div>
 
       {/* Top rated items */}
@@ -35,7 +35,7 @@ export default function Home() {
           <Hometitle text="New items" />
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
-        <TopProducts />
+        <LatestProducts />
       </div>
 
       {/* Latest articles */}

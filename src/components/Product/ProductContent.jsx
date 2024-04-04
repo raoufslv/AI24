@@ -13,7 +13,7 @@ export default function ProductContent({ product }) {
         {/* first section */}
         <div className="flex md:flex-row flex-col items-center md:items-start justify-between gap-16 w-fit">
           {/* Product images */}
-          <div className="sm:w-1/2">
+          <div className="md:w-1/2 sm:w-4/5">
             <EmblaCarousel slides={SLIDES} options={OPTIONS} />
           </div>
           {/* Product shops info */}
@@ -32,7 +32,7 @@ export default function ProductContent({ product }) {
               </div>
             </div>
             <p
-              className="mt-6 2xl:w-[37rem] xl:w-[33rem] lg:w-[22rem] md:w-[28rem] w-[22rem]"
+              className="mt-6 2xl:w-[37rem] xl:w-[33rem] lg:w-[22rem] md:w-[28rem]"
               dangerouslySetInnerHTML={{ __html: product.description }}
             ></p>
           </div>
@@ -45,6 +45,7 @@ export default function ProductContent({ product }) {
             price={product.price}
             rating={product.rating}
             tags={product.tags}
+            author={product.author}
           />
         </div>
       </div>

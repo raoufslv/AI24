@@ -5,7 +5,11 @@ import { Menubar } from "@/components/ui/menubar";
 export default function CategoriesBar({ flag }) {
   return (
     <Menubar
-      className={`${flag ? "bg-darky bg-opacity-80 w-fit" : "absolute z-20 top-20 bg-white bg-opacity-30"} 
+      className={`${
+        flag
+          ? "bg-darky bg-opacity-80 w-fit"
+          : "absolute z-20 top-20 bg-white bg-opacity-30"
+      } 
        px-3 py-6 border-0 gap-2 sm:flex hidden`}
     >
       {categories.map((category, idx) => (
@@ -13,6 +17,7 @@ export default function CategoriesBar({ flag }) {
           <SelectCategory
             category={category.name}
             subcategories={category.subcategories}
+            flag={flag}
           />
         </div>
       ))}

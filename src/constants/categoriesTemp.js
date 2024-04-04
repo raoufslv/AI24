@@ -8,7 +8,7 @@ import Robots from "@/assets/images/categories/Robots.png";
 
 export const categories = [
   {
-    name: "courses",
+    name: "Courses",
     subcategories: [
       {
         name: "Character Creation",

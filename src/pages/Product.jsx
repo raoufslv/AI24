@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { products } from "@/constants/products";
 import { CircleArrowLeft } from "lucide-react";
 import BigBanner from "@/components/shared/BigBanner";
 import SmallBanner from "@/components/shared/SmallBanner";
@@ -7,11 +6,10 @@ import DividerLine from "@/components/customUI/forms/DividerLine";
 
 import Hometitle from "@/components/ui/hometitle";
 import ViewAllButton from "@/components/customUI/ViewAllButton";
-
-import TopProducts from "@/components/home/TopProducts";
 import ProductContent from "@/components/Product/ProductContent";
 
 import { useProductQuery } from "@/hooks/react-query/useProduct";
+import SimilarProducts from "@/components/shared/SimilarProducts";
 
 export default function Product() {
   const { id } = useParams();
@@ -34,7 +32,7 @@ export default function Product() {
             window.history.back();
           }}
         />
-        <h1 className="text-2xl font-bruno text-start">{product.title}</h1>
+        <h1 className="text-2xl  text-start">{product.title}</h1>
       </div>
 
       {/* Divider Line */}
@@ -59,7 +57,7 @@ export default function Product() {
           <Hometitle text="Similar to this items" />
           <ViewAllButton path={"/products"} />
         </div>
-        <TopProducts />
+        <SimilarProducts productId={id} />
       </div>
     </>
   );
