@@ -116,17 +116,6 @@ export const categories = [
         image: Addons,
       },
       {
-        name: "Texturing",
-        subjects: ["Texture Painting", "Material Libraries", "Texture Baking"],
-        image: Printing,
-      },
-      {
-        name: "Rigging",
-        subjects: ["Facial Rigging", "Skinning & Weight painting"],
-        image: Robots,
-      },
-      { name: "Animation", image: Animation },
-      {
         name: "Simulation",
         subjects: [
           "Cloth",
@@ -141,22 +130,6 @@ export const categories = [
         ],
         image: Materials,
       },
-      {
-        name: "2D Addons",
-        subjects: ["Grease Pencil", "Cell Shading", "Pixal Art"],
-        image: Printing,
-      },
-      { name: "Compositing", image: Printing },
-      { name: "AI", image: Assets },
-      { name: "Character Creation", image: Animation },
-      { name: "Clouds", image: Addons },
-      {
-        name: "Sci-Fi",
-        subjects: ["Spaceships", "Generative Sci-fi"],
-        image: Assets,
-      },
-      { name: "Asset Managment", image: Materials },
-      { name: "Rendering", image: Printing },
       {
         name: "Enviromnet Creation",
         subjects: [
@@ -174,9 +147,36 @@ export const categories = [
         ],
         image: Assets,
       },
+      {
+        name: "Texturing",
+        subjects: ["Texture Painting", "Material Libraries", "Texture Baking"],
+        image: Printing,
+      },
+      {
+        name: "Rigging",
+        subjects: ["Facial Rigging", "Skinning & Weight painting"],
+        image: Robots,
+      },
+      {
+        name: "2D Addons",
+        subjects: ["Grease Pencil", "Cell Shading", "Pixal Art"],
+        image: Printing,
+      },
+      {
+        name: "Sci-Fi",
+        subjects: ["Spaceships", "Generative Sci-fi"],
+        image: Assets,
+      },
+      { name: "Nodes", subjects: ["Geometry Nodes"], image: Materials },
+      { name: "Animation", image: Animation },
+      { name: "Compositing", image: Printing },
+      { name: "AI", image: Assets },
+      { name: "Character Creation", image: Animation },
+      { name: "Clouds", image: Addons },
+      { name: "Asset Managment", image: Materials },
+      { name: "Rendering", image: Printing },
       { name: "Motion Graphics", image: Animation },
       { name: "Sound", image: Art },
-      { name: "Nodes", subjects: ["Geometry Nodes"], image: Materials },
     ],
   },
   {
