@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import LazyLoad from "react-lazy-load";
+import RatingGroup from "./RatingGroup";
 
 export default function ProductCard({ product, className }) {
   return (
@@ -26,9 +27,9 @@ export default function ProductCard({ product, className }) {
           <div className="flex justify-between items-center mt-1 px-4">
             <CardItem
               translateZ="50"
-              className=" py-2 xl:text-xl lg:text-lg md:text-base sm:text-sm  text-neutral-600 dark:text-white"
+              className=" py-2 lg:text-lg md:text-base sm:text-sm  text-neutral-600 dark:text-white"
               style={{
-                width: "200px",
+                width: "280px",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -36,12 +37,13 @@ export default function ProductCard({ product, className }) {
             >
               {product.title}
             </CardItem>
+          </div>
+          <div className="flex justify-between items-center mt-1 px-4">
             <CardItem
               translateZ={20}
-              className="px-2 py-2 text-xs  dark:text-white flex items-center justify-center gap-1"
+              className=" text-xs dark:text-white flex items-center justify-center gap-1"
             >
-              {product.rating}
-              <Star size={20} />
+              <RatingGroup flag="card" filled={product.rating} />{" "}
             </CardItem>
           </div>
           <div className="flex justify-between items-center my-4 px-4">
