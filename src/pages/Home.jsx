@@ -15,15 +15,26 @@ export default function Home() {
       <HeroSection />
 
       {/* Top rated items */}
-      <div className=" mt-4 xl:mt-0">
-        <Hometitle text="Popular Items" />
+      <div className=" mt-4 xl:mt-7">
         <div className="flex justify-between items-end w-full mt-4 xl:mt-0">
-          <h2 className="text-lg">Addons</h2>
+          <div>
+            <Hometitle text="Popular Addons" />
+            <p className="text-sm text-gray-600">
+              Check out the most used addons these days. They can enhance your
+              productivity.
+            </p>
+          </div>
+
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
         <TopProducts category={"Addons"} />
-        <div className="flex justify-between items-end w-full mt-4">
-          <h2 className="text-lg mt-6">Courses</h2>
+        <div className="flex justify-between items-end w-full mt-12">
+          <div>
+            <Hometitle text="Popular Courses" />
+            <p className="text-sm text-gray-600">
+              Explore the most popular courses to boost your knowledge.
+            </p>
+          </div>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
         <TopProducts category={"Courses"} />
@@ -32,7 +43,12 @@ export default function Home() {
       {/* Top rated items */}
       <div className="mt-12">
         <div className="flex justify-between items-end w-full mt-4 xl:mt-0">
-          <Hometitle text="New items" />
+          <div>
+            <Hometitle text="New items" />
+            <p className="text-sm text-gray-600">
+              Discover the latest items added to our collection.
+            </p>
+          </div>
           <ViewAllButton path={"/products?filter=toprated"} />
         </div>
         <LatestProducts />
