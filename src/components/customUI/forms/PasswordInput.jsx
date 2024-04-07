@@ -6,18 +6,20 @@ import { Eye, EyeOff } from "lucide-react";
 import ErrorMessage from "@/components/customUI/forms/ErrorMessage";
 import { cn } from "@/lib/utils";
 
-export default function PasswordInput({ register, errors, className }) {
+export default function PasswordInput({ register, errors, className, params }) {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <LabelInputContainer className={cn("relative", className)}>
-      <Label htmlFor="password">Password</Label>
+      <Label htmlFor={`${params}password`}>{`${params}`} Password</Label>
       <Input
-        {...register("password")}
-        id="password"
+        {...register(`${params}password`)}
+        id={`${params}password`}
         placeholder="••••••••"
         type={showPassword ? "text" : "password"}
       />
-      {errors.password && <ErrorMessage message={errors.password.message} />}
+      {errors[params + "password"] && (
+        <ErrorMessage message={errors[params + "password"].message} />
+      )}
 
       <button
         type="button"

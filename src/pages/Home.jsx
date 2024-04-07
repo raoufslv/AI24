@@ -19,23 +19,23 @@ export default function Home() {
         <div className="flex justify-between items-end w-full mt-4 xl:mt-0">
           <div>
             <Hometitle text="Popular Addons" />
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               Check out the most used addons these days. They can enhance your
               productivity.
             </p>
           </div>
 
-          <ViewAllButton path={"/products?filter=toprated"} />
+          <ViewAllButton path={"/products?categories=Addons"} />
         </div>
         <TopProducts category={"Addons"} />
         <div className="flex justify-between items-end w-full mt-12">
           <div>
             <Hometitle text="Popular Courses" />
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               Explore the most popular courses to boost your knowledge.
             </p>
           </div>
-          <ViewAllButton path={"/products?filter=toprated"} />
+          <ViewAllButton path={"/products?categories=Courses"} />
         </div>
         <TopProducts category={"Courses"} />
       </div>
@@ -45,11 +45,11 @@ export default function Home() {
         <div className="flex justify-between items-end w-full mt-4 xl:mt-0">
           <div>
             <Hometitle text="New items" />
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               Discover the latest items added to our collection.
             </p>
           </div>
-          <ViewAllButton path={"/products?filter=toprated"} />
+          <ViewAllButton path={"/products"} />
         </div>
         <LatestProducts />
       </div>

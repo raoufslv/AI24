@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function SubCategories({ category }) {
   const navigate = useNavigate();
+  console.log(category)
   const subCategories = categories.find(
     (cat) => cat.name === category
   ).subcategories;
+  console.log(subCategories)
 
   return (
     <div className="flex flex-wrap gap-4 mt-4">

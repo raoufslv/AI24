@@ -9,7 +9,7 @@ export default function Categories() {
   const [selectedCategory, setSelectedCategory] = useState(
     queryParameters.get("categories")
       ? queryParameters.get("categories")
-      : "courses"
+      : "Courses"
   );
   return (
     <div className="flex flex-col justify-center items-center">

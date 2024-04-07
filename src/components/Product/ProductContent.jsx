@@ -1,12 +1,16 @@
-import { Bookmark, Link2 } from "lucide-react";
+import { Link2 } from "lucide-react";
 import EmblaCarousel from "@/components/customUI/EmblaCarousel";
 import "@/assets/styles/embla.css";
 import ShopInfoCard from "./ShopInfoCard";
 import ProductSpecificationList from "./ProductSpecificationList";
+import { useToast } from "@/components/ui/use-toast";
+import BookmarkButton from "../customUI/BookmarkButton";
 
 export default function ProductContent({ product }) {
   const OPTIONS = {};
   const SLIDES = product.imagesurls;
+  const { toast } = useToast();
+
   return (
     <>
       <div className="flex flex-col gap-14">
@@ -27,8 +31,15 @@ export default function ProductContent({ product }) {
             <div className="flex justify-between gap-16">
               <h2 className="text-lg font-bold font-bruno">Description</h2>
               <div className="flex gap-2">
-                <Link2 />
-                <Bookmark />
+                <Link2
+                  className=" cursor-pointer"
+                  onClick={() => {
+                    toast({
+                      description: "Your message has been sent.",
+                    });
+                  }}
+                />
+                <BookmarkButton productId={product._id} />
               </div>
             </div>
             <p

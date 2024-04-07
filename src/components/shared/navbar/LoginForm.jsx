@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginMutation } from "@/hooks/react-query/useAuth";
 import { setAccessToken } from "@/context/accessToken";
 import { useAuth } from "@/context/AuthContext";
+import { createAxiosInstance } from "@/services/apiConfig";
 
 const LoginFormSchema = z.object({
   email: z.string().nonempty(),
@@ -44,6 +45,7 @@ export function LoginForm({ toggle, selfOpenModal }) {
       setRole(response.role);
       setImage(response.image);
       setFirstName(response.firstName);
+      createAxiosInstance();
       // close the modal
       selfOpenModal(false);
     } catch (error) {

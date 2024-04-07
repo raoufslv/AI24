@@ -13,6 +13,9 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ProfilPicUpload from "./ProfilPicUpload";
 
+import { ChangePassword } from "@/components/shared/navbar/ChangePassword";
+import FormModal from "@/components/customUI/FormModal";
+
 const ProfilInfoFormSchema = z.object({
   firstname: z.string().min(2).max(50),
   lastname: z.string().min(2).max(50),
@@ -26,6 +29,7 @@ export default function UserFormInfo({ userInfo }) {
   const updateUserInfoMutation = useUpdateUserInfoMutation();
   const [LocalImage, setLocalImage] = useState(userInfo.imageurl);
   const { setImage, setFirstName } = useAuth();
+  const [openChangePassword, setOpenChangePassword] = useState(false);
 
   const {
     register,
@@ -66,64 +70,71 @@ export default function UserFormInfo({ userInfo }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-2xl w-full mx-auto"
-    >
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-2xl w-full mx-auto"
+      >
+        {/* Image Upload */}
+        <ProfilPicUpload
+          LocalImage={LocalImage}
+          setLocalImage={setLocalImage}
+          setValue={setValue}
+        />
 
-      {/* Image Upload */}
-      <ProfilPicUpload
-        LocalImage={LocalImage}
-        setLocalImage={setLocalImage}
-        setValue={setValue}
-      />
+        <div className="grid grid-cols-1 sm:gap-6 mt-6 sm:grid-cols-2">
+          <FormInput
+            register={register}
+            errors={errors}
+            id="firstname"
+            name="First Name"
+            placeholder="Enter your first name"
+          />
+          <FormInput
+            register={register}
+            errors={errors}
+            id="lastname"
+            name="Last Name"
+            placeholder="Enter your last name"
+          />
+        </div>
 
-      <div className="grid grid-cols-1 sm:gap-6 mt-6 sm:grid-cols-2">
         <FormInput
           register={register}
           errors={errors}
-          id="firstname"
-          name="First Name"
-          placeholder="Enter your first name"
+          id="username"
+          name="Username"
+          placeholder="Enter your username"
         />
         <FormInput
           register={register}
           errors={errors}
-          id="lastname"
-          name="Last Name"
-          placeholder="Enter your last name"
+          id="email"
+          name="Email"
+          placeholder="Enter your email"
         />
-      </div>
 
-      <FormInput
-        register={register}
-        errors={errors}
-        id="username"
-        name="Username"
-        placeholder="Enter your username"
-      />
-      <FormInput
-        register={register}
-        errors={errors}
-        id="email"
-        name="Email"
-        placeholder="Enter your email"
-      />
+        <div className="flex justify-between gap-4 mt-4 w-full ">
+          <Button
+            type="button"
+            variant="outline"
+            className="border-2  border-stone-700 dark:border-white dark:bg-transparent"
+            onClick={() => {
+              setOpenChangePassword(true);
+            }}
+          >
+            Change Password
+          </Button>
+          <Button type="submit" disabled={isSubmitting} className="">
+            {isSubmitting ? "updating..." : "Update Profile"}
+          </Button>
+        </div>
 
-      <div className="flex justify-between gap-4 mt-4 w-full ">
-        <Button
-          type="button"
-          variant="outline"
-          className="border-2  border-stone-700 dark:border-white dark:bg-transparent"
-        >
-          Change Password
-        </Button>
-        <Button type="submit" disabled={isSubmitting} className="">
-          {isSubmitting ? "updating..." : "Update Profile"}
-        </Button>
-      </div>
-
-      {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
-    </form>
+        {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
+      </form>
+      <FormModal open={openChangePassword} setOpen={setOpenChangePassword}>
+        <ChangePassword selfOpenModal={setOpenChangePassword} />
+      </FormModal>
+    </>
   );
 }

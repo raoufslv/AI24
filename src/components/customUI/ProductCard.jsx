@@ -5,6 +5,7 @@ import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import LazyLoad from "react-lazy-load";
 import RatingGroup from "./RatingGroup";
+import BookmarkButton from "./BookmarkButton";
 
 export default function ProductCard({ product, className }) {
   return (
@@ -37,11 +38,12 @@ export default function ProductCard({ product, className }) {
             >
               {product.title}
             </CardItem>
+            <BookmarkButton productId={product.id} size={34} />
           </div>
           <div className="flex justify-between items-center mt-1 px-4">
             <CardItem
               translateZ={20}
-              className=" text-xs dark:text-white flex items-center justify-center gap-1"
+              className="text-xs dark:text-white flex items-center justify-center gap-1"
             >
               <RatingGroup flag="card" filled={product.rating} />{" "}
             </CardItem>

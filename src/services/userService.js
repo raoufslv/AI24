@@ -21,3 +21,34 @@ export const getUserInfo = async () => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const addProductBookmark = async (productID) => {
+  try {
+    const response = await axiosInstance.post(
+      `user/addProductBookmark/${productID}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const CheckProductBookmarks = async (productID) => {
+  try {
+    const response = await axiosInstance.get(
+      `user/checkProductBookmarks/${productID}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const GetProductsBookmarks = async () => {
+  try {
+    const response = await axiosInstance.get(`user/productsBookmarks`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};

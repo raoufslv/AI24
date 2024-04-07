@@ -9,8 +9,7 @@ import ProfilAvatar from "./ProfilAvatar";
 
 export default function AuthButtons() {
   const [openSignup, setOpenSignup] = useState(false);
-  const [openLogin, setOpenLogin] = useState(false);
-  const { connected } = useAuth();
+  const { connected, openLogin, setOpenLogin } = useAuth();
 
   const toggleBetweenForms = () => {
     setOpenLogin(!openLogin);

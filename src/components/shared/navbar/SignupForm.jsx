@@ -45,6 +45,7 @@ export function SignupForm({ toggle, selfOpenModal }) {
       setAccessToken(response.accessToken);
       setConnected(true);
       setRole(response.role);
+      createAxiosInstance();
       // close the modal
       selfOpenModal(false);
     } catch (error) {

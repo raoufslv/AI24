@@ -18,3 +18,12 @@ export const signup = async (data) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const ChangePassword = async (data) => {
+  try {
+    const response = await axiosInstance.put("user/updatePassword", data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};

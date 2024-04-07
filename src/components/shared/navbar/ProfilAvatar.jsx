@@ -1,6 +1,6 @@
 import { useAuth } from "@/context/AuthContext";
 import { setAccessToken } from "@/context/accessToken";
-import { axiosInstance } from "@/services/apiConfig";
+import { axiosInstance, createAxiosInstance } from "@/services/apiConfig";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -25,6 +25,7 @@ export default function ProfilAvatar() {
       setConnected(false);
       await axiosInstance.post("auth/logout");
       setAccessToken(null);
+      createAxiosInstance();
     } catch (error) {
       throw new Error(error);
     }

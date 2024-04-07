@@ -92,6 +92,22 @@ export default function Products() {
     tags,
   ]);
 
+  useEffect(() => {
+    // Reset page count to 1 whenever a filter is applied
+    setPage(1);
+  }, [
+    searchQuery,
+    categories,
+    subcategories,
+    subjects,
+    selectedSoftware,
+    selectedLicense,
+    minPrice,
+    maxPrice,
+    sort,
+    tags,
+  ]);
+
   return (
     <>
       <div className="flex flex-col items-center justify-center">
