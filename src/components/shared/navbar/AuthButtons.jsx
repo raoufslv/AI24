@@ -6,10 +6,17 @@ import FormModal from "@/components/customUI/FormModal";
 import { useAuth } from "@/context/AuthContext";
 
 import ProfilAvatar from "./ProfilAvatar";
+import { ForgetPassword } from "./ForgetPassword";
 
 export default function AuthButtons() {
   const [openSignup, setOpenSignup] = useState(false);
-  const { connected, openLogin, setOpenLogin } = useAuth();
+  const {
+    connected,
+    openLogin,
+    setOpenLogin,
+    openForgetPassword,
+    setOpenForgetPassword,
+  } = useAuth();
 
   const toggleBetweenForms = () => {
     setOpenLogin(!openLogin);
@@ -52,6 +59,10 @@ export default function AuthButtons() {
 
       <FormModal open={openLogin} setOpen={setOpenLogin}>
         <LoginForm toggle={toggleBetweenForms} selfOpenModal={setOpenLogin} />
+      </FormModal>
+
+      <FormModal open={openForgetPassword} setOpen={setOpenForgetPassword}>
+        <ForgetPassword />
       </FormModal>
     </>
   );

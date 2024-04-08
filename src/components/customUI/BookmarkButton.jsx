@@ -9,24 +9,14 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function BookmarkButton({ productId, size }) {
   const { connected, setOpenLogin } = useAuth();
-  const { toast } = useToast();
   const [bookmarked, setBookmarked] = useState(false);
-
+  const { toast } = useToast();
   const AddProductBookmark = useAddProductBookmark();
-  const checkProductBookmarks = useCheckProductBookmarks(productId);
-
-  useEffect(() => {
-    if (connected) {
-      const {
-        data: isProductBookmarked,
-        isLoading,
-        isError,
-      } = checkProductBookmarks;
-      if (!isLoading && !isError) {
-        setBookmarked(isProductBookmarked.message);
-      }
-    }
-  }, [connected, checkProductBookmarks.data, checkProductBookmarks.isLoading]);
+  const {
+    data: isProductBookmarked,
+    isLoading,
+    isError,
+  } = useCheckProductBookmarks(productId, connected);
 
   const handleBookmarkClick = async (event) => {
     event.preventDefault();
@@ -40,6 +30,14 @@ export default function BookmarkButton({ productId, size }) {
       setOpenLogin(true);
     }
   };
+
+  useEffect(() => {
+    if (!isLoading && !isError && isProductBookmarked) {
+      setBookmarked(isProductBookmarked.message);
+    } else {
+      setBookmarked(false);
+    }
+  }, [isProductBookmarked, isLoading, isError]);
 
   return (
     <Bookmark

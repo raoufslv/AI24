@@ -22,11 +22,11 @@ export default function ProfilAvatar() {
   const logout = async () => {
     try {
       // clear the access token
+      navigate("/");
       setConnected(false);
       await axiosInstance.post("auth/logout");
       setAccessToken(null);
       createAxiosInstance();
-      navigate("/");
     } catch (error) {
       throw new Error(error);
     }

@@ -8,9 +8,25 @@ export const AuthProvider = ({ children }) => {
   const [image, setImage] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
+  const [openForgetPassword, setOpenForgetPassword] = useState(false);
 
   return (
-    <AuthContext.Provider value={{ connected, setConnected, role, setRole, image, setImage, firstName, setFirstName, openLogin, setOpenLogin }}>
+    <AuthContext.Provider
+      value={{
+        connected,
+        setConnected,
+        role,
+        setRole,
+        image,
+        setImage,
+        firstName,
+        setFirstName,
+        openLogin,
+        setOpenLogin,
+        openForgetPassword,
+        setOpenForgetPassword,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

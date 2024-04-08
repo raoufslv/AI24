@@ -27,3 +27,12 @@ export const ChangePassword = async (data) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const forgotPassword = async (data) => {
+  try {
+    const response = await axiosInstance.post("auth/forgetPassword", data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};

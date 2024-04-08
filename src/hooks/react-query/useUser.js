@@ -23,15 +23,15 @@ export const useUserInfoQuery = () => {
 export const useAddProductBookmark = () => {
   return useMutation({
     mutationFn: (productID) => addProductBookmark(productID),
-    networkMode: "online"
+    networkMode: "online",
   });
 };
 
-export const useCheckProductBookmarks = (productID) => {
+export const useCheckProductBookmarks = (productID, connected) => {
   return useQuery({
-    queryKey: ["CheckProductBookmarks", productID],
-    queryFn: () => CheckProductBookmarks(productID),
-    networkMode: "online"
+    queryKey: ["CheckProductBookmarks", productID, connected],
+    queryFn: () => CheckProductBookmarks(productID, connected),
+    networkMode: "online",
   });
 };
 

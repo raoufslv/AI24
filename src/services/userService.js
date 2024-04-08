@@ -33,10 +33,10 @@ export const addProductBookmark = async (productID) => {
   }
 };
 
-export const CheckProductBookmarks = async (productID) => {
+export const CheckProductBookmarks = async (productID, connected) => {
   try {
     const response = await axiosInstance.get(
-      `user/checkProductBookmarks/${productID}`
+      `user/checkProductBookmarks/${productID}/${connected}`
     );
     return response.data;
   } catch (error) {

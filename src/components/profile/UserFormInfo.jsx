@@ -15,6 +15,7 @@ import ProfilPicUpload from "./ProfilPicUpload";
 
 import { ChangePassword } from "@/components/shared/navbar/ChangePassword";
 import FormModal from "@/components/customUI/FormModal";
+import { ForgetPassword } from "../shared/navbar/ForgetPassword";
 
 const ProfilInfoFormSchema = z.object({
   firstname: z.string().min(2).max(50),
@@ -28,7 +29,8 @@ export default function UserFormInfo({ userInfo }) {
   const { toast } = useToast();
   const updateUserInfoMutation = useUpdateUserInfoMutation();
   const [LocalImage, setLocalImage] = useState(userInfo.imageurl);
-  const { setImage, setFirstName } = useAuth();
+  const { setImage, setFirstName, openForgetPassword, setOpenForgetPassword } =
+    useAuth();
   const [openChangePassword, setOpenChangePassword] = useState(false);
 
   const {
@@ -134,6 +136,10 @@ export default function UserFormInfo({ userInfo }) {
       </form>
       <FormModal open={openChangePassword} setOpen={setOpenChangePassword}>
         <ChangePassword selfOpenModal={setOpenChangePassword} />
+      </FormModal>
+
+      <FormModal open={openForgetPassword} setOpen={setOpenForgetPassword}>
+        <ForgetPassword />
       </FormModal>
     </>
   );
