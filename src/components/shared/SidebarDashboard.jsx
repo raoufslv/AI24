@@ -4,10 +4,29 @@ import { Button } from "../ui/button";
 import { Bookmark, LogOut, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useAuth } from "@/context/AuthContext";
+import { setAccessToken } from "@/context/accessToken";
+import { axiosInstance, createAxiosInstance } from "@/services/apiConfig";
+
 export default function SidebarDashboard() {
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname.slice(1).split("/")[0];
+  const { setConnected } = useAuth();
+
+  const logout = async () => {
+    try {
+      // clear the access token
+      setConnected(false);
+      await axiosInstance.post("auth/logout");
+      setAccessToken(null);
+      createAxiosInstance();
+      navigate("/");
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-between p-6 border-r-2 h-screen">
       <div className="flex flex-col gap-24">
@@ -48,6 +67,7 @@ export default function SidebarDashboard() {
         className="font-bold flex gap-2 text-base justify-center items-center
         text-red-500 hover:text-red-500 hover:bg-red-100 dark:hover:text-red-500 dark:hover:bg-red-900"
         variant="ghost"
+        onClick={logout}
       >
         <LogOut />
         Logout

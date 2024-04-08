@@ -26,6 +26,7 @@ export default function ProfilAvatar() {
       await axiosInstance.post("auth/logout");
       setAccessToken(null);
       createAxiosInstance();
+      navigate("/");
     } catch (error) {
       throw new Error(error);
     }
