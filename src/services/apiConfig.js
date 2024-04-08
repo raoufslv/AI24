@@ -2,7 +2,7 @@ import { getAccessToken } from "@/context/accessToken";
 export let axiosInstance = axios.create();
 
 import axios from "axios";
-const BASE_URL = import.meta.env.VITE_PRODUCTIONURL;
+const BASE_URL = import.meta.env.VITE_PRODUCTIO_URL;
 
 export const createAxiosInstance = () => {
   axiosInstance = axios.create({
