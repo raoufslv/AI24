@@ -65,7 +65,7 @@ export function LoginForm({ toggle, selfOpenModal }) {
 
       <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
         {/*<SocialLoginButton /> <GoogleAuth />*/}
-        <SocialLoginButton />
+        <GoogleAuth />
 
         <div className="flex items-center gap-2">
           <DividerLine />

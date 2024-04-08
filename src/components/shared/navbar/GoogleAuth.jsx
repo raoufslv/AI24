@@ -1,11 +1,17 @@
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLoginMutation } from "@/hooks/react-query/useAuth";
 
 export default function GoogleAuth() {
-  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const GoogleLoginMutation = useGoogleLoginMutation();
   return (
     <GoogleLogin
-      onSuccess={(credentialResponse) => {
+      onSuccess={async (credentialResponse) => {
         console.log(credentialResponse);
+        const response = await GoogleLoginMutation.mutateAsync({
+          clientId: credentialResponse.clientId,
+          credential: credentialResponse.credential,
+        });
+        console.log(response);
       }}
       onError={() => {
         console.log("Login Failed");
