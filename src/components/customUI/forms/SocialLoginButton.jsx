@@ -1,19 +1,19 @@
 import google from "@/assets/icons/google.svg";
 import BottomGradient from "@/components/customUI/forms/BottomGradient";
 import { useGoogleLoginMutation } from "@/hooks/react-query/useAuth";
-import { useGoogleLogin } from "@react-oauth/google";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
 
 export default function SocialLoginButton() {
   const GoogleLoginMutation = useGoogleLoginMutation();
 
-  const signIn = useGoogleLogin({
-    onSuccess: (credentialResponse) => {
+  const signIn = useGoogleOneTapLogin({
+    onSuccess: async (credentialResponse) => {
       console.log(credentialResponse);
-      GoogleLoginMutation.mutate({
-        token: credentialResponse.access_token,
-        expires_in: credentialResponse.expires_in,
-        scope: credentialResponse.scope,
+      const response = await GoogleLoginMutation.mutateAsync({
+        clientId: credentialResponse.clientId,
+        credential: credentialResponse.credential,
       });
+      console.log(response);
     },
     onError: (error) => {
       console.log(error);
