@@ -8,6 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useChangePasswordMutatuion } from "@/hooks/react-query/useAuth";
+import { useToast } from "@/components/ui/use-toast";
 
 const ChangePasswordFormSchema = z.object({
   Oldpassword: z.string().min(8).max(20),
@@ -16,6 +17,7 @@ const ChangePasswordFormSchema = z.object({
 
 export function ChangePassword({ selfOpenModal }) {
   const ChangePasswordMutatuion = useChangePasswordMutatuion();
+  const { toast } = useToast();
 
   const {
     register,
@@ -34,6 +36,10 @@ export function ChangePassword({ selfOpenModal }) {
     try {
       const response = await ChangePasswordMutatuion.mutateAsync(data);
       console.log(response);
+      toast({
+        variant: "success",
+        title: response.message,
+      });
       // close the modal
       selfOpenModal(false);
     } catch (error) {
