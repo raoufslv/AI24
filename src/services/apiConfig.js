@@ -2,9 +2,7 @@ import { getAccessToken } from "@/context/accessToken";
 export let axiosInstance = axios.create();
 
 import axios from "axios";
-const localUrl = "http://localhost:5000/api";
-const deployedUrl = "https://cgvortexserver.onrender.com/api";
-const BASE_URL = deployedUrl;
+const BASE_URL = import.meta.env.VITE_PRODUCTIONURL;
 
 export const createAxiosInstance = () => {
   axiosInstance = axios.create({
