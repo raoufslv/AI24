@@ -79,7 +79,7 @@ export function LoginForm({ toggle, selfOpenModal }) {
           placeholder="Enter your email or username"
           className="w-80"
         />
-        <PasswordInput register={register} errors={errors} className="mb-1" />
+        <PasswordInput register={register} errors={errors} className="mb-1" params="" />
 
         <ForgotPasswordLink />
         <SubmitButton

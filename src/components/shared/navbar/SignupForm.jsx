@@ -94,7 +94,12 @@ export function SignupForm({ toggle, selfOpenModal }) {
           name="Email"
           placeholder="Enter your email"
         />
-        <PasswordInput register={register} errors={errors} className="mb-8" />
+        <PasswordInput
+          register={register}
+          errors={errors}
+          className="mb-8"
+          params=""
+        />
 
         <SubmitButton
           isSubmitting={isSubmitting}

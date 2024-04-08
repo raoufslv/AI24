@@ -8,11 +8,25 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function BookmarkButton({ productId, size }) {
-  const { connected, openLogin, setOpenLogin } = useAuth();
+  const { connected, setOpenLogin } = useAuth();
   const { toast } = useToast();
   const [bookmarked, setBookmarked] = useState(false);
 
   const AddProductBookmark = useAddProductBookmark();
+  const checkProductBookmarks = useCheckProductBookmarks(productId);
+
+  useEffect(() => {
+    if (connected) {
+      const {
+        data: isProductBookmarked,
+        isLoading,
+        isError,
+      } = checkProductBookmarks;
+      if (!isLoading && !isError) {
+        setBookmarked(isProductBookmarked.message);
+      }
+    }
+  }, [connected, checkProductBookmarks.data, checkProductBookmarks.isLoading]);
 
   const handleBookmarkClick = async (event) => {
     event.preventDefault();
@@ -23,24 +37,10 @@ export default function BookmarkButton({ productId, size }) {
         description: response.message,
       });
     } else {
-      // i want here to open the login modal
       setOpenLogin(true);
     }
   };
 
-  if (connected) {
-    const {
-      data: isProductBookmarked,
-      isLoading,
-      isError,
-    } = useCheckProductBookmarks(productId);
-
-    useEffect(() => {
-      if (!isLoading && !isError) {
-        setBookmarked(isProductBookmarked.message);
-      }
-    }, [isLoading, isProductBookmarked]);
-  }
   return (
     <Bookmark
       onClick={handleBookmarkClick}
