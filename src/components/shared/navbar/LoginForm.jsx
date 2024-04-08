@@ -14,6 +14,7 @@ import { useLoginMutation } from "@/hooks/react-query/useAuth";
 import { setAccessToken } from "@/context/accessToken";
 import { useAuth } from "@/context/AuthContext";
 import { createAxiosInstance } from "@/services/apiConfig";
+import GoogleAuth from "./GoogleAuth";
 
 const LoginFormSchema = z.object({
   email: z.string().nonempty(),
@@ -63,7 +64,8 @@ export function LoginForm({ toggle, selfOpenModal }) {
       </h2>
 
       <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
-        <SocialLoginButton />
+        {/*<SocialLoginButton />*/}
+        <GoogleAuth />
 
         <div className="flex items-center gap-2">
           <DividerLine />
@@ -79,7 +81,12 @@ export function LoginForm({ toggle, selfOpenModal }) {
           placeholder="Enter your email or username"
           className="w-80"
         />
-        <PasswordInput register={register} errors={errors} className="mb-1" params="" />
+        <PasswordInput
+          register={register}
+          errors={errors}
+          className="mb-1"
+          params=""
+        />
 
         <ForgotPasswordLink />
         <SubmitButton

@@ -7,13 +7,14 @@ import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getAccessToken, setAccessToken } from "@/context/accessToken";
 import { axiosInstance, createAxiosInstance } from "@/services/apiConfig";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const { setConnected, setRole, setImage, setFirstName } = useAuth();
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_PRODUCTIO_URL+'/auth/refresh', {
+    fetch(import.meta.env.VITE_PRODUCTIO_URL + "/auth/refresh", {
       method: "POST",
       credentials: "include",
     })
@@ -83,12 +84,14 @@ function App() {
   }
 
   return (
-    <Fragment>
-      <ThemeProvider>
-        <Router />
-        <Toaster />
-      </ThemeProvider>
-    </Fragment>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <Fragment>
+        <ThemeProvider>
+          <Router />
+          <Toaster />
+        </ThemeProvider>
+      </Fragment>
+    </GoogleOAuthProvider>
   );
 }
 

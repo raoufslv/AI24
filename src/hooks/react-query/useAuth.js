@@ -4,6 +4,7 @@ import {
   signup,
   ChangePassword,
   forgotPassword,
+  googleLogin,
 } from "@/services/authService";
 
 export const useLoginMutation = () => {
@@ -27,5 +28,11 @@ export const useSignupMutation = () => {
 export const useForgotPasswordMutation = () => {
   return useMutation({
     mutationFn: (data) => forgotPassword(data),
+  });
+};
+
+export const useGoogleLoginMutation = () => {
+  return useMutation({
+    mutationFn: (data) => googleLogin(data),
   });
 };

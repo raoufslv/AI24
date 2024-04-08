@@ -36,3 +36,12 @@ export const forgotPassword = async (data) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const googleLogin = async (data) => {
+  try {
+    const response = await axiosInstance.post("auth/googleLogin", data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
