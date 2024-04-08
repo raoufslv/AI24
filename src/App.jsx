@@ -13,7 +13,7 @@ function App() {
   const { setConnected, setRole, setImage, setFirstName } = useAuth();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_PRODUCTIONURL}/auth/refresh`, {
+    fetch(import.meta.env.VITE_PRODUCTIO_URL+'/auth/refresh', {
       method: "POST",
       credentials: "include",
     })
@@ -53,7 +53,7 @@ function App() {
           // Token is about to expire in less than 1 minute, refresh it
           try {
             const response = await axios.post(
-              `${import.meta.env.VITE_PRODUCTIONURL}/auth/refresh`,
+              `${import.meta.env.VITE_PRODUCTIO_URL}/auth/refresh`,
               {},
               { withCredentials: true }
             );
