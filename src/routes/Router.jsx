@@ -9,7 +9,7 @@ import OneNews from "@/pages/OneNews";
 import Profile from "@/pages/Profile";
 import Bookmarks from "@/pages/Bookmarks";
 // import NotFound from "../pages/not-found";
-// import Dashboard from "../pages/dashboard";
+import Dashboard from "../pages/Dashboard";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
@@ -94,6 +94,16 @@ const Router = () => {
               </DashboardLayout>
             }
           />
+          {role === "admin" && (
+            <Route
+              path="/dashboard"
+              element={
+                <DashboardLayout>
+                  <Dashboard />
+                </DashboardLayout>
+              }
+            />
+          )}
         </>
       )}
       {/*

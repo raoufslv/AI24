@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "@/components/customUI/Logo";
 import { Button } from "../ui/button";
-import { Bookmark, LogOut, User } from "lucide-react";
+import { Bookmark, LogOut, User, LayoutDashboard } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "@/context/AuthContext";
@@ -43,7 +43,7 @@ export default function SidebarDashboard() {
             }`}
             onClick={() => navigate("/profile")}
           >
-            <User />
+            <User className={path == "profile" ? "fill-black" : ""} />
             Profile
           </Button>
           <Button
@@ -58,8 +58,23 @@ export default function SidebarDashboard() {
             `}
             onClick={() => navigate("/bookmarks")}
           >
-            <Bookmark />
+            <Bookmark className={path == "bookmarks" ? "fill-black" : ""} />
             Bookmarks
+          </Button>
+          <Button
+            size="lg"
+            variant="ghost"
+            className={`flex gap-2 text-base justify-start items-center w-full
+            ${
+              path == "dashboard"
+                ? "bg-slate-100 font-bold dark:bg-slate-800"
+                : ""
+            }
+            `}
+            onClick={() => navigate("/dashboard")}
+          >
+            <LayoutDashboard className={path == "dashboard" ? "fill-black" : ""} />
+            Dashboard
           </Button>
         </ul>
       </div>
