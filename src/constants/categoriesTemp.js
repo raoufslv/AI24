@@ -1,10 +1,32 @@
 import Assets from "@/assets/images/categories/3DAssets.png";
-import Printing from "@/assets/images/categories/3DPrinting.png";
 import Addons from "@/assets/images/categories/Addons.png";
-import Animation from "@/assets/images/categories/Animation.png";
 import Art from "@/assets/images/categories/Art.png";
 import Materials from "@/assets/images/categories/Materials.png";
 import Robots from "@/assets/images/categories/Robots.png";
+import Character_Creation from "@/assets/images/categories/Character_Creation.jpg";
+import hard_surface_modeling from "@/assets/images/categories/hard_surface_modeling.jpg";
+import scuplting from "@/assets/images/categories/scuplting.jpg";
+import Rigging from "@/assets/images/categories/Rigging.jpg";
+import Animation from "@/assets/images/categories/Animation.jpg";
+import Enviroment_Design from "@/assets/images/categories/Enviroment_Design.jpg";
+import Environment_Design from "@/assets/images/categories/Environment_Design.jpg";
+import Cloth from "@/assets/images/categories/Cloth.jpg";
+import Lighting from "@/assets/images/categories/Lighting.jpg";
+import CAD from "@/assets/images/categories/CAD.jpg";
+import Simulation from "@/assets/images/categories/Simulation.jpg";
+import scifi from "@/assets/images/categories/scifi.jpg";
+import Nodes from "@/assets/images/categories/Nodes.png";
+import VFX from "@/assets/images/categories/VFX.webp";
+import Printing from "@/assets/images/categories/3d_printing.webp";
+import texturing from "@/assets/images/categories/3d-texturing.webp";
+import modeling from "@/assets/images/categories/modeling.webp";
+import addons2D from "@/assets/images/categories/2D_addons.png";
+import compositing from "@/assets/images/categories/compositing.png";
+import AI from "@/assets/images/categories/ai.webp";
+import Asset_Managment from "@/assets/images/categories/Asset_Managment.webp";
+import rendering from "@/assets/images/categories/rendering.jpg";
+import motion_graphics from "@/assets/images/categories/motion_graphics.jpg";
+import sound from "@/assets/images/categories/sound.png";
 
 export const categories = [
   {
@@ -18,12 +40,12 @@ export const categories = [
           "Character Sculpting",
           "Stylized Characters",
         ],
-        image: Art,
+        image: Character_Creation,
       },
       {
         name: "Hard Surface Modeling",
         subjects: ["Vehicles", "Weapons", "Robots"],
-        image: Assets,
+        image: hard_surface_modeling,
       },
       {
         name: "Sculpting",
@@ -36,7 +58,7 @@ export const categories = [
           "Props",
           "Plants & Trees",
         ],
-        image: Printing,
+        image: scuplting,
       },
       {
         name: "Rigging",
@@ -46,7 +68,12 @@ export const categories = [
           "Weapon Rigging",
           "Animal R",
         ],
-        image: Robots,
+        image: Rigging,
+      },
+      {
+        name: "Environment Design",
+        subjects: ["Sci-fi environment", "Natural Environment"],
+        image: Environment_Design,
       },
       {
         name: "Animation",
@@ -58,15 +85,11 @@ export const categories = [
         ],
         image: Animation,
       },
-      {
-        name: "Environment Design",
-        subjects: ["Sci-fi environment", "Natural Environment"],
-        image: Addons,
-      },
+
       {
         name: "Cloth",
         subjects: ["Cloth Design", "Cloth Simulation"],
-        image: Art,
+        image: Cloth,
       },
       {
         name: "VFX",
@@ -76,28 +99,28 @@ export const categories = [
           "Matt Painting",
           "Simulation",
         ],
-        image: Materials,
+        image: VFX,
       },
       {
         name: "Archviz",
         subjects: ["Interior Visualization", "Exterior Visualization"],
-        image: Assets,
+        image: Enviroment_Design,
       },
       {
         name: "Lighting",
-        image: Printing,
+        image: Lighting,
       },
       {
         name: "CAD Modeling",
-        image: Robots,
-      },
-      {
-        name: "3D Printing",
-        image: Animation,
+        image: CAD,
       },
       {
         name: "Texturing",
-        image: Addons,
+        image: texturing,
+      },
+      {
+        name: "3D Printing",
+        image: Printing,
       },
     ],
   },
@@ -113,7 +136,7 @@ export const categories = [
           "Archviz Modeling",
           "CAD Modeling",
         ],
-        image: Addons,
+        image: modeling,
       },
       {
         name: "Simulation",
@@ -128,7 +151,7 @@ export const categories = [
           "Energy FX",
           "VDB Addons",
         ],
-        image: Materials,
+        image: Simulation,
       },
       {
         name: "Enviromnet Creation",
@@ -145,38 +168,38 @@ export const categories = [
           "Vegetation",
           "Weather FX",
         ],
-        image: Assets,
+        image: Environment_Design,
       },
       {
         name: "Texturing",
         subjects: ["Texture Painting", "Material Libraries", "Texture Baking"],
-        image: Printing,
-      },
-      {
-        name: "Rigging",
-        subjects: ["Facial Rigging", "Skinning & Weight painting"],
-        image: Robots,
+        image: texturing,
       },
       {
         name: "2D Addons",
         subjects: ["Grease Pencil", "Cell Shading", "Pixal Art"],
-        image: Printing,
+        image: addons2D,
       },
+      {
+        name: "Rigging",
+        subjects: ["Facial Rigging", "Skinning & Weight painting"],
+        image: Rigging,
+      },
+
       {
         name: "Sci-Fi",
         subjects: ["Spaceships", "Generative Sci-fi"],
-        image: Assets,
+        image: scifi,
       },
-      { name: "Nodes", subjects: ["Geometry Nodes"], image: Materials },
+      { name: "Nodes", subjects: ["Geometry Nodes"], image: Nodes },
       { name: "Animation", image: Animation },
-      { name: "Compositing", image: Printing },
-      { name: "AI", image: Assets },
-      { name: "Character Creation", image: Animation },
-      { name: "Clouds", image: Addons },
-      { name: "Asset Managment", image: Materials },
-      { name: "Rendering", image: Printing },
-      { name: "Motion Graphics", image: Animation },
-      { name: "Sound", image: Art },
+      { name: "Compositing", image: compositing },
+      { name: "AI", image: AI },
+      { name: "Character Creation", image: Character_Creation },
+      { name: "Asset Managment", image: Asset_Managment },
+      { name: "Rendering", image: rendering },
+      { name: "Motion Graphics", image: motion_graphics },
+      { name: "Sound", image: sound },
     ],
   },
   {
