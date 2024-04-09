@@ -4,7 +4,14 @@ import SearchBar from "@/components/shared/SearchBar";
 import SidebarFilter from "@/components/shared/SidebarFilter";
 import NewsList from "@/components/customUI/NewsList";
 
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 export default function News() {
+  const [sort, setSort] = useState("Default");
+  const [tags, setTags] = useState([]);
+  const [queryParameters] = useSearchParams();
+  const categories = queryParameters.get("categories");
   return (
     <>
       {/* ads banner */}
@@ -19,7 +26,11 @@ export default function News() {
 
       <div className="flex md:flex-row md:items-start flex-col xl:gap-16 lg:gap-6 gap-4 justify-center items-center">
         {/* side bar */}
-        <SidebarFilter />
+        <SidebarFilter
+          setSort={setSort}
+          setTags={setTags}
+          category={categories}
+        />
 
         {/* product list */}
         <NewsList />

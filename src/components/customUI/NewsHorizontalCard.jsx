@@ -53,11 +53,8 @@ export default function NewsHorizontalCard({ news }) {
           <div className=" flex justify-between">
             <div className="flex gap-2">
               {news.tags.map((tag, index) => (
-                <CardItem translateZ="10">
-                  <Badge
-                    className="bg-neutral-200 dark:bg-darky dark:text-white text-neutral-600 dark:border-white/[0.2] border px-2 py-1 text-xs font-light"
-                    key={index}
-                  >
+                <CardItem key={index} translateZ="10">
+                  <Badge className="bg-neutral-200 dark:bg-darky dark:text-white text-neutral-600 dark:border-white/[0.2] border px-2 py-1 text-xs font-light">
                     {tag}
                   </Badge>
                 </CardItem>

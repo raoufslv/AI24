@@ -11,12 +11,10 @@ export default function GoogleAuth() {
   return (
     <GoogleLogin
       onSuccess={async (credentialResponse) => {
-        console.log(credentialResponse);
         const response = await GoogleLoginMutation.mutateAsync({
           clientId: credentialResponse.clientId,
           credential: credentialResponse.credential,
         });
-        console.log(response);
         setAccessToken(response.accessToken);
         setConnected(true);
         setRole(response.role);
@@ -29,6 +27,9 @@ export default function GoogleAuth() {
       onError={() => {
         console.log("Login Failed");
       }}
+      useOneTap
+      auto_select
+      width={320}
     />
   );
 }
