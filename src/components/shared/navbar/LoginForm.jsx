@@ -42,10 +42,10 @@ export function LoginForm({ toggle, selfOpenModal }) {
     try {
       const response = await loginMutation.mutateAsync(data);
       setAccessToken(response.accessToken);
-      setConnected(true);
       setRole(response.role);
       setImage(response.image);
       setFirstName(response.firstName);
+      setConnected(true);
       createAxiosInstance();
       // close the modal
       selfOpenModal(false);

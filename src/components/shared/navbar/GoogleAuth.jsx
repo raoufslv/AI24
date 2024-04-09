@@ -16,10 +16,10 @@ export default function GoogleAuth() {
           credential: credentialResponse.credential,
         });
         setAccessToken(response.accessToken);
-        setConnected(true);
         setRole(response.role);
         setImage(response.image);
         setFirstName(response.firstName);
+        setConnected(true);
         createAxiosInstance();
         // close the modal
         setOpenLogin(false);
