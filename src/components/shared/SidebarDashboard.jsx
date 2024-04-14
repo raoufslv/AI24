@@ -12,7 +12,7 @@ export default function SidebarDashboard() {
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname.slice(1).split("/")[0];
-  const { setConnected } = useAuth();
+  const { setConnected, role } = useAuth();
 
   const logout = async () => {
     try {
@@ -61,21 +61,25 @@ export default function SidebarDashboard() {
             <Bookmark className={path == "bookmarks" ? "fill-black" : ""} />
             Bookmarks
           </Button>
-          <Button
-            size="lg"
-            variant="ghost"
-            className={`flex gap-2 text-base justify-start items-center w-full
+          {role === "admin" && (
+            <Button
+              size="lg"
+              variant="ghost"
+              className={`flex gap-2 text-base justify-start items-center w-full
             ${
               path == "dashboard"
                 ? "bg-slate-100 font-bold dark:bg-slate-800"
                 : ""
             }
             `}
-            onClick={() => navigate("/dashboard")}
-          >
-            <LayoutDashboard className={path == "dashboard" ? "fill-black" : ""} />
-            Dashboard
-          </Button>
+              onClick={() => navigate("/dashboard")}
+            >
+              <LayoutDashboard
+                className={path == "dashboard" ? "fill-black" : ""}
+              />
+              Dashboard
+            </Button>
+          )}
         </ul>
       </div>
       <Button

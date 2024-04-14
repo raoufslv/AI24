@@ -1,11 +1,5 @@
-"use client";
-
-import * as React from "react";
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
+  RowPagination,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -13,7 +7,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ChevronDown, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -35,48 +29,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useState } from "react";
+import {
+  useGetAllUsers,
+  useModifyUserRole,
+  useDeleteUser,
+} from "@/hooks/react-query/useUser";
+import { useToast } from "@/components/ui/use-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import PaginationTable from "./PaginationTable";
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-];
-
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns = [
   {
     id: "select",
     header: ({ table }) => (
@@ -100,47 +63,73 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "firstname",
+    header: "Name",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize">{row.getValue("firstname")}</div>
     ),
   },
   {
     accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: () => <div className="text-left">Email</div>,
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "username",
+    header: () => <div className="text-left"> Username</div>,
+
+    cell: ({ row }) => (
+      <div className="lowercase">{row.getValue("username")}</div>
+    ),
+  },
+  {
+    accessorKey: "role",
+    header: () => <div className="text-left">Role</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
+      const role = row.getValue("role");
 
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className="text-left font-medium">{role}</div>;
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const user = row.original;
+      const queryClient = useQueryClient();
+      const modifyUserRole = useModifyUserRole();
+      const deleteUser = useDeleteUser();
+      const { toast } = useToast();
+      const handleDelete = async (userId) => {
+        try {
+          const response = await deleteUser.mutateAsync(userId);
+          queryClient.invalidateQueries("users");
+          queryClient.invalidateQueries("recentUsers");
+          toast({
+            description: response.message,
+          });
+        } catch (error) {
+          toast({
+            description: error.message,
+            status: "error",
+          });
+        }
+      };
+
+      const handleToggleRole = async (userId, role) => {
+        try {
+          const response = await modifyUserRole.mutateAsync({ userId, role });
+          queryClient.invalidateQueries("users");
+          toast({
+            description: response.message,
+          });
+        } catch (error) {
+          toast({
+            description: error.message,
+            status: "error",
+          });
+        }
+      };
 
       return (
         <DropdownMenu>
@@ -151,15 +140,25 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>{" "}
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                handleDelete(user._id);
+              }}
+            >
+              Delete
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                handleToggleRole(
+                  user._id,
+                  user.role === "user" ? "manager" : "user"
+                );
+              }}
+            >
+              {user.role === "user" ? "Make Manager" : "Make User"}
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -168,13 +167,13 @@ export const columns: ColumnDef<Payment>[] = [
 ];
 
 export default function DataTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const { data, isLoading, error } = useGetAllUsers();
+  const [sorting, setSorting] = useState([]);
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [columnVisibility, setColumnVisibility] = useState({});
+  const [rowSelection, setRowSelection] = useState({});
+  const [pageIndex, setpageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(2);
 
   const table = useReactTable({
     data,
@@ -182,7 +181,7 @@ export default function DataTable() {
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel: getPaginationRowModel(), // Include pagination model
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
@@ -192,8 +191,19 @@ export default function DataTable() {
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination: {
+        pageIndex: pageIndex,
+        pageSize: pageSize,
+      },
     },
   });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="w-full">
@@ -201,7 +211,7 @@ export default function DataTable() {
         <div className="w-full">
           <Input
             placeholder="Filter emails..."
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            value={table.getColumn("email")?.getFilterValue() ?? ""}
             onChange={(event) =>
               table.getColumn("email")?.setFilterValue(event.target.value)
             }
@@ -211,7 +221,10 @@ export default function DataTable() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button
+              variant="outline"
+              className="ml-auto dark:bg-black dark:border-neutral-800"
+            >
               Columns <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -237,28 +250,29 @@ export default function DataTable() {
         </DropdownMenu>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button
+              variant="outline"
+              className="ml-auto dark:bg-black dark:border-neutral-800"
+            >
               Sort <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
+            {table.getAllColumns().map((column) => {
+              if (!column.getCanSort()) {
+                return null;
+              }
+              return (
+                <DropdownMenuItem
+                  key={column.id}
+                  onClick={() => {
+                    column.toggleSorting(column.getIsSorted() === "asc");
+                  }}
+                >
+                  {column.id}
+                </DropdownMenuItem>
+              );
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -318,22 +332,11 @@ export default function DataTable() {
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
+          <PaginationTable
+            table={table}
+            setpageIndex={setpageIndex}
+            pageIndex={pageIndex}
+          />
         </div>
       </div>
     </div>

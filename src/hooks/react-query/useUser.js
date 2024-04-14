@@ -5,6 +5,11 @@ import {
   addProductBookmark,
   CheckProductBookmarks,
   GetProductsBookmarks,
+  getAllUsers,
+  getRecentUsers,
+  modifyUserRole,
+  deleteUser,
+  getStatistics,
 } from "@/services/userService";
 
 export const useUpdateUserInfoMutation = () => {
@@ -39,5 +44,38 @@ export const useGetProductsBookmarks = () => {
   return useQuery({
     queryKey: ["ProductsBookmarks"],
     queryFn: () => GetProductsBookmarks(),
+  });
+};
+
+export const useGetAllUsers = () => {
+  return useQuery({
+    queryKey: ["AllUsers"],
+    queryFn: () => getAllUsers(),
+  });
+};
+
+export const useGetRecentUsers = () => {
+  return useQuery({
+    queryKey: ["RecentUsers"],
+    queryFn: () => getRecentUsers(),
+  });
+};
+
+export const useModifyUserRole = () => {
+  return useMutation({
+    mutationFn: (data) => modifyUserRole(data),
+  });
+};
+
+export const useDeleteUser = () => {
+  return useMutation({
+    mutationFn: (id) => deleteUser(id),
+  });
+};
+
+export const useGetStatistics = () => {
+  return useQuery({
+    queryKey: ["Statistics"],
+    queryFn: () => getStatistics(),
   });
 };

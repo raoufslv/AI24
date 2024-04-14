@@ -52,3 +52,48 @@ export const GetProductsBookmarks = async () => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const getAllUsers = async () => {
+  try {
+    const response = await axiosInstance.get("user/all");
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const modifyUserRole = async (data) => {
+  try {
+    const response = await axiosInstance.put("user/modifyUserRole", data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const getRecentUsers = async () => {
+  try {
+    const response = await axiosInstance.get("user/recent");
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const deleteUser = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`user/delete/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const getStatistics = async () => {
+  try {
+    const response = await axiosInstance.get("user/statistics");
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
