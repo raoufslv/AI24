@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import DataTable from "@/components/dashboard/DataTable";
+import UserTable from "@/components/dashboard/UserTable";
 import {
   useGetRecentUsers,
   useGetStatistics,
@@ -100,7 +100,7 @@ export default function Dashboard() {
               </div>
             </CardHeader>
             <CardContent>
-              <DataTable />
+              <UserTable />
             </CardContent>
           </Card>
           <Card

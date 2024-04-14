@@ -72,6 +72,14 @@ export const theme = {
       sm: "calc(var(--radius) - 4px)",
     },
     keyframes: {
+      "collapsible-down": {
+        from: { height: "0" },
+        to: { height: "var(--radix-collapsible-content-height)" },
+      },
+      "collapsible-up": {
+        from: { height: "var(--radix-collapsible-content-height)" },
+        to: { height: "0" },
+      },
       "accordion-down": {
         from: { height: "0" },
         to: { height: "var(--radix-accordion-content-height)" },
@@ -87,6 +95,8 @@ export const theme = {
       },
     },
     animation: {
+      "collapsible-down": "collapsible-down 0.2s ease-out",
+      "collapsible-up": "collapsible-up 0.2s ease-out",
       "accordion-down": "accordion-down 0.2s ease-out",
       "accordion-up": "accordion-up 0.2s ease-out",
       scroll:
@@ -96,15 +106,15 @@ export const theme = {
 };
 export const plugins = [require("tailwindcss-animate"), addVariablesForColors];
 
-
-const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette").default;
+const flattenColorPalette =
+  require("tailwindcss/lib/util/flattenColorPalette").default;
 
 function addVariablesForColors({ addBase, theme }) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
- 
+
   addBase({
     ":root": newVars,
   });

@@ -4,8 +4,10 @@ import {
   getPopularProducts,
   getSimilarProducts,
   getLatestProducts,
+  getAllProducts,
+  deleteProduct,
 } from "@/services/productsService";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery, useMutation } from "@tanstack/react-query";
 
 export const useProductsQuery = (
   page,
@@ -81,5 +83,19 @@ export const useLatestProductsQuery = () => {
     queryKey: ["latestProducts"],
     queryFn: () => getLatestProducts(),
     staleTime: 1000 * 60 * 30, // 30 minutes
+  });
+};
+
+export const useAllProductsQuery = () => {
+  return useQuery({
+    queryKey: ["allProducts"],
+    queryFn: () => getAllProducts(),
+    staleTime: 1000 * 60 * 2, // 2 minute
+  });
+};
+
+export const useDeleteProductMutation = () => {
+  return useMutation({
+    mutationFn: (productId) => deleteProduct(productId),
   });
 };

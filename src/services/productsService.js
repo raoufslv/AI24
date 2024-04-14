@@ -72,3 +72,21 @@ export const getLatestProducts = async () => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const getAllProducts = async () => {
+  try {
+    const response = await axiosInstance.get("product/all");
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const deleteProduct = async (productId) => {
+  try {
+    const response = await axiosInstance.delete(`product/${productId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};

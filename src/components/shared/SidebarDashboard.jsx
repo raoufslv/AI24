@@ -1,7 +1,13 @@
 import React from "react";
 import Logo from "@/components/customUI/Logo";
 import { Button } from "../ui/button";
-import { Bookmark, LogOut, User, LayoutDashboard } from "lucide-react";
+import {
+  Bookmark,
+  LogOut,
+  User,
+  LayoutDashboard,
+  PackagePlus,
+} from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "@/context/AuthContext";
@@ -80,6 +86,23 @@ export default function SidebarDashboard() {
               Dashboard
             </Button>
           )}
+          {role === "admin" || role === "manager" ? (
+            <Button
+              size="lg"
+              variant="ghost"
+              className={`flex gap-2 text-base justify-start items-center w-full
+                ${
+                  path == "productsDashboard"
+                    ? "bg-slate-100 font-bold dark:bg-slate-800"
+                    : ""
+                }
+                `}
+              onClick={() => navigate("/productsDashboard")}
+            >
+              <PackagePlus />
+              Products
+            </Button>
+          ) : null}
         </ul>
       </div>
       <Button

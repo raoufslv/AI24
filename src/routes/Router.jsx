@@ -14,6 +14,8 @@ import DefaultLayout from "@/layouts/DefaultLayout";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
 import { useAuth } from "@/context/AuthContext";
+import ProductsDashboard from "@/pages/ProductsDashboard";
+import AddProduct from "@/pages/AddProduct";
 
 const Router = () => {
   const { connected, role } = useAuth();
@@ -104,6 +106,25 @@ const Router = () => {
               }
             />
           )}
+          {role === "admin" || role === "manager" ? (
+            <><Route
+              path="/productsDashboard"
+              element={
+                <DashboardLayout>
+                  <ProductsDashboard />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/productsDashboard/add"
+              element={
+                <DashboardLayout>
+                  <AddProduct />
+                </DashboardLayout>
+              }
+            />
+            </>
+          ) : null}
         </>
       )}
       {/*

@@ -10,7 +10,7 @@ import {
 import { ChevronDown, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -31,80 +31,87 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import {
-  useGetAllUsers,
-  useModifyUserRole,
-  useDeleteUser,
-} from "@/hooks/react-query/useUser";
+  useAllProductsQuery,
+  // useModifyUserRole,
+  useDeleteProductMutation,
+} from "@/hooks/react-query/useProduct";
 import { useToast } from "@/components/ui/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import PaginationTable from "./PaginationTable";
 
 export const columns = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
+    accessorKey: "image",
+    header: "Cover Image",
     cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
+      <div className="flex items-center">
+        <img
+          src={row.getValue("image")}
+          alt={row.getValue("title")}
+          className="h-14 rounded"
+        />
+      </div>
     ),
-    enableSorting: false,
-    enableHiding: false,
   },
   {
-    accessorKey: "firstname",
-    header: "Name",
+    accessorKey: "title",
+    header: "Title",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("firstname")}</div>
+      <div
+        className="capitalize"
+        style={{
+          width: "280px",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
+        {row.getValue("title")}
+      </div>
     ),
   },
   {
-    accessorKey: "email",
-    header: () => <div className="text-left">Email</div>,
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    accessorKey: "categories",
+    header: () => <div className="text-left">Categories</div>,
+    cell: ({ row }) => (
+      <div className="lowercase">{row.getValue("categories")}</div>
+    ),
   },
   {
-    accessorKey: "username",
-    header: () => <div className="text-left"> Username</div>,
+    accessorKey: "subcategories",
+    header: () => <div className="text-left">Subcategories</div>,
+    cell: ({ row }) => (
+      <div className="lowercase">{row.getValue("subcategories")}</div>
+    ),
+  },
+  {
+    accessorKey: "author",
+    header: () => <div className="text-left"> Author</div>,
 
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("username")}</div>
+      <div className="lowercase">{row.getValue("author")}</div>
     ),
   },
   {
-    accessorKey: "role",
-    header: () => <div className="text-left">Role</div>,
-    cell: ({ row }) => {
-      const role = row.getValue("role");
-
-      return <div className="text-left font-medium">{role}</div>;
-    },
+    accessorKey: "price",
+    header: () => <div className="text-left">Price</div>,
+    cell: ({ row }) => (
+      <div className="text-left font-medium">${row.getValue("price")}</div>
+    ),
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const user = row.original;
+      const product = row.original;
       const queryClient = useQueryClient();
-      const modifyUserRole = useModifyUserRole();
-      const deleteUser = useDeleteUser();
+      // const modifyUserRole = useModifyUserRole();
+      const deleteProduct = useDeleteProductMutation();
       const { toast } = useToast();
-      const handleDelete = async (userId) => {
+      const handleDelete = async (productId) => {
         try {
-          const response = await deleteUser.mutateAsync(userId);
-          queryClient.invalidateQueries("users");
-          queryClient.invalidateQueries("recentUsers");
+          const response = await deleteProduct.mutateAsync(productId);
+          queryClient.invalidateQueries("allProducts");
           toast({
             description: response.message,
           });
@@ -116,9 +123,9 @@ export const columns = [
         }
       };
 
-      const handleToggleRole = async (userId, role) => {
+      const handleEdit = async (productId) => {
         try {
-          const response = await modifyUserRole.mutateAsync({ userId, role });
+          //const response = await modifyUserRole.mutateAsync({ productId });
           queryClient.invalidateQueries("users");
           toast({
             description: response.message,
@@ -144,20 +151,17 @@ export const columns = [
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                handleDelete(user._id);
+                handleDelete(product.id);
               }}
             >
               Delete
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
-                handleToggleRole(
-                  user._id,
-                  user.role === "user" ? "manager" : "user"
-                );
+                handleEdit(product.id);
               }}
             >
-              {user.role === "user" ? "Make Manager" : "Make User"}
+              Edit
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -166,14 +170,24 @@ export const columns = [
   },
 ];
 
-export default function DataTable() {
-  const { data, isLoading, error } = useGetAllUsers();
+// this function has to be refactored to a global utility function
+const roundUp = (number) => {
+  const parsedNumber = parseFloat(number);
+  const roundedNumber = Math.ceil(parsedNumber);
+
+  return roundedNumber === parsedNumber
+    ? Math.floor(parsedNumber)
+    : roundedNumber;
+};
+
+export default function ProductTable() {
+  const { data, isLoading, error } = useAllProductsQuery();
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
   const [pageIndex, setpageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(2);
+  const [pageSize, setPageSize] = useState(7);
 
   const table = useReactTable({
     data,
@@ -207,74 +221,75 @@ export default function DataTable() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4 gap-4">
-        <div className="w-full">
+      <div className="flex items-center py-4 gap-4 justify-between">
+        <div className=" w-[40rem]">
           <Input
-            placeholder="Filter emails..."
-            value={table.getColumn("email")?.getFilterValue() ?? ""}
+            placeholder="Filter titles..."
+            value={table.getColumn("title")?.getFilterValue() ?? ""}
             onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
+              table.getColumn("title")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="w-full"
           />
         </div>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="ml-auto dark:bg-black dark:border-neutral-800"
-            >
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
+        <div className="flex gap-5">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="ml-auto dark:bg-black dark:border-neutral-800"
+              >
+                Columns <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="ml-auto dark:bg-black dark:border-neutral-800"
+              >
+                Sort <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table.getAllColumns().map((column) => {
+                if (!column.getCanSort()) {
+                  return null;
+                }
                 return (
-                  <DropdownMenuCheckboxItem
+                  <DropdownMenuItem
                     key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
+                    onClick={() => {
+                      column.toggleSorting(column.getIsSorted() === "asc");
+                    }}
                   >
                     {column.id}
-                  </DropdownMenuCheckboxItem>
+                  </DropdownMenuItem>
                 );
               })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="ml-auto dark:bg-black dark:border-neutral-800"
-            >
-              Sort <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table.getAllColumns().map((column) => {
-              if (!column.getCanSort()) {
-                return null;
-              }
-              return (
-                <DropdownMenuItem
-                  key={column.id}
-                  onClick={() => {
-                    column.toggleSorting(column.getIsSorted() === "asc");
-                  }}
-                >
-                  {column.id}
-                </DropdownMenuItem>
-              );
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -326,16 +341,13 @@ export default function DataTable() {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
+      <div className="flex items-center justify-end space-x-2">
         <div className="space-x-2">
           <PaginationTable
-            table={table}
             setpageIndex={setpageIndex}
             pageIndex={pageIndex}
+            totalPages={roundUp(data.length / pageSize) - 1}
+            hasMore={roundUp(data.length / pageSize) - 1 > pageIndex}
           />
         </div>
       </div>
