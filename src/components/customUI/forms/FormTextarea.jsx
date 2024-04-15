@@ -15,7 +15,7 @@ export default function FormTextarea({
   return (
     <LabelInputContainer className={cn("mb-4", className)}>
       <Label htmlFor={id}>{name}</Label>
-      <Textarea {...register(id)} id={id} placeholder={placeholder} />
+      <Textarea className={className} {...register(id)} id={id} placeholder={placeholder} />
       {errors[id] && <ErrorMessage message={errors[id].message} />}
     </LabelInputContainer>
   );

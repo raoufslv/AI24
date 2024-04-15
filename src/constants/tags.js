@@ -60,16 +60,6 @@ export default [
     categories: ["Materials"],
   },
   {
-    id: 13,
-    name: "Substance-Designer",
-    categories: ["Materials"],
-  },
-  {
-    id: 13,
-    name: "Substance-Painter",
-    categories: ["Materials"],
-  },
-  {
     id: 14,
     name: "tiling",
     categories: ["Materials"],

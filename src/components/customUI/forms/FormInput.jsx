@@ -11,11 +11,17 @@ export default function FormInput({
   id,
   name,
   placeholder,
+  number,
 }) {
   return (
     <LabelInputContainer className={cn("mb-4", className)}>
       <Label htmlFor={id}>{name}</Label>
-      <Input {...register(id)} id={id} placeholder={placeholder} type="text" />
+      <Input
+        {...register(id)}
+        id={id}
+        placeholder={placeholder}
+        type={number ? number : "text"}
+      />
       {errors[id] && <ErrorMessage message={errors[id].message} />}
     </LabelInputContainer>
   );

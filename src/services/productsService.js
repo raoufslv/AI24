@@ -90,3 +90,12 @@ export const deleteProduct = async (productId) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const createProduct = async (productData) => {
+  try {
+    const response = await axiosInstance.post("product/add", productData);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
