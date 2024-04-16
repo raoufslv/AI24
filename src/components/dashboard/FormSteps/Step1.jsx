@@ -174,7 +174,7 @@ export default function Step1({
                   setValue(
                     "tags",
                     getValues("tags").filter(
-                      (selectedTag) => selectedTag.id !== tag.id
+                      (selectedTag) => selectedTag !== tag
                     )
                   );
                   // add the tag to the unselected tags

@@ -103,3 +103,16 @@ export const createProduct = async (data) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const updateProduct = async (data) => {
+  try {
+    const response = await axiosInstance.put(`product/${data.id}`, data.data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};

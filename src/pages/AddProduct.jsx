@@ -9,12 +9,15 @@ import ErrorMessage from "@/components/customUI/forms/ErrorMessage";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateProductMutation } from "@/hooks/react-query/useProduct";
+import {
+  useCreateProductMutation,
+  useUpdateProductMutation,
+} from "@/hooks/react-query/useProduct";
 import { useState, useMemo } from "react";
 
 import tags from "@/constants/tags";
 import { useToast } from "@/components/ui/use-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const steps = [{}, {}];
 
@@ -42,10 +45,16 @@ const ProductFormSchema = z.object({
 });
 
 export default function AddProduct() {
+  const location = useLocation();
+
+  // Check if state data exists and extract the product
+  const product = location.state && location.state.product;
+
   const [updatePreview, setUpdatePreview] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   const CreateProduct = useCreateProductMutation();
+  const UpdateProduct = useUpdateProductMutation();
   const {
     register,
     handleSubmit,
@@ -55,17 +64,37 @@ export default function AddProduct() {
     setValue,
   } = useForm({
     defaultValues: {
-      title: "",
-      category: "",
-      subCategory: "",
-      subject: "",
-      description: "",
-      author: "",
-      images: [],
-      tags: [],
-      software: "",
-      license: "",
-      productShopInfo: [],
+      title: product?.title || "",
+      category: product?.categories[0] || "",
+      subCategory: product?.subcategories[0] || "",
+      subject: product?.subjects[0] || "",
+      description: product?.description || "",
+      author: product?.author || "",
+      images:
+        product?.images &&
+        product?.images.map((image) => ({
+          file: image,
+          meta: {
+            previewUrl: image,
+          },
+        })),
+
+      tags:
+        product?.tags &&
+        product?.tags.map((tag) => ({
+          name: tag,
+        })),
+
+      software: product?.software || "",
+      license: product?.license || "",
+      productShopInfo:
+        product?.productshopsinfolist &&
+        product?.productshopsinfolist.map((shopInfo) => ({
+          price: shopInfo.price,
+          rating: shopInfo.rating,
+          productlink: shopInfo.productlink,
+          shopid: shopInfo.shopid,
+        })),
     },
     resolver: zodResolver(ProductFormSchema),
   });
@@ -95,8 +124,19 @@ export default function AddProduct() {
         }
       }
 
-      const response = await CreateProduct.mutateAsync(formData);
-      if (response) {
+      console.log("formData", formData);
+
+      var response = null;
+      if (product) {
+        response = await UpdateProduct.mutateAsync({
+          id: product.id,
+          data: formData,
+        });
+      } else {
+        response = await CreateProduct.mutateAsync(formData);
+      }
+
+      if (response && response !== "error") {
         toast({
           title: "Product has been created successfully",
         });
@@ -133,7 +173,7 @@ export default function AddProduct() {
     setUnselectedTags(FilteredTags);
 
     // set the selected tags to empty
-    setValue("tags", []);
+    // setValue("tags", []);
   }, [getValues("category")]);
 
   return (

@@ -39,16 +39,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import PaginationTable from "./PaginationTable";
 import { roundUp } from "@/lib/utils";
 
-import { useNavigate } from "react-router-dom";
-
 export const columns = [
   {
-    accessorKey: "images",
+    accessorKey: "image",
     header: "Cover Image",
     cell: ({ row }) => (
       <div className="flex items-center">
         <img
-          src={row.getValue("images")[0]}
+          src={row.getValue("image")}
           alt={row.getValue("title")}
           className="h-14 rounded"
         />
@@ -124,15 +122,12 @@ export const columns = [
         }
       };
 
-      const navigate = useNavigate();
-
       const handleEdit = async (productId) => {
         try {
-          navigate(
-            `/productsDashboard/add/${productId}`,
-            // send the data to the edit page
-            { state: { product } }
-          );
+          queryClient.invalidateQueries("users");
+          toast({
+            description: response.message,
+          });
         } catch (error) {
           toast({
             description: error.message,
@@ -173,7 +168,7 @@ export const columns = [
   },
 ];
 
-export default function ProductTable() {
+export default function ShopTable() {
   const { data, isLoading, error } = useAllProductsQuery();
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -215,7 +210,7 @@ export default function ProductTable() {
   return (
     <div className="w-full">
       <div className="flex items-center py-4 gap-4 justify-between">
-        <div className="w-[40rem]">
+        <div className=" w-[40rem]">
           <Input
             placeholder="Filter titles..."
             value={table.getColumn("title")?.getFilterValue() ?? ""}

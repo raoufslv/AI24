@@ -7,6 +7,7 @@ import {
   User,
   LayoutDashboard,
   PackagePlus,
+  Store,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -87,21 +88,38 @@ export default function SidebarDashboard() {
             </Button>
           )}
           {role === "admin" || role === "manager" ? (
-            <Button
-              size="lg"
-              variant="ghost"
-              className={`flex gap-2 text-base justify-start items-center w-full
+            <>
+              <Button
+                size="lg"
+                variant="ghost"
+                className={`flex gap-2 text-base justify-start items-center w-full
                 ${
                   path == "productsDashboard"
                     ? "bg-slate-100 font-bold dark:bg-slate-800"
                     : ""
                 }
                 `}
-              onClick={() => navigate("/productsDashboard")}
-            >
-              <PackagePlus />
-              Products
-            </Button>
+                onClick={() => navigate("/productsDashboard")}
+              >
+                <PackagePlus />
+                Products
+              </Button>
+              <Button
+                size="lg"
+                variant="ghost"
+                className={`flex gap-2 text-base justify-start items-center w-full
+                ${
+                  path == "shopsDashboard"
+                    ? "bg-slate-100 font-bold dark:bg-slate-800"
+                    : ""
+                }
+                `}
+                onClick={() => navigate("/shopsDashboard")}
+              >
+                <Store />
+                Shops
+              </Button>
+            </>
           ) : null}
         </ul>
       </div>

@@ -16,6 +16,8 @@ import DashboardLayout from "@/layouts/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import ProductsDashboard from "@/pages/ProductsDashboard";
 import AddProduct from "@/pages/AddProduct";
+import ShopsDashboard from "@/pages/ShopsDashboard";
+import AddShop from "@/pages/AddShop";
 
 const Router = () => {
   const { connected, role } = useAuth();
@@ -107,22 +109,47 @@ const Router = () => {
             />
           )}
           {role === "admin" || role === "manager" ? (
-            <><Route
-              path="/productsDashboard"
-              element={
-                <DashboardLayout>
-                  <ProductsDashboard />
-                </DashboardLayout>
-              }
-            />
-            <Route
-              path="/productsDashboard/add"
-              element={
-                <DashboardLayout>
-                  <AddProduct />
-                </DashboardLayout>
-              }
-            />
+            <>
+              <Route
+                path="/productsDashboard"
+                element={
+                  <DashboardLayout>
+                    <ProductsDashboard />
+                  </DashboardLayout>
+                }
+              />
+              <Route
+                path="/productsDashboard/add"
+                element={
+                  <DashboardLayout>
+                    <AddProduct />
+                  </DashboardLayout>
+                }
+              />
+              <Route
+                path="/productsDashboard/add/:id"
+                element={
+                  <DashboardLayout>
+                    <AddProduct />
+                  </DashboardLayout>
+                }
+              />
+              <Route
+                path="/shopsDashboard"
+                element={
+                  <DashboardLayout>
+                    <ShopsDashboard />
+                  </DashboardLayout>
+                }
+              />
+              <Route
+                path="/shopsDashboard/add"
+                element={
+                  <DashboardLayout>
+                    <AddShop />
+                  </DashboardLayout>
+                }
+              />
             </>
           ) : null}
         </>
