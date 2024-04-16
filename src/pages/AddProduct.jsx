@@ -13,6 +13,8 @@ import { useCreateProductMutation } from "@/hooks/react-query/useProduct";
 import { useState, useMemo } from "react";
 
 import tags from "@/constants/tags";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const steps = [{}, {}];
 
@@ -41,6 +43,8 @@ const ProductFormSchema = z.object({
 
 export default function AddProduct() {
   const [updatePreview, setUpdatePreview] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const CreateProduct = useCreateProductMutation();
   const {
     register,
@@ -65,8 +69,6 @@ export default function AddProduct() {
     },
     resolver: zodResolver(ProductFormSchema),
   });
-
-  console.log(errors);
 
   const onSubmit = async (data) => {
     try {
@@ -94,7 +96,15 @@ export default function AddProduct() {
       }
 
       const response = await CreateProduct.mutateAsync(formData);
-      console.log(response);
+      if (response) {
+        toast({
+          title: "Product has been created successfully",
+        });
+        // wait for the toast to show
+        setTimeout(() => {
+          navigate(`/products/${response}`);
+        }, 1000);
+      }
     } catch (error) {
       setError("root", {
         type: "manual",
