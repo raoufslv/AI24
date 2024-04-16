@@ -1,26 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "@/pages/Home";
 import Contact from "@/pages/Contact";
-import Products from "@/pages/Products";
-import Categories from "@/pages/Categories";
-import Product from "@/pages/Product";
-import News from "@/pages/News";
-import OneNews from "@/pages/OneNews";
 import Profile from "@/pages/Profile";
-import Bookmarks from "@/pages/Bookmarks";
-// import NotFound from "../pages/not-found";
-import Dashboard from "../pages/Dashboard";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
 import { useAuth } from "@/context/AuthContext";
-import ProductsDashboard from "@/pages/ProductsDashboard";
-import AddProduct from "@/pages/AddProduct";
-import ShopsDashboard from "@/pages/ShopsDashboard";
-import AddShop from "@/pages/AddShop";
+import Aboutus from "@/pages/Aboutus";
+import Challenges from "@/pages/Challenges";
+import Evenets from "@/pages/Evenets";
+import Arena from "@/pages/Arena";
 
 const Router = () => {
-  const { connected, role } = useAuth();
+  const { connected } = useAuth();
   return (
     <Routes>
       <Route
@@ -33,50 +25,42 @@ const Router = () => {
         }
       />
       <Route
+        path="/aboutus"
+        element={
+          <DefaultLayout>
+            <Aboutus />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/challenges"
+        element={
+          <DefaultLayout>
+            <Challenges />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/evenets"
+        element={
+          <DefaultLayout>
+            <Evenets />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/arena"
+        element={
+          <DefaultLayout>
+            <Arena />
+          </DefaultLayout>
+        }
+      />
+      <Route
         path="/contact"
         element={
           <DefaultLayout>
             <Contact />
-          </DefaultLayout>
-        }
-      />
-      <Route
-        path="/products"
-        element={
-          <DefaultLayout>
-            <Products />
-          </DefaultLayout>
-        }
-      />
-      <Route
-        path="/categories"
-        element={
-          <DefaultLayout>
-            <Categories />
-          </DefaultLayout>
-        }
-      />
-      <Route
-        path="/products/:id"
-        element={
-          <DefaultLayout>
-            <Product />
-          </DefaultLayout>
-        }
-      />
-      <Route
-        path="/news"
-        element={
-          <DefaultLayout>
-            <News />
-          </DefaultLayout>
-        }
-      />
-      <Route
-        path="/news/:id"
-        element={
-          <DefaultLayout>
-            <OneNews />
           </DefaultLayout>
         }
       />
@@ -90,91 +74,8 @@ const Router = () => {
               </DashboardLayout>
             }
           />
-          <Route
-            path="/bookmarks"
-            element={
-              <DashboardLayout>
-                <Bookmarks />
-              </DashboardLayout>
-            }
-          />
-          {role === "admin" && (
-            <Route
-              path="/dashboard"
-              element={
-                <DashboardLayout>
-                  <Dashboard />
-                </DashboardLayout>
-              }
-            />
-          )}
-          {role === "admin" || role === "manager" ? (
-            <>
-              <Route
-                path="/productsDashboard"
-                element={
-                  <DashboardLayout>
-                    <ProductsDashboard />
-                  </DashboardLayout>
-                }
-              />
-              <Route
-                path="/productsDashboard/add"
-                element={
-                  <DashboardLayout>
-                    <AddProduct />
-                  </DashboardLayout>
-                }
-              />
-              <Route
-                path="/productsDashboard/add/:id"
-                element={
-                  <DashboardLayout>
-                    <AddProduct />
-                  </DashboardLayout>
-                }
-              />
-              <Route
-                path="/shopsDashboard"
-                element={
-                  <DashboardLayout>
-                    <ShopsDashboard />
-                  </DashboardLayout>
-                }
-              />
-              <Route
-                path="/shopsDashboard/add"
-                element={
-                  <DashboardLayout>
-                    <AddShop />
-                  </DashboardLayout>
-                }
-              />
-            </>
-          ) : null}
         </>
       )}
-      {/*
-      <Route
-        path="*"
-        element={
-          <DefaultLayout>
-            <NotFound />
-          </DefaultLayout>
-        }
-      />
-
-      {/* Conditional routing based on user role /}
-      {userRole === "admin" && (
-        <Route
-          path="/admin"
-          element={
-            <DashboardLayout>
-              <Dashboard />
-            </DashboardLayout>
-          }
-        />
-      )} */}
     </Routes>
   );
 };

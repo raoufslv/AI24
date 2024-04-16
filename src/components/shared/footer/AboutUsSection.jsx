@@ -11,9 +11,7 @@ export default function AboutUsSection() {
       <h2 className={classes.footerH2}>Get to know us</h2>
       <p
         className={`text-sm w-72 ${classes.textGray}`}
-      >{`We are a market place where you find everything related to 3D, 2D,
-        modeling, animations and much more. \nWe also write articles about related topics, checkout our latest
-        articles.`}</p>
+      >{`We code and we quest. We are the best in the west. We are the Code Quest Arena team. We are here to help you with all your coding needs. We are the best in the west.`}</p>
     </div>
   );
 }

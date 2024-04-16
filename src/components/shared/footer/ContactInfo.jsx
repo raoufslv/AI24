@@ -20,7 +20,7 @@ export default function ContactInfo() {
         <Mail size={34} />
         <div className="flex flex-col w-full">
           <p className={classes.textGray}>24/7 Mail support</p>
-          <Link to="mailto:contact@cgvortex.com">contact@cgvortex.com</Link>
+          <Link to="mailto:contact@codequestarena.com">contact@codequestarena.com</Link>
         </div>
       </div>
     </div>

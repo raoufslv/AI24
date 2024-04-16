@@ -24,14 +24,14 @@ export default function NewsletterSection() {
           />
           <Button
             type="submit"
-            className="bg-greeny dark:bg-greeny rounded-l-none absolute right-0 hover:bg-black"
+            className=" rounded-l-none absolute right-0 hover:bg-black"
           >
             Subscribe
           </Button>
         </div>
         <span className="xl:text-sm text-xs mt-2 w-fit-content mx-auto">
           By subscribing you agree to our{" "}
-          <span className="text-greeny">
+          <span className="">
             Terms & Conditions and Privacy Policy
           </span>
         </span>

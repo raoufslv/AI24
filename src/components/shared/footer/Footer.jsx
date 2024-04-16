@@ -6,7 +6,7 @@ import FollowUsSection from "@/components/shared/footer/FollowUsSection";
 
 export default function Footer() {
   return (
-    <div className="w-full bg-darky flex flex-col items-center justify-start text-white pt-10 xl:px-56 lg:px-28 md:px-20 sm:px-16 px-10">
+    <div className="w-full bg-emerald-800 flex flex-col items-center justify-start text-white pt-10 xl:px-56 lg:px-28 md:px-20 sm:px-16 px-10">
       <div className="border-b-2 flex md:flex-row flex-col gap-6 md:gap-0 justify-between items-start pb-16 w-full">
         <NewsletterSection />
       </div>

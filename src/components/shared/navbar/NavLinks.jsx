@@ -46,52 +46,69 @@ export default function NavLinks({ toggleMenu }) {
       </li>
       <li>
         <motion.div
-          variants={path === "products" ? activeVariants : itemVariants}
+          variants={path === "aboutus" ? activeVariants : itemVariants}
           whileHover="hover"
           initial="initial"
           animate="animate"
         >
           <Link
-            to="/products"
+            to="/aboutus"
             tabIndex="1"
-            aria-label="Go to the products page"
+            aria-label="Go to the aboutus page"
             {...(toggleMenu && { onClick: toggleMenu })}
           >
-            Products
+            About us
           </Link>
         </motion.div>
       </li>
       <li>
         <motion.div
-          variants={path === "categories" ? activeVariants : itemVariants}
+          variants={path === "challenges" ? activeVariants : itemVariants}
           whileHover="hover"
           initial="initial"
           animate="animate"
         >
           <Link
-            to="/categories"
+            to="/challenges"
             tabIndex="1"
-            aria-label="Go to the categories page"
+            aria-label="Go to the challenges page"
             {...(toggleMenu && { onClick: toggleMenu })}
           >
-            categories
+            Challenges
           </Link>
         </motion.div>
       </li>
       <li>
         <motion.div
-          variants={path === "news" ? activeVariants : itemVariants}
+          variants={path === "evenets" ? activeVariants : itemVariants}
           whileHover="hover"
           initial="initial"
           animate="animate"
         >
           <Link
-            to="/news"
+            to="/evenets"
             tabIndex="2"
-            aria-label="Go to the news page"
+            aria-label="Go to the evenets page"
             {...(toggleMenu && { onClick: toggleMenu })}
           >
-            News
+            Evenets
+          </Link>
+        </motion.div>
+      </li>
+      <li>
+        <motion.div
+          variants={path === "arena" ? activeVariants : itemVariants}
+          whileHover="hover"
+          initial="initial"
+          animate="animate"
+        >
+          <Link
+            to="/arena"
+            tabIndex="2"
+            aria-label="Go to the arena page"
+            {...(toggleMenu && { onClick: toggleMenu })}
+          >
+            Arena
           </Link>
         </motion.div>
       </li>
