@@ -1,6 +1,5 @@
-# CG Vortex Client
-[![Netlify Status](https://api.netlify.com/api/v1/badges/010e92b3-30ab-4253-bd4d-ce19b3881216/deploy-status)](https://app.netlify.com/sites/cg-vortex/deploys)
-
+# Code Quest Arena
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5b52b18b-7434-4865-baee-6cffbda99dc6/deploy-status)](https://app.netlify.com/sites/code-quest-arena/deploys)
 ## Project setup
 ```
 npm install
