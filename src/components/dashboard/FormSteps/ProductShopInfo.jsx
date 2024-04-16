@@ -8,10 +8,10 @@ export default function ProductShopInfo({
   errors,
   getValues,
   setValue,
-  shopId,
+  shopid,
 }) {
   const [updateProductShopInfo, setUpdateProductShopInfo] = useState(false);
-  setValue(`productShopInfo[${index}].shopId`, shopId); // Update the form value
+  setValue(`productShopInfo[${index}].shopid`, shopid); // Update the form value
   const handleClick = (idx) => {
     const newRating = idx + 1;
     setValue(`productShopInfo[${index}].rating`, newRating); // Update the form value
@@ -50,7 +50,7 @@ export default function ProductShopInfo({
       <FormInput
         register={register}
         errors={errors}
-        id={`productShopInfo[${index}].productLink`}
+        id={`productShopInfo[${index}].productlink`}
         name="Product Link"
         placeholder="Enter the product link"
       />

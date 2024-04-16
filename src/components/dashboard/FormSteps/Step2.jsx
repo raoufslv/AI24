@@ -5,6 +5,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { useShopsQuery } from "@/hooks/react-query/useShop";
 import ProductSelector from "../ProductSelector";
+import ErrorMessage from "@/components/customUI/forms/ErrorMessage";
 
 export default function Step2({ register, errors, getValues, setValue }) {
   const [updatePreview, setUpdatePreview] = useState(false);
@@ -86,6 +87,7 @@ export default function Step2({ register, errors, getValues, setValue }) {
           ))}
         </div>
       </div>
+      {errors.images && <ErrorMessage message={errors.images.message} />}
       <div className="flex gap-4 w-1/4 self-end">
         <ProductSelector
           topic={"Shops"}
@@ -93,6 +95,7 @@ export default function Step2({ register, errors, getValues, setValue }) {
           value={selectedShop}
           onChange={handleCategoryChange}
           img={shops.map((shop) => shop.logoimageurl)}
+          flag="flag"
         />
       </div>
       {selectedShop ? (
@@ -105,13 +108,14 @@ export default function Step2({ register, errors, getValues, setValue }) {
               getValues={getValues}
               setValue={setValue}
               index={index}
-              shopId={shop._id}
+              shopid={shop._id}
             />
           ) : null
         )
       ) : (
         <div>Please select a shop</div>
       )}
+      {errors.productShopInfo && <ErrorMessage message={errors.productShopInfo.message} />}
     </div>
   );
 }

@@ -103,6 +103,6 @@ export const useDeleteProductMutation = () => {
 
 export const useCreateProductMutation = () => {
   return useMutation({
-    mutationFn: (product) => createProduct(product),
+    mutationFn: (data) => createProduct(data),
   });
 };

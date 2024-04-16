@@ -91,9 +91,13 @@ export const deleteProduct = async (productId) => {
   }
 };
 
-export const createProduct = async (productData) => {
+export const createProduct = async (data) => {
   try {
-    const response = await axiosInstance.post("product/add", productData);
+    const response = await axiosInstance.post("product/add", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);

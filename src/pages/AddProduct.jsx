@@ -10,31 +10,37 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateProductMutation } from "@/hooks/react-query/useProduct";
+import { useState, useMemo } from "react";
+
+import tags from "@/constants/tags";
 
 const steps = [{}, {}];
 
 const ProductFormSchema = z.object({
-  title: z.string().min(5).max(50),
-  category: z.string().min(2).max(50),
-  subCategory: z.string().min(2).max(50),
-  subject: z.string().min(2).max(50),
-  description: z.string().min(8).max(200),
-  author: z.string().min(2).max(50),
-  images: z.array(z.object()),
-  tags: z.array(z.string()),
-  software: z.string().min(2).max(50),
-  license: z.string().min(2).max(50),
-  productShopInfo: z.array(
-    z.object({
-      price: z.number(),
-      rating: z.number(),
-      productLink: z.string(),
-      shopId: z.string(),
-    })
-  ),
+  title: z.string().min(1, "please add a title").max(200),
+  category: z.string().min(1, "please select a category"),
+  subCategory: z.string().min(1, "please select a subCategory"),
+  subject: z.string(),
+  description: z.string().min(1, "please add a description").max(2000),
+  author: z.string().min(1, "please add an author").max(100),
+  images: z.array(z.any()).min(1, "Please upload at least one image"),
+  tags: z.array(z.any()).min(1, "Please select at least one tag"),
+  software: z.string().min(1, "please select a software"),
+  license: z.string().min(1, "please select a license"),
+  productShopInfo: z
+    .array(
+      z.object({
+        price: z.string().min(0, "please add a price").max(1000),
+        rating: z.number().min(0).max(5),
+        productlink: z.string().min(1, "please add a product link").max(400),
+        shopid: z.string().min(5).max(300),
+      })
+    )
+    .min(1, "please add at least one shop info"),
 });
 
 export default function AddProduct() {
+  const [updatePreview, setUpdatePreview] = useState(false);
   const CreateProduct = useCreateProductMutation();
   const {
     register,
@@ -55,20 +61,39 @@ export default function AddProduct() {
       tags: [],
       software: "",
       license: "",
-      productShopInfo: {
-        price: 0,
-        rating: 0,
-        productLink: "",
-        shopId: "",
-      },
+      productShopInfo: [],
     },
     resolver: zodResolver(ProductFormSchema),
   });
 
+  console.log(errors);
+
   const onSubmit = async (data) => {
     try {
-      console.log("data");
-      const response = await CreateProduct.mutateAsync(data);
+      data.tags = data.tags.map((tag) => tag.name);
+      data.images = data.images.map((image) => image.file);
+
+      const formData = new FormData();
+      for (const key in data) {
+        if (key === "images") {
+          data[key].forEach((image) => {
+            formData.append("images", image);
+          });
+        } else if (key === "productShopInfo") {
+          data[key].forEach((shopInfo, index) => {
+            for (const shopInfoKey in shopInfo) {
+              formData.append(
+                `productShopInfo[${index}][${shopInfoKey}]`,
+                shopInfo[shopInfoKey]
+              );
+            }
+          });
+        } else {
+          formData.append(key, data[key]);
+        }
+      }
+
+      const response = await CreateProduct.mutateAsync(formData);
       console.log(response);
     } catch (error) {
       setError("root", {
@@ -78,8 +103,32 @@ export default function AddProduct() {
     }
   };
 
+  let FilteredTags = tags;
+  if (getValues("category")) {
+    FilteredTags = tags.filter((tag) =>
+      tag.categories.includes(getValues("category"))
+    );
+  }
+
+  const [unselectedTags, setUnselectedTags] = useState(FilteredTags);
+
+  useMemo(() => {
+    // get the tags that belong to the category
+    if (getValues("category")) {
+      FilteredTags = tags.filter((tag) =>
+        tag.categories.includes(getValues("category"))
+      );
+    }
+    // set the unselected tags to the filtered tags
+    setUnselectedTags(FilteredTags);
+
+    // set the selected tags to empty
+    setValue("tags", []);
+  }, [getValues("category")]);
+
   return (
     <form
+      key={updatePreview ? 0 : 1}
       className="flex w-full flex-col gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -90,6 +139,10 @@ export default function AddProduct() {
             errors={errors}
             getValues={getValues}
             setValue={setValue}
+            updatePreview={updatePreview}
+            setUpdatePreview={setUpdatePreview}
+            unselectedTags={unselectedTags}
+            setUnselectedTags={setUnselectedTags}
           />
         </Step>
         <Step>

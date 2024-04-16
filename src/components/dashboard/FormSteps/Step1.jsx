@@ -1,20 +1,25 @@
 import FormInput from "@/components/customUI/forms/FormInput";
 import ErrorMessage from "@/components/customUI/forms/ErrorMessage";
+import ProductSelector from "@/components/dashboard/ProductSelector";
+import FormTextarea from "@/components/customUI/forms/FormTextarea";
+import { Button } from "@/components/ui/button";
+
+import { X } from "lucide-react";
 
 import { categories } from "@/constants/categoriesTemp";
 import softwares from "@/constants/softwares";
 import license from "@/constants/license";
-import ProductSelector from "@/components/dashboard/ProductSelector";
-import FormTextarea from "@/components/customUI/forms/FormTextarea";
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
-
-import tags from "@/constants/tags";
-
-export default function Step1({ register, errors, getValues, setValue }) {
-  const [updatePreview, setUpdatePreview] = useState(false);
+export default function Step1({
+  register,
+  errors,
+  getValues,
+  setValue,
+  updatePreview,
+  setUpdatePreview,
+  unselectedTags,
+  setUnselectedTags,
+}) {
   const handleCategoryChange = (category) => {
     setValue("category", category);
     setValue(
@@ -76,37 +81,6 @@ export default function Step1({ register, errors, getValues, setValue }) {
   const softwareNames = softwares.map((software) => software.name);
   const licenseNames = license.map((license) => license.name);
 
-  let FilteredTags = tags;
-  if (getValues("category")) {
-    FilteredTags = tags.filter((tag) =>
-      tag.categories.includes(getValues("category"))
-    );
-  }
-
-  const [unselectedTags, setUnselectedTags] = useState(FilteredTags);
-
-  useEffect(() => {
-    // put only the tag names in the tags array
-    setValue(
-      "tags",
-      getValues("tags").map((tag) => tag)
-    );
-  }, [getValues("tags")]);
-
-  useEffect(() => {
-    // get the tags that belong to the category
-    if (getValues("category")) {
-      FilteredTags = tags.filter((tag) =>
-        tag.categories.includes(getValues("category"))
-      );
-    }
-    // set the unselected tags to the filtered tags
-    setUnselectedTags(FilteredTags);
-
-    // set the selected tags to empty
-    setValue("tags", []);
-  }, [getValues("category")]);
-
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
@@ -129,7 +103,6 @@ export default function Step1({ register, errors, getValues, setValue }) {
       </div>
 
       <div className="flex gap-4">
-        {console.log(getValues("category"))}
         <ProductSelector
           topic={"Category"}
           items={categoryNames}
