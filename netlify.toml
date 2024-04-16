@@ -1,0 +1,23 @@
+[[headers]]
+  # Cache HTML files for 1 hour
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  # Cache CSS files for 1 week
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  # Cache JavaScript files for 1 week
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  # Cache image files for 1 month
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
